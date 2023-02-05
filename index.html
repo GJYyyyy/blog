@@ -182,81 +182,6 @@
 <p><strong>本来看到这个需求我还在想自己造轮子，第一个方案就是用css3的transform实现，后来因为自己实在太弱了，做不出来，没办法，还是去找大佬的轮子~</strong><br><strong>等后面有机会了再试试能不能自己写出来~</strong></p>
 <hr>
 <p>这个效果使用了<a target="_blank" rel="noopener" href="https://github.com/NiklasKnaack/jquery-svg3dtagcloud-plugin">jquery-svg3dtagcloud-plugin</a>插件<br>源码直接放在下面了，如果需要可以直接复制修改</p>
-<pre><code class="html">    &lt;!DOCTYPE html&gt;
-    &lt;html lang=&quot;en&quot;&gt;
-        &lt;head&gt;
-            &lt;meta charset=&quot;UTF-8&quot;&gt;
-            &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-            &lt;title&gt;用css3实现一个星球节点旋转效果图&lt;/title&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-            &lt;div id=&quot;holder&quot;&gt;&lt;/div&gt;
-
-            &lt;!-- 这里可以配合jquery使用，也可以不用jquery独立使用 --&gt;
-            &lt;!-- &lt;script src=&quot;../common/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt; --&gt;
-            &lt;script src=&quot;./jquery.svg3dtagcloud.min.js&quot;&gt;&lt;/script&gt;
-            &lt;script&gt;
-                // 设置要显示的条目
-                let entries = [
-                    &#123; label: &#39;中国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;美国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;加拿大&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;日本&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;墨西哥&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;英国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;法国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;德国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;西班牙&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;古巴&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;利比亚&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;韩国&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                    &#123; label: &#39;俄罗斯&#39;, url: &#39;/mypage/用css3实现一个星球节点旋转效果图&#39; &#125;,
-                ]
-
-                // 设置参数
-                let settings = &#123;
-                    entries,
-                    width: 480,
-                    height: 480,
-                    radius: &#39;65%&#39;,
-                    radiusMin: 75,
-                    bgDraw: true,
-                    bgColor: &#39;white&#39;,
-                    opacityOver: 1.00,
-                    opacityOut: 0.05,
-                    opacitySpeed: 6,
-                    fov: 800,
-                    speed: 2,
-                    fontFamily: &#39;Oswald, Arial, sans-serif&#39;,
-                    fontSize: &#39;15&#39;,
-                    fontColor: &#39;#333&#39;,
-                    fontWeight: &#39;normal&#39;,//bold
-                    fontStyle: &#39;normal&#39;,//italic 
-                    fontStretch: &#39;normal&#39;,//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
-                    fontToUpperCase: true,
-                    tooltipFontFamily: &#39;Oswald, Arial, sans-serif&#39;,
-                    tooltipFontSize: &#39;11&#39;,
-                    tooltipFontColor: &#39;#fff&#39;,
-                    tooltipFontWeight: &#39;normal&#39;,//bold
-                    tooltipFontStyle: &#39;normal&#39;,//italic 
-                    tooltipFontStretch: &#39;normal&#39;,//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
-                    tooltipFontToUpperCase: false,
-                    tooltipTextAnchor: &#39;left&#39;,
-                    tooltipDiffX: 0,
-                    tooltipDiffY: 10,
-                    animatingSpeed: 0.01,
-                    animatingRadiusLimit: 1.3
-                &#125;;
-
-                // 这里可以配合jquery使用，也可以不用jquery独立使用
-                // $( &#39;#holder&#39; ).svg3DTagCloud( settings );
-                var svg3DTagCloud = new SVG3DTagCloud( document.getElementById( &#39;holder&#39;  ), settings );
-            &lt;/script&gt;
-        &lt;/body&gt;
-    &lt;/html&gt;
-</code></pre>
-
             
         </div>
     </div>
@@ -269,14 +194,14 @@
         
         <span class="tag">
             
-            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="color: #00a596">
+            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="color: #ff7d73">
                 面试题
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00a596">
                 特效
             </a>
         </span>
@@ -327,83 +252,6 @@
         <div class="content" v-pre>
             
             <p>本来照着官网把hexo博客给搭建好了，但是官网居然没有告诉应该怎么配置about、categories和tags。。。<br>没办法，只有自己去解决问题了~  </p>
-<hr>
-<h2 id="about"><a href="#about" class="headerlink" title="about"></a>about</h2><p>这个比较好处理</p>
-<p>如果是全局安装的hexo，可以执行下面的命令</p>
-<pre><code class="bash">hexo new page &quot;about&quot;
-</code></pre>
-<p>如果是局部安装的，可以像这样写</p>
-<pre><code class="bash">npx hexo new page &quot;about&quot;
-</code></pre>
-<p>然后就会自动生成 source&#x2F;about&#x2F;index.md 文件，后面就可以像编辑博客一样编辑它了~</p>
-<hr>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><p>这个目录的创建和about一致，向下面这样写就行</p>
-<pre><code class="bash">hexo new page &quot;categories&quot;
-</code></pre>
-<p>或</p>
-<pre><code class="bash">npx hexo new page &quot;categories&quot;
-</code></pre>
-<p>然后才是重要的，想要使用categories的功能，需要修改自动生成的 &#x2F;source&#x2F;categories&#x2F;index.md 文件，将其内容修改为下面内容</p>
-<pre><code class="markdown">---
-title: categories
-type: &quot;categories&quot;
-layout: &quot;categories&quot;
----
-</code></pre>
-<p>然后新建一个博客文件</p>
-<pre><code class="bash">hexo new &#39;测试categories&#39;
-</code></pre>
-<p>将该博客文件的初始内容改为</p>
-<pre><code class="markdown">---
-title: 测试categories
-categories:
-- 分类1
----
-</code></pre>
-<p>这样新建的博客就会自动被分类到 “分类1” 中去了~</p>
-<p>如果想要给一篇博客多个分类可以这样写</p>
-<pre><code class="markdown">---
-title: 测试categories
-categories:
-- [分类1]
-- [分类2]
-- [分类3]
----
-</code></pre>
-<p><em>千万不要忘了中括号，没有中括号会变成 分类1的子分类2的子分类3</em></p>
-<hr>
-<h2 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h2><p>这个目录的创建以及功能的实现和categories一致，只要改个名字就好了~</p>
-<p>第一步创建目录</p>
-<pre><code class="bash">hexo new page &quot;tags&quot;
-</code></pre>
-<p>或</p>
-<pre><code class="bash">npx hexo new page &quot;tags&quot;
-</code></pre>
-<p>第二步修改文件<br>修改 &#x2F;source&#x2F;tags&#x2F;index.md 文件，使用下面的内容覆盖原本内容</p>
-<pre><code class="markdown">---
-title: tags
-type: &quot;tags&quot;
-layout: &quot;tags&quot;
----
-</code></pre>
-<p>第三步创建博客</p>
-<pre><code class="bash">hexo new &#39;测试tags&#39;
-</code></pre>
-<p>第四步修改博客初始内容，使用下面内容覆盖它</p>
-<pre><code class="markdown">---
-title: 测试tags
-tags:
-- 标签1
-- 标签2
----
-</code></pre>
-<p>这样就可以给博客添加 “标签1” 和 “标签2” 了，tags功能不用考虑中括号[].</p>
-<hr>
-<p>其实官网有说关于<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands#new">目录处理</a>的问题，但是说的很不清晰</p>
-<blockquote>
-<p>默认情况下，Hexo 会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo 会创建一个以标题为名字的目录，并在目录中放置一个 index.md 文件。</p>
-</blockquote>
-
             
         </div>
     </div>
@@ -416,14 +264,14 @@ tags:
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #03a9f4">
+            <a href="/tags/Hexo/" style="color: #00a596">
                 Hexo
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">
+            <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">
                 搭建博客
             </a>
         </span>
@@ -450,8 +298,7 @@ tags:
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="别催"><a href="#别催" class="headerlink" title="别催!!"></a>别催!!</h2><h3 id="作者正在长脑子"><a href="#作者正在长脑子" class="headerlink" title="作者正在长脑子~"></a>作者正在长脑子~</h3><h4 id="别急。快了！快有内容了！"><a href="#别急。快了！快有内容了！" class="headerlink" title="别急。快了！快有内容了！"></a>别急。快了！快有内容了！</h4><p>打点代码证明！  </p>
-<pre><code class="javascript">console.log(&#39;脑子快就长好了！&#39;);
+            <h2 id="别催"><a href="#别催" class="headerlink" title="别催!!"></a>别催!!</h2><h3 id="作者正在长脑子"><a href="#作者正在长脑子" class="headerlink" title="作者正在长脑子~"></a>作者正在长脑子~</h3><h4 id="别急。快了！快有内容了！"><a href="#别急。快了！快有内容了！" class="headerlink" title="别急。快了！快有内容了！"></a>别急。快了！快有内容了！</h4><pre><code class="javascript">console.log(&#39;打点代码证明脑子快就长好了！&#39;);
 </code></pre>
 
             
