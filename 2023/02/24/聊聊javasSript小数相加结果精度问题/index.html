@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>Archives | 喵喵的狗窝</title>
+        <title>javasSript小数相加精度问题` | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -128,130 +128,88 @@
     </div>
 </nav>
 
-                
-<div id="archives">
-    
-    <div id="search-mask" style="z-index: 5"></div>
-    <input id="search-bar" class="input" placeholder="搜索" style="z-index: 6">
-    
-    
-    <div class="timeline" style="z-index: 4" data-title="javassript小数相加精度问题`">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/2/24</div>
-            <a href="/2023/02/24/%E8%81%8A%E8%81%8AjavasSript%E5%B0%8F%E6%95%B0%E7%9B%B8%E5%8A%A0%E7%BB%93%E6%9E%9C%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/">
-                <h3>javasSript小数相加精度问题`</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
+                <div class="article">
+    <div>
+        <h1>javasSript小数相加精度问题` </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/2/24
+        </span>
+        
+        
     </div>
     
-    <div class="timeline" style="z-index: 3" data-title="用css3实现一个星球节点旋转效果图">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/2/5</div>
-            <a href="/2023/02/05/%E7%94%A8css3%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%98%9F%E7%90%83%E8%8A%82%E7%82%B9%E6%97%8B%E8%BD%AC%E6%95%88%E6%9E%9C%E5%9B%BE/">
-                <h3>用css3实现一个星球节点旋转效果图</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="color: #00a596">面试题</a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">特效</a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Css/" style="color: #00bcd4">Css</a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/SVG/" style="color: #03a9f4">SVG</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>如果在javasSript中0.1 + 0.3会出现精度问题，那么其他小数相加会不会也有问题呢？<br>测试用代码和结果如下</p>
+<span id="more"></span>
+
+<pre><code class="javascript">let arr = [.1, .2, .3, .4, .5, .6, .7, .8, .9]
+for(let i = 0;i &lt; arr.length;i++) &#123;
+    let val1 = arr[i];
+    for(let j = i;j &lt; arr.length;j++) &#123;
+        let val2 = arr[j];
+        console.log(`$&#123;val1&#125; + $&#123;val2&#125; = $&#123;val1 + val2&#125;`)
+    &#125;
+&#125;
+
+// 0.1 + 0.1 = 0.2
+// 0.1 + 0.2 = 0.30000000000000004
+// 0.1 + 0.3 = 0.4
+// 0.1 + 0.4 = 0.5
+// 0.1 + 0.5 = 0.6
+// 0.1 + 0.6 = 0.7
+// 0.1 + 0.7 = 0.7999999999999999
+// 0.1 + 0.8 = 0.9
+// 0.1 + 0.9 = 1
+// 0.2 + 0.2 = 0.4
+// 0.2 + 0.3 = 0.5
+// 0.2 + 0.4 = 0.6000000000000001
+// 0.2 + 0.5 = 0.7
+// 0.2 + 0.6 = 0.8
+// 0.2 + 0.7 = 0.8999999999999999
+// 0.2 + 0.8 = 1
+// 0.2 + 0.9 = 1.1
+// 0.3 + 0.3 = 0.6
+// 0.3 + 0.4 = 0.7
+// 0.3 + 0.5 = 0.8
+// 0.3 + 0.6 = 0.8999999999999999
+// 0.3 + 0.7 = 1
+// 0.3 + 0.8 = 1.1
+// 0.3 + 0.9 = 1.2
+// 0.4 + 0.4 = 0.8
+// 0.4 + 0.5 = 0.9
+// 0.4 + 0.6 = 1
+// 0.4 + 0.7 = 1.1
+// 0.4 + 0.8 = 1.2000000000000002
+// 0.4 + 0.9 = 1.3
+// 0.5 + 0.5 = 1
+// 0.5 + 0.6 = 1.1
+// 0.5 + 0.7 = 1.2
+// 0.5 + 0.8 = 1.3
+// 0.5 + 0.9 = 1.4
+// 0.6 + 0.6 = 1.2
+// 0.6 + 0.7 = 1.2999999999999998
+// 0.6 + 0.8 = 1.4
+// 0.6 + 0.9 = 1.5
+// 0.7 + 0.7 = 1.4
+// 0.7 + 0.8 = 1.5
+// 0.7 + 0.9 = 1.6
+// 0.8 + 0.8 = 1.6
+// 0.8 + 0.9 = 1.7000000000000002
+// 0.9 + 0.9 = 1.8
+</code></pre>
+
     </div>
     
-    <div class="timeline" style="z-index: 2" data-title="hexo配置about、categories和tags">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/2/3</div>
-            <a href="/2023/02/03/hexo%E9%85%8D%E7%BD%AEabout%E3%80%81categories%E5%92%8Ctags/">
-                <h3>hexo配置about、categories和tags</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Hexo/" style="color: #00a596">Hexo</a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">搭建博客</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline" style="z-index: 1" data-title="第一篇文章哦~">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/12/23</div>
-            <a href="/2022/12/23/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%93%A6~/">
-                <h3>第一篇文章哦~</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
     
 </div>
 
@@ -278,6 +236,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+
+
+
+
 
 
         <!-- html -->
