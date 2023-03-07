@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>Tags: javascript | 喵喵的狗窝</title>
+        <title>实现一个基本的WebSocket前后端数据交互功能 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -128,160 +128,132 @@
     </div>
 </nav>
 
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>实现一个基本的WebSocket前后端数据交互功能 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/3/7
+        </span>
         
-        
-        <span>
-            <a href="/tags/Hexo/" style="background: #00a596">
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Hexo
+                学习
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                搭建博客
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/javascript/" style="color: #ff7d73">javascript</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/javascript/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                javascript
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                面试题
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                特效
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Css/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Css
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/SVG/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                SVG
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/3/7</div>
-            <a href="/2023/03/07/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84WebSocket%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%8A%9F%E8%83%BD/">
-                <h3>实现一个基本的WebSocket前后端数据交互功能</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/javascript/" style="color: #00a596">javascript</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>后端使用 nodejs 开发，使用到了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/nodejs-websocket">nodejs-websocket</a>库</p>
+<p>前端使用了 H5 原生的 WebSocket 功能</p>
+<hr>
+<h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><span id="more"></span>
+
+<h3 id="后端代码（backend-js）："><a href="#后端代码（backend-js）：" class="headerlink" title="后端代码（backend.js）："></a>后端代码（backend.js）：</h3><pre><code class="javascript">const ws = require(&#39;nodejs-websocket&#39;);
+
+/**
+ * 创建websocket服务端，返回一个socket连接
+ * @param &#123;number&#125; port
+ * @param &#123;string&#125; host
+ * @returns &#123;Promise&#125;
+ */
+function run(port = 6868, host = &#39;localhost&#39;) &#123;
+    return new Promise((resolve) =&gt; &#123;
+        const server = ws.createServer((connection) =&gt; &#123;
+            console.log(&#39;检测到新的连接&#39;);
+            resolve(connection);
+        &#125;);
+
+        server.listen(port, host);
+    &#125;);
+&#125;
+
+async function test() &#123;
+    let socket = await run();
+
+    // 服务端主动发送信息
+    socket.sendText(&#39;服务端发出的信息&#39;);
+
+    // 服务端接收信息
+    socket.on(&#39;text&#39;, (str) =&gt; &#123;
+        console.log(`服务端收到的信息：$&#123;str&#125;`);
+    &#125;);
+&#125;
+
+test();
+</code></pre>
+<h3 id="前端代码（frontend-html）："><a href="#前端代码（frontend-html）：" class="headerlink" title="前端代码（frontend.html）："></a>前端代码（frontend.html）：</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;script&gt;
+            /**
+             * 创建websocket客户端，返回一个socket连接
+             * @param &#123;string&#125; url
+             * @returns &#123;Promise&#125;
+             */
+            function run(url) &#123;
+                return new Promise((resolve) =&gt; &#123;
+                    let socket = new WebSocket(url);
+                    socket.addEventListener(&#39;open&#39;, () =&gt; &#123;
+                        console.log(&#39;创建连接成功&#39;);
+                        resolve(socket);
+                    &#125;);
+                &#125;);
+            &#125;
+
+            async function test() &#123;
+                let socket = await run(&#39;ws://localhost:6868&#39;);
+
+                // 客户端主动发送信息
+                socket.send(&#39;客户端发出的信息&#39;);
+
+                // 客户端接收信息
+                socket.addEventListener(&#39;message&#39;, (res) =&gt; &#123;
+                    console.log(`客户端收到的信息：$&#123;res.data&#125;`);
+                &#125;);
+            &#125;
+
+            test();
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/2/24</div>
-            <a href="/2023/02/24/javasSript%E5%B0%8F%E6%95%B0%E7%9B%B8%E5%8A%A0%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/">
-                <h3>javasSript小数相加精度问题</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/javascript/" style="color: #ffa2c4">javascript</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -308,6 +280,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+
+
+
+
 
 
         <!-- html -->
