@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>hexo配置about、categories和tags | 喵喵的狗窝</title>
+        <title>使用PuTTY和ssh密钥登录ubuntu | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -130,14 +130,14 @@
 
                 <div class="article">
     <div>
-        <h1>hexo配置about、categories和tags </h1>
+        <h1>使用PuTTY和ssh密钥登录ubuntu </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/2/3
+            2023/4/22
         </span>
         
         <span class="category">
@@ -157,12 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Hexo/" style="color: #00bcd4">Hexo</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">搭建博客</a>
+                <a href="/tags/ubuntu/" style="color: #00a596">ubuntu</a>
             </span>
             
         </span>
@@ -170,85 +165,37 @@
     </div>
     
     <div class="content" v-pre>
-        <p>本来照着官网把hexo博客给搭建好了，但是官网居然没有告诉应该怎么配置about、categories和tags。。。<br>没办法，只有自己去解决问题了~  </p>
+        <h1 id="1-服务端配置"><a href="#1-服务端配置" class="headerlink" title="1. 服务端配置"></a>1. 服务端配置</h1><h2 id="1-1-允许密钥登录"><a href="#1-1-允许密钥登录" class="headerlink" title="1.1 允许密钥登录"></a>1.1 允许密钥登录</h2><p>配置 &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+<pre><code class="bash">sudo vim /etc/ssh/sshd_config
+</code></pre>
 <span id="more"></span>
 
-<hr>
-<h2 id="about"><a href="#about" class="headerlink" title="about"></a>about</h2><p>这个比较好处理</p>
-<p>如果是全局安装的hexo，可以执行下面的命令</p>
-<pre><code class="bash">hexo new page &quot;about&quot;
+<p>添加内容</p>
+<pre><code class="text"># 启用RSA认证
+RSAAuthentication yes
+# 启用公钥认证
+PubkeyAuthentication yes
+# 禁止root用户登录
+PermitRootLogin no
 </code></pre>
-<p>如果是局部安装的，可以像这样写</p>
-<pre><code class="bash">npx hexo new page &quot;about&quot;
+<h2 id="1-2-生成密钥对"><a href="#1-2-生成密钥对" class="headerlink" title="1.2 生成密钥对"></a>1.2 生成密钥对</h2><p>-t: 密钥类型，可以选择 dsa | ecdsa | ed25519 | rsa; 省略的情况下默认是rsa</p>
+<p>-f: 密钥目录位置，指定生成密钥的保存路径和文件名。省略的情况下， 默认为当前用户home路径下的.ssh隐藏目录，也就是<del>&#x2F;.ssh&#x2F;，同时默认密钥文件名以id_rsa开头。省略的情况下，默认目录就是</del>&#x2F;.ssh&#x2F;，不会再次提醒输入。但是会再次提是你输入文件名，如果不输入直接回车，则默认的密钥文件名就是id_rsa</p>
+<p>-C: 指定此密钥的备注信息，需要配置多个免密登录时，建议携带;生成的公钥会在最后面显示此备注信息</p>
+<p>-N: 指定此密钥对的密码，如果指定此参数，则命令执行过程中就不会出现交互确认密码的信息了。如果省略此参数，会提示你输入密码和密码确认。一般情况下不用输入，直接回车就行。如果输入密码之后，以后每次都要输入密码。这里请根据你的安全需要决定是否需要密码，如果不需要，直接回车。</p>
+<pre><code class="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa -N shoufeng -C shoufeng
 </code></pre>
-<p>然后就会自动生成 source&#x2F;about&#x2F;index.md 文件，后面就可以像编辑博客一样编辑它了~</p>
-<hr>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><p>这个目录的创建和about一致，向下面这样写就行</p>
-<pre><code class="bash">hexo new page &quot;categories&quot;
+<p>生成成功后会在 ~&#x2F;.</p>
+<h2 id="1-3-在服务器上安装公钥"><a href="#1-3-在服务器上安装公钥" class="headerlink" title="1.3. 在服务器上安装公钥"></a>1.3. 在服务器上安装公钥</h2><pre><code class="bash">cd ~/.ssh
+cat id_rsa.pub &gt;&gt; authorized_keys
 </code></pre>
-<p>或</p>
-<pre><code class="bash">npx hexo new page &quot;categories&quot;
+<p>保证只有自己的账户能够对ssh读写，只要确保后面两位都是0就行了</p>
+<pre><code class="bash">chmod 600 authorized_keys
+chmod 700 ~/.ssh
 </code></pre>
-<p>然后才是重要的，想要使用categories的功能，需要修改自动生成的 &#x2F;source&#x2F;categories&#x2F;index.md 文件，将其内容修改为下面内容</p>
-<pre><code class="markdown">---
-title: categories
-type: &quot;categories&quot;
-layout: &quot;categories&quot;
----
+<h2 id="1-4-重启ssh"><a href="#1-4-重启ssh" class="headerlink" title="1.4. 重启ssh"></a>1.4. 重启ssh</h2><pre><code class="bash">service sshd restart
 </code></pre>
-<p>然后新建一个博客文件</p>
-<pre><code class="bash">hexo new &#39;测试categories&#39;
-</code></pre>
-<p>将该博客文件的初始内容改为</p>
-<pre><code class="markdown">---
-title: 测试categories
-categories:
-- 分类1
----
-</code></pre>
-<p>这样新建的博客就会自动被分类到 “分类1” 中去了~</p>
-<p>如果想要给一篇博客多个分类可以这样写</p>
-<pre><code class="markdown">---
-title: 测试categories
-categories:
-- [分类1]
-- [分类2]
-- [分类3]
----
-</code></pre>
-<p><em>千万不要忘了中括号，没有中括号会变成 分类1的子分类2的子分类3</em></p>
-<hr>
-<h2 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h2><p>这个目录的创建以及功能的实现和categories一致，只要改个名字就好了~</p>
-<p>第一步创建目录</p>
-<pre><code class="bash">hexo new page &quot;tags&quot;
-</code></pre>
-<p>或</p>
-<pre><code class="bash">npx hexo new page &quot;tags&quot;
-</code></pre>
-<p>第二步修改文件<br>修改 &#x2F;source&#x2F;tags&#x2F;index.md 文件，使用下面的内容覆盖原本内容</p>
-<pre><code class="markdown">---
-title: tags
-type: &quot;tags&quot;
-layout: &quot;tags&quot;
----
-</code></pre>
-<p>第三步创建博客</p>
-<pre><code class="bash">hexo new &#39;测试tags&#39;
-</code></pre>
-<p>第四步修改博客初始内容，使用下面内容覆盖它</p>
-<pre><code class="markdown">---
-title: 测试tags
-tags:
-- 标签1
-- 标签2
----
-</code></pre>
-<p>这样就可以给博客添加 “标签1” 和 “标签2” 了，tags功能不用考虑中括号[].</p>
-<hr>
-<p>其实官网有说关于<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands#new">目录处理</a>的问题，但是说的很不清晰</p>
-<blockquote>
-<p>默认情况下，Hexo 会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo 会创建一个以标题为名字的目录，并在目录中放置一个 index.md 文件。</p>
-</blockquote>
+<h1 id="2-客户端配置"><a href="#2-客户端配置" class="headerlink" title="2. 客户端配置"></a>2. 客户端配置</h1><h2 id="2-1-PuTTY"><a href="#2-1-PuTTY" class="headerlink" title="2.1. PuTTY"></a>2.1. PuTTY</h2><h3 id="2-2-私钥格式转换"><a href="#2-2-私钥格式转换" class="headerlink" title="2.2. 私钥格式转换"></a>2.2. 私钥格式转换</h3><p>把生成的私钥文件 id.rsa 下载下来，然后通过PuTTygen转化为 ppk 格式。<br>一般安装了PuTTY都会附加安装PuTTYgen。<br>电脑搜索打开PuTTYgen，选择上方菜单栏 Conversions -&gt; Import key 导入下载的 id.rsa 文件，点击 Save private Key 按钮保存到本地。</p>
+<h3 id="2-3-配置PuTTY"><a href="#2-3-配置PuTTY" class="headerlink" title="2.3. 配置PuTTY"></a>2.3. 配置PuTTY</h3><p>打开PuTTy。<br>找到 Connection -&gt; SSH -&gt; Auth ，在 Private key file for authentication 区域选择私钥ppk文件。<br>找到 Connection -&gt; Data ，在 Auto-login username 填入用户名<br>找到 Session ，输入服务器地址，然后 Save，最后再 Open 就可以了</p>
 
     </div>
     
