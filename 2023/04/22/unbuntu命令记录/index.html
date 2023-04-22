@@ -166,11 +166,14 @@
     
     <div class="content" v-pre>
         <p>持续补充中…</p>
-<h1 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h1><p>添加用户</p>
-<pre><code class="bash">sudo useradd USER
+<h1 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h1><p>连接远程服务器</p>
+<pre><code class="bash">ssh USER@ip
 </code></pre>
 <span id="more"></span>
 
+<h1 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h1><p>添加用户</p>
+<pre><code class="bash">sudo useradd USER
+</code></pre>
 <p>删除用户</p>
 <pre><code class="bash">sudo deluser --remove-home USER
 </code></pre>
@@ -231,6 +234,12 @@
 </code></pre>
 <p>进入指定分屏</p>
 <pre><code class="bash">screen -r PROCESSID
+</code></pre>
+<h1 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h1><p>打开当前用户的定时任务表</p>
+<pre><code class="bash">crontab -e
+</code></pre>
+<p>设置定时任务（下面意思是23点定时运行用户目录下的test.sh脚本）</p>
+<pre><code class="bash">0 23 * * * ~/test.sh
 </code></pre>
 
     </div>

@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>ubuntu安装我的世界服务器 | 喵喵的狗窝</title>
+        <title>ubuntu安装我的世界服务器端 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -130,7 +130,7 @@
 
                 <div class="article">
     <div>
-        <h1>ubuntu安装我的世界服务器 </h1>
+        <h1>ubuntu安装我的世界服务器端 </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -157,12 +157,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/ubuntu/" style="color: #ffa2c4">ubuntu</a>
+                <a href="/tags/ubuntu/" style="color: #00bcd4">ubuntu</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Minecraft/" style="color: #00a596">Minecraft</a>
+                <a href="/tags/Minecraft/" style="color: #00bcd4">Minecraft</a>
             </span>
             
         </span>
@@ -176,12 +176,12 @@ sudo apt install default-jdk
 </code></pre>
 <span id="more"></span>
 
-<h1 id="2-创建minecraft用户"><a href="#2-创建minecraft用户" class="headerlink" title="2. 创建minecraft用户"></a>2. 创建minecraft用户</h1><p><strong>因为安全原因， Minecraft 不应该在 root 用户下运行。我们将会创建一个新的系统用户和用户组，用户主目录&#x2F;opt&#x2F;minecraft。这个用户有最小权限，来运行 Minecraft 服务器</strong></p>
+<h1 id="2-创建minecraft用户"><a href="#2-创建minecraft用户" class="headerlink" title="2. 创建minecraft用户"></a>2. 创建minecraft用户</h1><p><strong>因为安全原因， Minecraft 不应该在 root 用户下运行。我们将会创建一个新的系统用户和用户组，用户主目录&#x2F;opt&#x2F;minecraft。这个用户有最小权限，来运行 Minecraft 服务器端</strong></p>
 <pre><code class="bash">sudo useradd -r -m -U -d /opt/minecraft -s /bin/bash minecraft
 sudo su - minecraft
 mkdir -p ~/&#123;backups,tools,server&#125;
 </code></pre>
-<h1 id="3-Minecraft服务端"><a href="#3-Minecraft服务端" class="headerlink" title="3. Minecraft服务端"></a>3. Minecraft服务端</h1><h2 id="3-1-下载服务端"><a href="#3-1-下载服务端" class="headerlink" title="3.1. 下载服务端"></a>3.1. 下载服务端</h2><p><strong>wget下载的是1.16版本，如果需要最新版，可以去<a target="_blank" rel="noopener" href="https://www.minecraft.net/en-us/download/server">官网下载最新版本</a>，然后通过FTP传到&#x2F;home&#x2F;minecraft&#x2F;server目录下</strong><br>java11可以兼容Minecraft1.16</p>
+<h1 id="3-Minecraft服务端"><a href="#3-Minecraft服务端" class="headerlink" title="3. Minecraft服务端"></a>3. Minecraft服务端</h1><h2 id="3-1-下载服务端"><a href="#3-1-下载服务端" class="headerlink" title="3.1. 下载服务端"></a>3.1. 下载服务端</h2><p><strong>wget下载的是1.16版本，如果需要最新版，可以去<a target="_blank" rel="noopener" href="https://www.minecraft.net/en-us/download/server">官网下载最新版本</a>，然后通过FTP传到&#x2F;opt&#x2F;minecraft&#x2F;server目录下</strong><br>java11可以兼容Minecraft1.16</p>
 <pre><code class="bash">wget https://launcher.mojang.com/v1/objects/a0d03225615ba897619220e256a266cb33a44b6b/server.jar -P ~/server
 </code></pre>
 <h2 id="3-2-配置服务端"><a href="#3-2-配置服务端" class="headerlink" title="3.2. 配置服务端"></a>3.2. 配置服务端</h2><p>第一次启动服务端会创建server.properties和eula.txt文件，然后停止运行</p>
@@ -192,16 +192,18 @@ java -Xmx1024M -Xms1024M -jar server.jar nogui
 <pre><code class="bash">cd ~/server
 vim eula.txt
 </code></pre>
-<p>配置好eula后，进入server.properties配置服务器信息</p>
-<p><strong>修改server.properties</strong><br><em><strong>online-mode&#x3D;false</strong></em><br><strong>这直接关系到开服后能否进入游戏，否则会出现无效会话的问题</strong></p>
+<p>配置好eula后，进入server.properties配置服务器端信息</p>
 <pre><code class="bash">cd ~/server
 vim server.properties
+</code></pre>
+<p><strong>修改server.properties</strong><br><em><strong>online-mode&#x3D;false</strong></em><br><strong>这直接关系到开服后能否进入游戏，否则会出现无效会话的问题</strong></p>
+<h2 id="3-3-配置防火墙"><a href="#3-3-配置防火墙" class="headerlink" title="3.3. 配置防火墙"></a>3.3. 配置防火墙</h2><pre><code class="bash">sudo ufw allow 25565/tcp
 </code></pre>
 <h1 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h1><h2 id="4-1-将服务端添加到系统服务并自启动"><a href="#4-1-将服务端添加到系统服务并自启动" class="headerlink" title="4.1. 将服务端添加到系统服务并自启动"></a>4.1. 将服务端添加到系统服务并自启动</h2><p>创建&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;minecraft.service文件</p>
 <pre><code class="bash">touch /etc/systemd/system/minecraft.service
 </code></pre>
 <p>修改文件内容为</p>
-<pre><code class="bash">[Unit]
+<pre><code class="text">[Unit]
 Description=Minecraft Server
 After=network.target
 
@@ -216,7 +218,7 @@ PrivateDevices=true
 NoNewPrivileges=true
 WorkingDirectory=/opt/minecraft/server
 ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar server.jar nogui
-ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password stop
+ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p PASSWORD stop
 
 [Install]
 WantedBy=multi-user.target
@@ -235,7 +237,35 @@ make
 ./mcrcon -v
 </code></pre>
 <p>修改server.properties<br>enable-rcon&#x3D;true<br>rcon.port&#x3D;25575<br>rcon.password&#x3D;PASSWORD  </p>
-<h2 id="4-3-server-properties配置参考"><a href="#4-3-server-properties配置参考" class="headerlink" title="4.3. server.properties配置参考"></a>4.3. server.properties配置参考</h2><pre><code class="bash">spawn-protection=16
+<p>通过mcrcon访问服务端</p>
+<pre><code class="bash">/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p PASSWORD -t
+</code></pre>
+<h2 id="4-3-定时备份"><a href="#4-3-定时备份" class="headerlink" title="4.3. 定时备份"></a>4.3. 定时备份</h2><p>创建自动备份程序文件 &#x2F;opt&#x2F;minecraft&#x2F;tools&#x2F;backup.sh ，并给其可执行权限</p>
+<pre><code class="bash">touch /opt/minecraft/tools/backup.sh
+sudo chmod 770 /opt/minecraft/tools/backup.sh
+</code></pre>
+<p>内容为</p>
+<pre><code class="bash">#!/bin/bash
+
+function rcon &#123;
+  /opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password &quot;$1&quot;
+&#125;
+
+rcon &quot;save-off&quot;
+rcon &quot;save-all&quot;
+tar -cvpzf /opt/minecraft/backups/server-$(date +%F-%H-%M).tar.gz /opt/minecraft/server
+rcon &quot;save-on&quot;
+
+## Delete older backups
+find /opt/minecraft/backups/ -type f -mtime +7 -name &#39;*.gz&#39; -delete
+</code></pre>
+<p>给当前用户添加定时任务</p>
+<pre><code class="bash">crontab -e
+</code></pre>
+<p>在定时任务文件中添加以下内容，每天23点定时运行</p>
+<pre><code class="bash">0 23 * * * /opt/minecraft/tools/backup.sh
+</code></pre>
+<h2 id="4-4-server-properties配置参考"><a href="#4-4-server-properties配置参考" class="headerlink" title="4.4. server.properties配置参考"></a>4.4. server.properties配置参考</h2><pre><code class="bash">spawn-protection=16
 
 #出生点保护半径(若没有op则不生效)
 
