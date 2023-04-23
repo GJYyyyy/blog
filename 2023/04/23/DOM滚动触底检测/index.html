@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>实现一个基本的WebSocket前后端数据交互功能 | 喵喵的狗窝</title>
+        <title>DOM滚动触底检测 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -130,14 +130,14 @@
 
                 <div class="article">
     <div>
-        <h1>实现一个基本的WebSocket前后端数据交互功能 </h1>
+        <h1>DOM滚动触底检测 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/3/7
+            2023/4/23
         </span>
         
         <span class="category">
@@ -160,90 +160,100 @@
                 <a href="/tags/javascript/" style="color: #ff7d73">javascript</a>
             </span>
             
+            <span class="tag">
+                
+                <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #ff7d73">特效</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Css/" style="color: #00bcd4">Css</a>
+            </span>
+            
         </span>
         
     </div>
     
     <div class="content" v-pre>
-        <p>后端使用 nodejs 开发，使用到了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/nodejs-websocket">nodejs-websocket</a>库</p>
-<p>前端使用了 H5 原生的 WebSocket 功能</p>
-<hr>
-<h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><span id="more"></span>
+        <p>这里用到了几个基本的css变量：</p>
+<ul>
+<li>clientHeight：可视区域的高度</li>
+<li>scrollTop：可视区域距离父容器顶部的距离</li>
+<li>scrollHeight：父容器内部总高度，包括被卷(scroll)的高度</li>
+<li>clientWidth：可视区域的宽度</li>
+<li>scrollLeft：可视区域距离父容器左部的距离</li>
+<li>scrollWidth：父容器内部总宽度，包括被卷(scroll)的宽度</li>
+</ul>
+<p>上代码~</p>
+<span id="more"></span>
 
-<h3 id="后端代码（backend-js）："><a href="#后端代码（backend-js）：" class="headerlink" title="后端代码（backend.js）："></a>后端代码（backend.js）：</h3><pre><code class="javascript">const ws = require(&#39;nodejs-websocket&#39;);
-
-/**
- * 创建websocket服务端，返回一个socket连接
- * @param &#123;number&#125; port
- * @param &#123;string&#125; host
- * @returns &#123;Promise&#125;
- */
-function run(port = 6868, host = &#39;localhost&#39;) &#123;
-    return new Promise((resolve) =&gt; &#123;
-        const server = ws.createServer((connection) =&gt; &#123;
-            console.log(&#39;检测到新的连接&#39;);
-            resolve(connection);
-        &#125;);
-
-        server.listen(port, host);
-    &#125;);
-&#125;
-
-async function test() &#123;
-    let socket = await run();
-
-    // 服务端主动发送信息
-    socket.sendText(&#39;服务端发出的信息&#39;);
-
-    // 服务端接收信息
-    socket.on(&#39;text&#39;, (str) =&gt; &#123;
-        console.log(`服务端收到的信息：$&#123;str&#125;`);
-    &#125;);
-&#125;
-
-test();
-</code></pre>
-<h3 id="前端代码（frontend-html）："><a href="#前端代码（frontend-html）：" class="headerlink" title="前端代码（frontend.html）："></a>前端代码（frontend.html）：</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+<pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-        &lt;title&gt;Document&lt;/title&gt;
-    &lt;/head&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        #wrapper &#123;
+            height: 400px;
+            width: 280px;
+            overflow-y: scroll;
+            background-color: black;
+        &#125;
+        #inner &#123;
+            height: 1000px;
+        &#125;
 
-    &lt;body&gt;
-        &lt;script&gt;
-            /**
-             * 创建websocket客户端，返回一个socket连接
-             * @param &#123;string&#125; url
-             * @returns &#123;Promise&#125;
-             */
-            function run(url) &#123;
-                return new Promise((resolve) =&gt; &#123;
-                    let socket = new WebSocket(url);
-                    socket.addEventListener(&#39;open&#39;, () =&gt; &#123;
-                        console.log(&#39;创建连接成功&#39;);
-                        resolve(socket);
-                    &#125;);
-                &#125;);
+        #wrapper2 &#123;
+            height: 280px;
+            width: 400px;
+            overflow-x: scroll;
+            background-color: black;
+        &#125;
+        #inner2 &#123;
+            width: 1000px;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;触底触顶检测&lt;/h1&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+        &lt;div id=&quot;inner&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;h1&gt;触左触右检测&lt;/h1&gt;
+    &lt;div id=&quot;wrapper2&quot;&gt;
+        &lt;div id=&quot;inner2&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        let $wrapper = document.getElementById(&#39;wrapper&#39;);
+        $wrapper.addEventListener(&#39;scroll&#39;, ((&#123;target&#125;) =&gt; &#123;
+            let touchBottom = target.clientHeight + target.scrollTop === target.scrollHeight,
+                touchTop = target.scrollTop === 0;
+            console.log(`touchBottom: $&#123;touchBottom&#125;`);
+            console.log(`touchTop: $&#123;touchTop&#125;`);
+            if(touchBottom) &#123;
+                alert(&#39;滚动触底了！&#39;);
+            &#125; else if(touchTop) &#123;
+                alert(&#39;滚动触顶了！&#39;);
             &#125;
+        &#125;))
 
-            async function test() &#123;
-                let socket = await run(&#39;ws://localhost:6868&#39;);
-
-                // 客户端主动发送信息
-                socket.send(&#39;客户端发出的信息&#39;);
-
-                // 客户端接收信息
-                socket.addEventListener(&#39;message&#39;, (res) =&gt; &#123;
-                    console.log(`客户端收到的信息：$&#123;res.data&#125;`);
-                &#125;);
+        let $wrapper2 = document.getElementById(&#39;wrapper2&#39;);
+        $wrapper2.addEventListener(&#39;scroll&#39;, ((&#123;target&#125;) =&gt; &#123;
+            let touchRight = target.clientWidth + target.scrollLeft === target.scrollWidth,
+                touchLeft = target.scrollLeft === 0;
+            console.log(`touchRight: $&#123;touchRight&#125;`);
+            console.log(`touchLeft: $&#123;touchLeft&#125;`);
+            if(touchRight) &#123;
+                alert(&#39;滚动触右了！&#39;);
+            &#125; else if(touchLeft) &#123;
+                alert(&#39;滚动触左了！&#39;);
             &#125;
-
-            test();
-        &lt;/script&gt;
-    &lt;/body&gt;
+        &#125;))
+    &lt;/script&gt;
+&lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 
