@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ffa2c4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #ff7d73">Ubuntu</a>
             </span>
             
         </span>
@@ -242,6 +242,9 @@
 <p>设置定时任务（下面意思是23点定时运行用户目录下的test.sh脚本）</p>
 <pre><code class="bash">0 23 * * * ~/test.sh
 </code></pre>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><p>查看指定端口有没有开启</p>
+<pre><code class="bash">netstat -ap | grep PORT
+</code></pre>
 
     </div>
     
@@ -291,7 +294,8 @@
         <link rel="stylesheet" href="/css/cursor.min.css">
         <script src="/js/cursor.min.js"></script>
         <!-- JS -->
-        <script src="/js/ipcheck.js"></script>
+        <!-- 先关掉自己的ip访问检测功能，感觉没啥用还降低性能-->
+        <!-- <script src="/js/ipcheck.js"></script> -->
         <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
         <script src="/js/fireworks.min.js"></script>
         <script src="/js/background.min.js"></script>
