@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ff7d73">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #00a596">Ubuntu</a>
             </span>
             
         </span>
@@ -171,80 +171,77 @@
 </code></pre>
 <span id="more"></span>
 
-<h1 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h1><p>添加用户</p>
-<pre><code class="bash">sudo useradd USER
+<h1 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h1><h2 id="搜索和过滤"><a href="#搜索和过滤" class="headerlink" title="搜索和过滤"></a>搜索和过滤</h2><pre><code class="bash"># 过滤命令返回的结果
+COMMAND | grep KEYWORD
+# findstr是windows的命令，功能和grep差不多
 </code></pre>
-<p>删除用户</p>
-<pre><code class="bash">sudo deluser --remove-home USER
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><pre><code class="bash"># 查看指定端口有没有开启
+# 切换到root用户才可以看到所有信息，否则只能看到当前用户的信息
+sudo -i
+netstat -ap | grep PORT
 </code></pre>
-<p>切换普通用户</p>
-<pre><code class="bash">sudu su - USER
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><pre><code class="bash"># 杀死进程
+kill PID
+# 或者
+kill -9 PID
 </code></pre>
-<p>切换根用户</p>
-<pre><code class="bash">sudu -i
+<h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><pre><code class="bash"># 添加用户
+sudo useradd USER
 </code></pre>
-<p>查看用户列表</p>
-<pre><code class="bash">cat /etc/passwd
+<pre><code class="bash"># 删除用户
+sudo deluser --remove-home USER
 </code></pre>
-<p>查看用户组列表</p>
-<pre><code class="bash">cat /etc/group
+<pre><code class="bash"># 切换普通用户
+sudu su - USER
 </code></pre>
-<h1 id="文件系统权限"><a href="#文件系统权限" class="headerlink" title="文件系统权限"></a>文件系统权限</h1><p>修改目录所属用户</p>
-<pre><code class="bash">sudo chown -R USER[:GROUP] FOLDER
+<pre><code class="bash"># 切换根用户
+sudu -i
 </code></pre>
-<p>修改目录权限</p>
-<pre><code class="bash">sudo chmod -R 777 FOLDER
+<pre><code class="bash"># 查看用户列表
+cat /etc/passwd
 </code></pre>
-<h1 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h1><p>重载守护进程配置</p>
-<pre><code class="bash">sudo systemctl daemon-reload
+<pre><code class="bash"># 查看用户组列表
+cat /etc/group
 </code></pre>
-<p>启动指定守护进程</p>
-<pre><code class="bash">sudo systemctl start DAEMON
+<h2 id="文件系统权限"><a href="#文件系统权限" class="headerlink" title="文件系统权限"></a>文件系统权限</h2><pre><code class="bash"># 修改目录所属用户
+sudo chown -R USER[:GROUP] FOLDER
 </code></pre>
-<p>查看指定守护进程状态</p>
-<pre><code class="bash">sudo systemctl status DAEMON
+<pre><code class="bash"># 修改目录权限
+sudo chmod -R 777 FOLDER
 </code></pre>
-<p>守护进程自启动</p>
-<pre><code class="bash">sudo systemctl enable DAEMON
+<h2 id="守护（后台）进程"><a href="#守护（后台）进程" class="headerlink" title="守护（后台）进程"></a>守护（后台）进程</h2><pre><code class="bash"># 重载守护进程配置
+sudo systemctl daemon-reload
 </code></pre>
-<h1 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h1><p>搜索关键字</p>
-<pre><code class="bash">/keyword
+<pre><code class="bash"># 启动指定守护进程
+sudo systemctl start DAEMON
 </code></pre>
-<p>模糊搜索关键字</p>
-<pre><code class="bash">?keyword
+<pre><code class="bash"># 查看指定守护进程状态
+sudo systemctl status DAEMON
 </code></pre>
-<p>搜索到了之后按”n”键查看下一个匹配项，按”N”查看上一个匹配项</p>
-<p>不保存退出</p>
-<pre><code class="bash">:q!
+<pre><code class="bash"># 守护进程自启动
+sudo systemctl enable DAEMON
 </code></pre>
-<h1 id="nano"><a href="#nano" class="headerlink" title="nano"></a>nano</h1><p>保存文件<br>ctrl + o</p>
+<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><pre><code class="bash"># 创建新分屏
+screen -S SCREENNAME
+</code></pre>
+<pre><code class="bash"># 查看当前用户下的所有分屏
+screen -ls
+</code></pre>
+<pre><code class="bash"># 退出当前分屏，停止运行
+exit
+</code></pre>
+<pre><code class="bash"># 进入指定分屏
+screen -r PROCESSID
+</code></pre>
+<p>退出当前分屏，继续运行<br>ctrl + a 同时 ctrl + d</p>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><pre><code class="bash"># 需要当前目录下有Makefile文件
+make
+</code></pre>
+<h1 id="常用命令行软件"><a href="#常用命令行软件" class="headerlink" title="常用命令行软件"></a>常用命令行软件</h1><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p>搜索关键字<br>&#x2F;keyword</p>
+<p>模糊搜索关键字,搜索到了之后按”n”键查看下一个匹配项，按”N”查看上一个匹配项<br>?keyword</p>
+<p>不保存退出<br>:q!</p>
+<h2 id="nano"><a href="#nano" class="headerlink" title="nano"></a>nano</h2><p>保存文件<br>ctrl + o</p>
 <p>保存退出文件<br>ctrl + x</p>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p><strong>需要目录下有Makefile文件</strong></p>
-<pre><code class="bash">make
-</code></pre>
-<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><p>创建新分屏</p>
-<pre><code class="bash">screen -S SCREENNAME
-</code></pre>
-<p>查看当前用户下的所有分屏</p>
-<pre><code class="bash">screen -ls
-</code></pre>
-<p>退出当前分屏，继续运行</p>
-<p>ctrl + a 同时 ctrl + d</p>
-<p>退出当前分屏，停止运行</p>
-<pre><code class="bash">exit
-</code></pre>
-<p>进入指定分屏</p>
-<pre><code class="bash">screen -r PROCESSID
-</code></pre>
-<h1 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h1><p>打开当前用户的定时任务表</p>
-<pre><code class="bash">crontab -e
-</code></pre>
-<p>设置定时任务（下面意思是23点定时运行用户目录下的test.sh脚本）</p>
-<pre><code class="bash">0 23 * * * ~/test.sh
-</code></pre>
-<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><p>查看指定端口有没有开启</p>
-<pre><code class="bash">netstat -ap | grep PORT
-</code></pre>
 
     </div>
     
