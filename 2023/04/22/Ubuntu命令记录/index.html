@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ff7d73">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #00a596">Ubuntu</a>
             </span>
             
         </span>
@@ -171,8 +171,16 @@
 </code></pre>
 <span id="more"></span>
 
-<h1 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h1><h2 id="搜索和过滤"><a href="#搜索和过滤" class="headerlink" title="搜索和过滤"></a>搜索和过滤</h2><pre><code class="bash"># 过滤命令返回的结果
-COMMAND | grep KEYWORD
+<h1 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h1><h2 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h2><pre><code class="bash"># 查看Ubuntu版本
+lsb_release -a
+</code></pre>
+<pre><code class="bash">查看Linux内核版本
+cat /proc/version
+</code></pre>
+<h2 id="查看pcie设备"><a href="#查看pcie设备" class="headerlink" title="查看pcie设备"></a>查看pcie设备</h2><pre><code class="bash">lspci
+</code></pre>
+<h2 id="搜索和过滤"><a href="#搜索和过滤" class="headerlink" title="搜索和过滤"></a>搜索和过滤</h2><pre><code class="bash"># 过滤命令返回的结果，-i表示不区分大小写
+COMMAND | grep -i KEYWORD
 # findstr是windows的命令，功能和grep差不多
 </code></pre>
 <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><pre><code class="bash"># 查看指定端口有没有开启
@@ -233,15 +241,33 @@ exit
 <pre><code class="bash"># 进入指定分屏
 screen -r PROCESSID
 </code></pre>
+<blockquote>
 <p>退出当前分屏，继续运行<br>ctrl + a 同时 ctrl + d</p>
+</blockquote>
 <h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><pre><code class="bash"># 需要当前目录下有Makefile文件
 make
 </code></pre>
-<h1 id="常用命令行软件"><a href="#常用命令行软件" class="headerlink" title="常用命令行软件"></a>常用命令行软件</h1><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p>搜索关键字<br>&#x2F;keyword</p>
+<h1 id="常用命令行软件"><a href="#常用命令行软件" class="headerlink" title="常用命令行软件"></a>常用命令行软件</h1><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><blockquote>
+<p>搜索关键字<br>&#x2F;keyword</p>
+</blockquote>
+<blockquote>
 <p>模糊搜索关键字,搜索到了之后按”n”键查看下一个匹配项，按”N”查看上一个匹配项<br>?keyword</p>
+</blockquote>
+<blockquote>
 <p>不保存退出<br>:q!</p>
-<h2 id="nano"><a href="#nano" class="headerlink" title="nano"></a>nano</h2><p>保存文件<br>ctrl + o</p>
+</blockquote>
+<blockquote>
+<p>查看文件编码<br>:set ff</p>
+</blockquote>
+<blockquote>
+<p>修改文件编码<br>:set ff&#x3D;unix<br>:set ff&#x3D;dos<br>将文件编码修改为 unix 可以解决linux下sh文件不能执行的问题</p>
+</blockquote>
+<h2 id="nano"><a href="#nano" class="headerlink" title="nano"></a>nano</h2><blockquote>
+<p>保存文件<br>ctrl + o</p>
+</blockquote>
+<blockquote>
 <p>保存退出文件<br>ctrl + x</p>
+</blockquote>
 
     </div>
     
