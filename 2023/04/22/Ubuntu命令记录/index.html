@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #00a596">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #03a9f4">Ubuntu</a>
             </span>
             
         </span>
@@ -177,7 +177,11 @@ lsb_release -a
 <pre><code class="bash">查看Linux内核版本
 cat /proc/version
 </code></pre>
-<h2 id="查看pcie设备"><a href="#查看pcie设备" class="headerlink" title="查看pcie设备"></a>查看pcie设备</h2><pre><code class="bash">lspci
+<h2 id="查看硬件设备"><a href="#查看硬件设备" class="headerlink" title="查看硬件设备"></a>查看硬件设备</h2><pre><code class="bash"># 查看pcie设备
+lspci
+</code></pre>
+<pre><code class="bash"># 查看usb设备
+lsusb
 </code></pre>
 <h2 id="搜索和过滤"><a href="#搜索和过滤" class="headerlink" title="搜索和过滤"></a>搜索和过滤</h2><pre><code class="bash"># 过滤命令返回的结果，-i表示不区分大小写
 COMMAND | grep -i KEYWORD
