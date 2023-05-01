@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #00bcd4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #ffa2c4">Ubuntu</a>
             </span>
             
         </span>
@@ -183,9 +183,11 @@ lspci
 <pre><code class="bash"># 查看usb设备
 lsusb
 </code></pre>
-<pre><code class="bash"># 查看CPU、GPU温度
-sudo apt install lm-sensors
+<pre><code class="bash">sudo apt install lm-sensors
+# 查看CPU、GPU温度
 sensors
+# 查看实时温度
+watch sensors
 </code></pre>
 <h2 id="搜索和过滤"><a href="#搜索和过滤" class="headerlink" title="搜索和过滤"></a>搜索和过滤</h2><pre><code class="bash"># 过滤命令返回的结果，-i表示不区分大小写
 COMMAND | grep -i KEYWORD
