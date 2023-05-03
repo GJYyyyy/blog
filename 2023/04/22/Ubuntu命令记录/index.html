@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ffa2c4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #00bcd4">Ubuntu</a>
             </span>
             
         </span>
@@ -176,6 +176,16 @@ lsb_release -a
 </code></pre>
 <pre><code class="bash">查看Linux内核版本
 cat /proc/version
+</code></pre>
+<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><pre><code class="bash"># 查看已安装软件
+sudo dpkg --list | grep -i PACKAGE
+</code></pre>
+<pre><code class="bash"># 卸载软件
+sudo apt-get remove PACKAGE
+# 完全删除软件
+sudo apt-get purge PACKAGE
+# 自动清理不需要的依赖
+sudo apt-get autoremove
 </code></pre>
 <h2 id="查看硬件设备"><a href="#查看硬件设备" class="headerlink" title="查看硬件设备"></a>查看硬件设备</h2><pre><code class="bash"># 查看pcie设备
 lspci
@@ -232,6 +242,9 @@ sudo systemctl daemon-reload
 </code></pre>
 <pre><code class="bash"># 启动指定守护进程
 sudo systemctl start DAEMON
+</code></pre>
+<pre><code class="bash"># 关闭指定守护进程
+sudo systemctl stop DAEMON
 </code></pre>
 <pre><code class="bash"># 查看指定守护进程状态
 sudo systemctl status DAEMON
