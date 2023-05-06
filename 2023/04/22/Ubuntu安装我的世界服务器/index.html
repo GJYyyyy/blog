@@ -157,12 +157,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ffa2c4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #00a596">Ubuntu</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Minecraft/" style="color: #03a9f4">Minecraft</a>
+                <a href="/tags/Minecraft/" style="color: #ffa2c4">Minecraft</a>
             </span>
             
         </span>
@@ -428,9 +428,31 @@ motd=A Minecraft Server
 
 #玩家客户端的多人游戏服务器列表中显示的服务器信息，显示于名称下方
 </code></pre>
-<h1 id="5-我的世界mod版本"><a href="#5-我的世界mod版本" class="headerlink" title="5. 我的世界mod版本"></a>5. 我的世界mod版本</h1><h2 id="5-1-mod版本服务器下载"><a href="#5-1-mod版本服务器下载" class="headerlink" title="5.1. mod版本服务器下载"></a>5.1. mod版本服务器下载</h2><p><a target="_blank" rel="noopener" href="https://files.minecraftforge.net/net/minecraftforge/forge/">https://files.minecraftforge.net/net/minecraftforge/forge/</a><br><em>注意，如果自动下载失败，可能需要vpn</em></p>
-<h2 id="5-2-mod版本服务器安装"><a href="#5-2-mod版本服务器安装" class="headerlink" title="5.2. mod版本服务器安装"></a>5.2. mod版本服务器安装</h2><p>需要先在windows上执行下载的jar文件，执行后会出现GUI界面，选择安装server版本，并且选择一个新的文件夹当作服务器目录，<br>安装完成后，服务器目录会出现一些文件，把这些文件复制到Ubuntu上，<br>然后执行run.sh文件，后面就跟安装普通服务器一样了，需要同意eula，然后修改server.properties，最后再次执行run.sh就行了</p>
-<h2 id="5-3-我的世界mod网站"><a href="#5-3-我的世界mod网站" class="headerlink" title="5.3. 我的世界mod网站"></a>5.3. 我的世界mod网站</h2><p><a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1">https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1</a></p>
+<h1 id="5-我的世界Mod版本"><a href="#5-我的世界Mod版本" class="headerlink" title="5. 我的世界Mod版本"></a>5. 我的世界Mod版本</h1><h2 id="5-1-服务器下载"><a href="#5-1-服务器下载" class="headerlink" title="5.1. 服务器下载"></a>5.1. <a target="_blank" rel="noopener" href="https://files.minecraftforge.net/net/minecraftforge/forge/">服务器下载</a></h2><p>这里下载的是forge版本的Minecraft<br><em>注意，如果自动下载失败，可能需要vpn</em></p>
+<h2 id="5-2-服务器安装"><a href="#5-2-服务器安装" class="headerlink" title="5.2. 服务器安装"></a>5.2. 服务器安装</h2><p>需要先在windows上执行下载的jar文件，执行后会出现GUI界面，选择安装server版本，并且选择一个新的文件夹当作服务器目录，<br>安装完成后，服务器目录会出现一些文件，把这些文件复制到Ubuntu上，<br>然后执行run.sh文件，后面就跟安装普通服务器一样了，需要同意eula，然后修改server.properties，最后再次执行run.sh就行了</p>
+<h2 id="5-3-安装Mod"><a href="#5-3-安装Mod" class="headerlink" title="5.3. 安装Mod"></a>5.3. 安装Mod</h2><p>可以去<a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1">Minecraft Mod网站</a>下载Mod，<br>然后将Mod（一般是.jar文件）放到游戏目录的mods目录下就可以用了，<br>客户端和服务器都需要将Mod放到mods文件夹里面，否则不能正常运行。</p>
+<h2 id="5-4-将服务端添加到系统服务并自启动"><a href="#5-4-将服务端添加到系统服务并自启动" class="headerlink" title="5.4. 将服务端添加到系统服务并自启动"></a>5.4. 将服务端添加到系统服务并自启动</h2><p><strong>注意，这里设置和普通服务器有一些不一样，不同之处就是需要root用户来执行，不能用minecraft用户执行，猜测可能是Mod版本需要root的权限比较多</strong><br>创建&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;minecraft.service文件</p>
+<pre><code class="bash">touch /etc/systemd/system/minecraft.service
+</code></pre>
+<p>修改文件内容为，User必须是root</p>
+<pre><code class="text">[Unit]
+Description=Minecraft Server
+
+[Service]
+User=root
+WorkingDirectory=/opt/minecraft_forge/server
+ExecStart=/usr/bin/bash run.sh
+ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p PASSWORD stop
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>绑定系统服务并自启动</p>
+<pre><code class="bash">sudo systemctl daemon-reload
+sudo systemctl start minecraft # 手动启动服务器最好切换到root用户
+sudo systemctl status minecraft
+sudo systemctl enable minecraft # 设置自启动最好也切换到root用户
+</code></pre>
 
     </div>
     

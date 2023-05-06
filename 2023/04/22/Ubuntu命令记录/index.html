@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #00bcd4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #03a9f4">Ubuntu</a>
             </span>
             
         </span>
@@ -237,19 +237,36 @@ sudo chown -R USER[:GROUP] FOLDER
 <pre><code class="bash"># 修改目录权限
 sudo chmod -R 777 FOLDER
 </code></pre>
-<h2 id="守护（后台）进程"><a href="#守护（后台）进程" class="headerlink" title="守护（后台）进程"></a>守护（后台）进程</h2><pre><code class="bash"># 重载守护进程配置
+<h2 id="服务-x2F-守护进程"><a href="#服务-x2F-守护进程" class="headerlink" title="服务&#x2F;守护进程"></a>服务&#x2F;守护进程</h2><h3 id="前提是需要在-x2F-etc-x2F-systemd-x2F-system目录下新建-DAEMON-service-文件来配置服务"><a href="#前提是需要在-x2F-etc-x2F-systemd-x2F-system目录下新建-DAEMON-service-文件来配置服务" class="headerlink" title="前提是需要在&#x2F;etc&#x2F;systemd&#x2F;system目录下新建 DAEMON.service 文件来配置服务"></a>前提是需要在&#x2F;etc&#x2F;systemd&#x2F;system目录下新建 DAEMON.service 文件来配置服务</h3><p>内容基本如下</p>
+<pre><code class="text">[Unit]
+Description=Minecraft Server
+
+[Service]
+User=root
+WorkingDirectory=/opt/minecraft_forge/server
+ExecStart=/usr/bin/bash run.sh
+ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p PASSWORD stop
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>这里重点说一下因为 <em>权限问题</em> 导致启动服务不成功的解决办法，<br>关键是 DAEMON.service 文件里面配置的 <em>User</em> 是否有足够的权限，<br>视情况可以改为 <em>root</em> 用户</p>
+<pre><code class="bash"># 重载服务配置
 sudo systemctl daemon-reload
 </code></pre>
-<pre><code class="bash"># 启动指定守护进程
+<pre><code class="bash"># 启动指定服务
 sudo systemctl start DAEMON
 </code></pre>
-<pre><code class="bash"># 关闭指定守护进程
+<pre><code class="bash"># 重启服务
+sudo systemctl restart DAEMON
+</code></pre>
+<pre><code class="bash"># 关闭指定服务
 sudo systemctl stop DAEMON
 </code></pre>
-<pre><code class="bash"># 查看指定守护进程状态
+<pre><code class="bash"># 查看指定服务状态
 sudo systemctl status DAEMON
 </code></pre>
-<pre><code class="bash"># 守护进程自启动
+<pre><code class="bash"># 服务自启动
 sudo systemctl enable DAEMON
 </code></pre>
 <h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><pre><code class="bash"># 创建新分屏
