@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>categories | 喵喵的狗窝</title>
+        <title>在租房环境下搭建DDNS服务器 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -128,13 +128,20 @@
     </div>
 </nav>
 
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>在租房环境下搭建DDNS服务器 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/9
+        </span>
         
-        
-        <span>
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -143,7 +150,42 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/DDNS/" style="color: #ff7d73">DDNS</a>
+            </span>
+            
+        </span>
+        
     </div>
+    
+    <div class="content" v-pre>
+        <p>事情是这样的，自从我毕业以后，就一直想要搭建个自己的服务器，但是自己很穷且云服务器太贵，而且不能体验到自己动手搭建的乐趣，所以才有了这篇文章</p>
+<span id="more"></span>
+<p><em><strong>开始前要说一下，如果没有光猫的超级管理员权限，是不能配置一级路由光猫的，所以最好打电话询问网络服务商要超管账号和密码</strong></em></p>
+<h1 id="路由器篇"><a href="#路由器篇" class="headerlink" title="路由器篇"></a>路由器篇</h1><p>我租的房子路由拓扑结构如下：</p>
+<ol>
+<li>一台光猫（顶级路由）</li>
+<li>我自己的路由器（二级路由）</li>
+</ol>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>进入光猫配置界面，将自己的二级路由设置为静态IP，并且设置为DMZ主机，这样就可以将大部分配置权限转移到二级路由去了</p>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>在二级路由配置界面设置DDNS，这里就不细说了，因为二级路由已经是DMZ主机了，所以可以直接设置二级路由DDNS</p>
+<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>重启光猫的防火墙，这一步是个坑，重启一下最好，不然容易遇到问题。（我用的是中兴f450g光猫）</p>
+<h2 id="第三步-1"><a href="#第三步-1" class="headerlink" title="第三步"></a>第三步</h2><p>在二级路由里面配置虚拟主机，这样就可以在外网使用DDNS域名配合二级路由暴露的端口调用本地服务了，但是注意这里有个坑，外部端口需要设置的大一些，在60000 - 65535最好，不然容易遇到问题</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>在内网访问DDNS的域名似乎不能成功，暂时不能解决</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -170,6 +212,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+
+
+
+
 
 
         <!-- html -->

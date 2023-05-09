@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>categories | 喵喵的狗窝</title>
+        <title>WOL网络唤醒 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -128,13 +128,20 @@
     </div>
 </nav>
 
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>WOL网络唤醒 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/9
+        </span>
         
-        
-        <span>
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -143,7 +150,41 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/WOL/" style="color: #03a9f4">WOL</a>
+            </span>
+            
+        </span>
+        
     </div>
+    
+    <div class="content" v-pre>
+        <p>WOL(Wake On Lan)指的是通过网络唤醒电脑，配置流程如下：</p>
+<span id="more"></span>
+
+<p>只说一下关键步骤</p>
+<ol>
+<li>电脑BIOS需要开启对应的WOL选项</li>
+<li>windows系统点击我的电脑-&gt;管理-&gt;网卡-&gt;允许魔术封包唤醒</li>
+<li>windows电源选项关闭快速启动</li>
+<li>windows防火墙允许端口7和9，并且协议为tcp&#x2F;udp</li>
+<li>通过WOL客户端对电脑IP发送魔术封包即可开机</li>
+</ol>
+<p>目前几个问题：<br>电脑关机状态只有关机后的几分钟可以开机成功，过了那几分钟就不能开机成功，但是睡眠状态下随时可以开机成功</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -170,6 +211,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+
+
+
+
 
 
         <!-- html -->

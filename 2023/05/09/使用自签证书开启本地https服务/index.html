@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>categories | 喵喵的狗窝</title>
+        <title>使用自签证书开启本地https服务 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -128,13 +128,20 @@
     </div>
 </nav>
 
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>使用自签证书开启本地https服务 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/9
+        </span>
         
-        
-        <span>
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -143,7 +150,61 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Ubuntu/" style="color: #03a9f4">Ubuntu</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Node-js/" style="color: #00a596">Node.js</a>
+            </span>
+            
+        </span>
+        
     </div>
+    
+    <div class="content" v-pre>
+        <p>记录一下如何在本地搭建https服务</p>
+<span id="more"></span>
+
+<h1 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h1><p><em>以下操作在Ubuntu环境下进行</em></p>
+<pre><code class="bash"># 生成密钥
+openssl genrsa -out server.key 2048
+</code></pre>
+<pre><code class="bash"># 生成证书请求文件
+# Common Name 是自己的域名，测试的话可以随便写一个
+openssl req -new -key server.key -out server.csr
+</code></pre>
+<pre><code class="bash"># 生成证书
+openssl x509 -req -days 365 -in server. csr -signkey server.key -out server.crt
+</code></pre>
+<p>然后开启nodejs服务</p>
+<pre><code class="javascript">const fs = require(&#39;fs&#39;);
+const https = require(&#39;https&#39;);
+const port = 9999;
+
+const server = https.createServer(&#123;
+    key: fs.readFileSync(&#39;./server.key&#39;),
+    cert: fs.readFileSync(&#39;./server.crt&#39;),
+&#125;)
+
+http.listen(9999);
+</code></pre>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/xgangzai/article/details/112300962">https://blog.csdn.net/xgangzai/article/details/112300962</a></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -170,6 +231,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+
+
+
+
 
 
         <!-- html -->
