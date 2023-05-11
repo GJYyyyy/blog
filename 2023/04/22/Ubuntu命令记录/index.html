@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Ubuntu/" style="color: #ffa2c4">Ubuntu</a>
+                <a href="/tags/Ubuntu/" style="color: #00a596">Ubuntu</a>
             </span>
             
         </span>
@@ -176,6 +176,9 @@ lsb_release -a
 </code></pre>
 <pre><code class="bash">查看Linux内核版本
 cat /proc/version
+</code></pre>
+<h2 id="关机定时启动系统"><a href="#关机定时启动系统" class="headerlink" title="关机定时启动系统"></a>关机定时启动系统</h2><pre><code class="bash"># 立刻关机，并且在1800秒之后重启
+sudo rtcwake -m off -s 1800
 </code></pre>
 <h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><pre><code class="bash"># 查看已安装软件
 sudo dpkg --list | grep -i PACKAGE
