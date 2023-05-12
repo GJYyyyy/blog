@@ -3,7 +3,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>实现一个基本的WebSocket前后端数据交互功能 | 喵喵的狗窝</title>
+        <title>用CSS画一个正方形 | 喵喵的狗窝</title>
         <meta name="author" content="喵喵拖孩">
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
         <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
@@ -130,14 +130,14 @@
 
                 <div class="article">
     <div>
-        <h1>实现一个基本的WebSocket前后端数据交互功能 </h1>
+        <h1>用CSS画一个正方形 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/3/7
+            2023/5/12
         </span>
         
         <span class="category">
@@ -157,7 +157,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/javascript/" style="color: #00bcd4">javascript</a>
+                <a href="/tags/Css/" style="color: #00a596">Css</a>
             </span>
             
         </span>
@@ -165,84 +165,58 @@
     </div>
     
     <div class="content" v-pre>
-        <p>后端使用 nodejs 开发，使用到了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/nodejs-websocket">nodejs-websocket</a>库</p>
-<p>前端使用了 H5 原生的 WebSocket 功能</p>
-<hr>
-<h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><span id="more"></span>
-
-<h3 id="后端代码（backend-js）："><a href="#后端代码（backend-js）：" class="headerlink" title="后端代码（backend.js）："></a>后端代码（backend.js）：</h3><pre><code class="javascript">const ws = require(&#39;nodejs-websocket&#39;);
-
-/**
- * 创建websocket服务端，返回一个socket连接
- * @param &#123;number&#125; port
- * @param &#123;string&#125; host
- * @returns &#123;Promise&#125;
- */
-function run(port = 6868, host = &#39;localhost&#39;) &#123;
-    return new Promise((resolve) =&gt; &#123;
-        const server = ws.createServer((connection) =&gt; &#123;
-            console.log(&#39;检测到新的连接&#39;);
-            resolve(connection);
-        &#125;);
-
-        server.listen(port, host);
-    &#125;);
-&#125;
-
-async function test() &#123;
-    let socket = await run();
-
-    // 服务端主动发送信息
-    socket.sendText(&#39;服务端发出的信息&#39;);
-
-    // 服务端接收信息
-    socket.on(&#39;text&#39;, (str) =&gt; &#123;
-        console.log(`服务端收到的信息：$&#123;str&#125;`);
-    &#125;);
-&#125;
-
-test();
-</code></pre>
-<h3 id="前端代码（frontend-html）："><a href="#前端代码（frontend-html）：" class="headerlink" title="前端代码（frontend.html）："></a>前端代码（frontend.html）：</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+        <p>个人 CSS 技能查漏补缺系列</p>
+<p>关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。</p>
+<p>直接上代码</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
     &lt;head&gt;
         &lt;meta charset=&quot;UTF-8&quot; /&gt;
         &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
         &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
         &lt;title&gt;Document&lt;/title&gt;
+        &lt;style&gt;
+            @keyframes show &#123;
+                0% &#123;
+                    width: 100px;
+                    height: 240px;
+                &#125;
+                25% &#123;
+                    width: 200px;
+                    height: 200px;
+                &#125;
+                50% &#123;
+                    width: 200px;
+                    height: 240px;
+                &#125;
+                75% &#123;
+                    width: 100px;
+                    height: 200px;
+                &#125;
+                100% &#123;
+                    width: 100px;
+                    height: 240px;
+                &#125;
+            &#125;
+
+            #wrapper &#123;
+                border: 1px solid black;
+                animation: show 5s linear 0s infinite;
+            &#125;
+
+            #wrapper &gt; #cube &#123;
+                --side: 80%;
+                width: var(--side);
+                padding: calc(var(--side) / 2) 0;
+                background-color: blue;
+            &#125;
+        &lt;/style&gt;
     &lt;/head&gt;
-
     &lt;body&gt;
-        &lt;script&gt;
-            /**
-             * 创建websocket客户端，返回一个socket连接
-             * @param &#123;string&#125; url
-             * @returns &#123;Promise&#125;
-             */
-            function run(url) &#123;
-                return new Promise((resolve) =&gt; &#123;
-                    let socket = new WebSocket(url);
-                    socket.addEventListener(&#39;open&#39;, () =&gt; &#123;
-                        console.log(&#39;创建连接成功&#39;);
-                        resolve(socket);
-                    &#125;);
-                &#125;);
-            &#125;
-
-            async function test() &#123;
-                let socket = await run(&#39;ws://localhost:6868&#39;);
-
-                // 客户端主动发送信息
-                socket.send(&#39;客户端发出的信息&#39;);
-
-                // 客户端接收信息
-                socket.addEventListener(&#39;message&#39;, (res) =&gt; &#123;
-                    console.log(`客户端收到的信息：$&#123;res.data&#125;`);
-                &#125;);
-            &#125;
-
-            test();
-        &lt;/script&gt;
+        &lt;p&gt;不管线框容器宽高怎么变，蓝色区块的宽高始终相等&lt;/p&gt;
+        &lt;div id=&quot;wrapper&quot;&gt;
+            &lt;div id=&quot;cube&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
     &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>

@@ -152,6 +152,244 @@
             
 
 <div class="post">
+    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/">
+        <h2 class="post-title">用CSS做一个椭圆轨道小球运动动画</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/12
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>个人CSS技能查漏补缺系列  </p>
+<p>关键在于使用关键帧(keyframs)时让两个动画重叠，并让其中一个动画延迟  </p>
+<p>直接上代码  </p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        #wrapper &#123;
+            --ballCount: 2; /* 小球数量 */
+            --ballAnimTime: 1s; /* 动画单轮总时间 */
+            --ballAnimDeley: calc(var(--ballAnimTime) / 4); /* 为了实现椭圆轨迹而计算的延迟时间，为单轮总时间除以4 */
+            --ballUnitAnimTime: calc(var(--ballAnimTime) / var(--ballCount)); /* 小球延迟，为单轮总时间除以小球数量 */
+
+            position: relative;
+            width: 60vw;
+            height: 30vw;
+            border: 1px solid black;
+            overflow: hidden;
+            resize: auto;
+        &#125;
+
+        #wrapper &gt; .ball &#123;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: 2vw;
+            height: 2vw;
+            border-radius: 50%;
+            background-color: blue;
+        &#125;
+
+        /* Y轴移动动画 */
+        @keyframes moveY &#123;
+            from &#123;
+                top: 0;
+            &#125;
+            to &#123;
+                top: 100%;
+            &#125;
+        &#125;
+        /* X轴移动动画 */
+        @keyframes moveX &#123;
+            from &#123;
+                left: 0;
+            &#125;
+            to &#123;
+                left: 100%;
+            &#125;
+        &#125;
+
+        #wrapper &gt; .ball1 &#123;
+            /* moveY需要比moveX延迟一段时间，才能显示出椭圆轨迹，这个时间为--ballAnimDeley*/
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            animation: 
+            moveY calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * (var(--ballAnimDeley) + 0 * var(--ballUnitAnimTime))) infinite alternate,
+            moveX calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * 0 * var(--ballUnitAnimTime)) infinite alternate;
+        &#125;
+
+        #wrapper &gt; .ball2 &#123;
+            animation: 
+            moveY calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * (var(--ballAnimDeley) + 1 * var(--ballUnitAnimTime))) infinite alternate,
+            moveX calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * 1 * var(--ballUnitAnimTime)) infinite alternate;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;线框右下角可以拖拽改变大小&lt;/p&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+        &lt;div class=&quot;ball ball1&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;ball ball2&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lin494910940/p/14051631.html">https://www.cnblogs.com/lin494910940/p/14051631.html</a></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
+                特效
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Css/" style="color: #00a596">
+                Css
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/">
+        <h2 class="post-title">用CSS画一个正方形</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/12
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>个人 CSS 技能查漏补缺系列</p>
+<p>关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。</p>
+<p>直接上代码</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+        &lt;style&gt;
+            @keyframes show &#123;
+                0% &#123;
+                    width: 100px;
+                    height: 240px;
+                &#125;
+                25% &#123;
+                    width: 200px;
+                    height: 200px;
+                &#125;
+                50% &#123;
+                    width: 200px;
+                    height: 240px;
+                &#125;
+                75% &#123;
+                    width: 100px;
+                    height: 200px;
+                &#125;
+                100% &#123;
+                    width: 100px;
+                    height: 240px;
+                &#125;
+            &#125;
+
+            #wrapper &#123;
+                border: 1px solid black;
+                animation: show 5s linear 0s infinite;
+            &#125;
+
+            #wrapper &gt; #cube &#123;
+                --side: 80%;
+                width: var(--side);
+                padding: calc(var(--side) / 2) 0;
+                background-color: blue;
+            &#125;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;不管线框容器宽高怎么变，蓝色区块的宽高始终相等&lt;/p&gt;
+        &lt;div id=&quot;wrapper&quot;&gt;
+            &lt;div id=&quot;cube&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Css/" style="color: #00a596">
+                Css
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/05/09/%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%E5%BC%80%E5%90%AF%E6%9C%AC%E5%9C%B0https%E6%9C%8D%E5%8A%A1/">
         <h2 class="post-title">使用自签证书开启本地https服务</h2>
     </a>
@@ -191,14 +429,14 @@
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #03a9f4">
+            <a href="/tags/Ubuntu/" style="color: #00a596">
                 Ubuntu
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Node-js/" style="color: #ffa2c4">
+            <a href="/tags/Node-js/" style="color: #00a596">
                 Node.js
             </a>
         </span>
@@ -247,7 +485,7 @@
         
         <span class="tag">
             
-            <a href="/tags/WOL/" style="color: #00a596">
+            <a href="/tags/WOL/" style="color: #ff7d73">
                 WOL
             </a>
         </span>
@@ -296,7 +534,7 @@
         
         <span class="tag">
             
-            <a href="/tags/DDNS/" style="color: #ff7d73">
+            <a href="/tags/DDNS/" style="color: #00a596">
                 DDNS
             </a>
         </span>
@@ -356,7 +594,7 @@
         
         <span class="tag">
             
-            <a href="/tags/webpack/" style="color: #03a9f4">
+            <a href="/tags/webpack/" style="color: #ff7d73">
                 webpack
             </a>
         </span>
@@ -414,14 +652,14 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00a596">
+            <a href="/tags/javascript/" style="color: #ff7d73">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00a596">
                 特效
             </a>
         </span>
@@ -486,7 +724,7 @@
         
         <span class="tag">
             
-            <a href="/tags/PuTTY/" style="color: #00a596">
+            <a href="/tags/PuTTY/" style="color: #03a9f4">
                 PuTTY
             </a>
         </span>
@@ -538,14 +776,14 @@ sudo apt install default-jdk
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #00a596">
+            <a href="/tags/Ubuntu/" style="color: #ff7d73">
                 Ubuntu
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Minecraft/" style="color: #ffa2c4">
+            <a href="/tags/Minecraft/" style="color: #03a9f4">
                 Minecraft
             </a>
         </span>
@@ -597,96 +835,13 @@ sudo apt install default-jdk
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #00a596">
+            <a href="/tags/Ubuntu/" style="color: #00bcd4">
                 Ubuntu
             </a>
         </span>
         
     </div>
     <a href="/2023/04/22/Ubuntu%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/03/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%93%A6/">
-        <h2 class="post-title">第一篇文章哦</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/3/16
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="别催"><a href="#别催" class="headerlink" title="别催!!"></a>别催!!</h2><h3 id="作者正在长脑子"><a href="#作者正在长脑子" class="headerlink" title="作者正在长脑子~"></a>作者正在长脑子~</h3><h4 id="别急。快了！快有内容了！"><a href="#别急。快了！快有内容了！" class="headerlink" title="别急。快了！快有内容了！"></a>别急。快了！快有内容了！</h4><pre><code class="javascript">console.log(&#39;打点代码证明脑子快就长好了！&#39;);
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/03/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%93%A6/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/03/07/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84WebSocket%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%8A%9F%E8%83%BD/">
-        <h2 class="post-title">实现一个基本的WebSocket前后端数据交互功能</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/3/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>后端使用 nodejs 开发，使用到了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/nodejs-websocket">nodejs-websocket</a>库</p>
-<p>前端使用了 H5 原生的 WebSocket 功能</p>
-<hr>
-<h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/javascript/" style="color: #00a596">
-                javascript
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/03/07/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84WebSocket%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%8A%9F%E8%83%BD/" class="go-post">阅读全文</a>
 </div>
 
 
