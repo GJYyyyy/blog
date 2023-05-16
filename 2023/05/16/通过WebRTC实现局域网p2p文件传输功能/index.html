@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>通过WebRTC实现局域网p2p文件传输功能 | 喵喵的狗窝</title>
+        <meta name="author" content="喵喵拖孩">
+        <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
+        <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <link rel="icon" href="/images/44609683.png">
+        <script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.min.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.2.1/css/all.min.css">
+        
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        
+        
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="loading" style="height: 100vh; width: 100vw; left: 0; top: 0; position: fixed; display: flex; z-index: 2147483647; justify-content: space-between; background: #fff; transition: opacity 0.3s ease-out, visibility 0.3s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none">
+    <div style="position: fixed; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center">
+        <div id="loadcontent" style="width: 50vmin; height: 50vmin; padding: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: solid 10px #a3ddfb; text-align: center">
+            <div>
+                <h2>LOADING...</h2>
+                <p style="word-break: keep-all">加载过慢请开启缓存（浏览器默认开启）</p>
+                <img alt="loading" src="/images/loading.gif" style="height: 50px">
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="layout">
+            <transition name="into">
+            <div id="main" v-show="showpage" style="display: -not-none">
+                <nav id="menu">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>喵喵的狗窝</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div :class="&quot;phone-menu &quot; + menushow" id="phone-menu">
+        <div class="curtain" @click="menushow = !menushow" v-show="menushow"></div>
+        <div class="title" @click="menushow = !menushow">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;喵喵的狗窝</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menushow">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+                <div class="article">
+    <div>
+        <h1>通过WebRTC实现局域网p2p文件传输功能 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/16
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/javascript/" style="color: #00a596">javascript</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/WebRTC/" style="color: #03a9f4">WebRTC</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起初我是想实现一个不论在内网还是公网环境下都能建立p2p连接传输文件的功能，后来经过学习发现，内网环境实现起来很简单，但是公网就很麻烦了，要用到STUN和TURN，并且不符合我“只能通过p2p传输文件，不能经过中转服务器”的理念，所以这个项目只实现了<strong>局域网</strong>这部分的功能</p>
+<h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><ul>
+<li>因为信令服务器没有部署ssl证书，所以当前端页面部署到https协议的服务器里时，无法访问信令服务器</li>
+</ul>
+<h1 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h1><ul>
+<li>p2p：对等连接。</li>
+<li>信令服务器：帮助p2p双方交换进行WebRTC连接所必须的信息，一般用WebSocket实现。</li>
+<li>STUN：帮助p2p双方获取到对方的IP地址和端口号，<em>（仅公网和多重内网环境需要）</em>。</li>
+<li>TURN：数据中转服务，当p2p连接失败时，会使用TURN服务中转数据，<em>（仅公网和多重内网环境需要）</em>。</li>
+</ul>
+<h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="/images/webrtc_test.gif"></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="信令服务器目录结构"><a href="#信令服务器目录结构" class="headerlink" title="信令服务器目录结构"></a>信令服务器目录结构</h2><ul>
+<li>src<ul>
+<li>server.js 主文件</li>
+<li>Users.js 用户类</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<pre><code class="javascript">// server.js
+
+&#39;use strict&#39;;
+
+const fs = require(&#39;fs&#39;);
+const http = require(&#39;http&#39;);
+const https = require(&#39;https&#39;);
+const ws = require(&#39;ws&#39;);
+const Users = require(&#39;./Users&#39;);
+
+const port = 9999;
+
+const middleware = (req, res) =&gt; &#123;
+
+    // 允许跨域连接
+    res.writeHead(200, &#123;
+        // &#39;Content-Type&#39;: &#39;text/plain&#39;,
+        &#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;,
+        &#39;Access-Control-Allow-Headers&#39;: &#39;Content-Type&#39;,
+        &#39;Access-Control-Allow-Methods&#39;: &#39;GET, POST, PUT, DELETE, OPTIONS&#39;
+    &#125;)
+&#125;
+
+let server;
+if (fs.existsSync(&#39;./ssl/server.crt&#39;)) &#123; // 如果根目录有ssl证书则使用https
+    server = https.createServer(&#123;
+        key: fs.readFileSync(&#39;./ssl/server.key&#39;),
+        cert: fs.readFileSync(&#39;./ssl/server.crt&#39;),
+    &#125;, middleware)
+&#125; else &#123;
+    server = http.createServer(middleware);
+&#125;
+
+const wsServer = new ws.Server(&#123;
+    server
+&#125;)
+
+let users = new Users;
+
+const onMsghandler = socket =&gt; &#123;
+    console.log(&#39;socket创建成功&#39;);
+    socket.on(&#39;message&#39;, msg =&gt; &#123;
+        let obj;
+        try &#123;
+            obj = JSON.parse(msg.toString())
+        &#125; catch (err) &#123; &#125;
+        let &#123; type, data &#125; = obj;
+        switch (type) &#123;
+            case &#39;login&#39;:
+                &#123;
+                    let flag = users.addUser(socket);
+                    socket.send(JSON.stringify(&#123;
+                        type: &#39;login_success&#39;,
+                        data: flag,
+                    &#125;))
+                    console.log(&#39;当前用户列表&#39;, users.getUserFlags());
+                &#125;
+                break;
+            case &#39;send_offer&#39;:
+                &#123;
+                    let userRemote = users.getUserByFlag(data.flagRemote);
+                    if (userRemote === undefined) &#123;
+                        socket.send(JSON.stringify(&#123;
+                            type: &#39;remote_disconnected&#39;
+                        &#125;))
+                    &#125; else &#123;
+                        userRemote.socket.send(JSON.stringify(&#123;
+                            type: &#39;receive_offer&#39;,
+                            data
+                        &#125;))
+                    &#125;
+                &#125;
+                break;
+            case &#39;send_answer&#39;:
+                &#123;
+                    let userRemote = users.getUserByFlag(data.flagRemote);
+                    if (userRemote === undefined) &#123;
+                        socket.send(JSON.stringify(&#123;
+                            type: &#39;remote_disconnected&#39;
+                        &#125;))
+                    &#125; else &#123;
+                        userRemote.socket.send(JSON.stringify(&#123;
+                            type: &#39;receive_answer&#39;,
+                            data
+                        &#125;))
+                    &#125;
+                &#125;
+                break;
+            case &#39;send_ice&#39;:
+                &#123;
+                    let userRemote = users.getUserByFlag(data.flagRemote);
+                    if (userRemote === undefined) &#123;
+                        socket.send(JSON.stringify(&#123;
+                            type: &#39;remote_disconnected&#39;
+                        &#125;))
+                    &#125; else &#123;
+                        userRemote.socket.send(JSON.stringify(&#123;
+                            type: &#39;receive_ice&#39;,
+                            data
+                        &#125;))
+                    &#125;
+                &#125;
+                break;
+            default:
+                break;
+        &#125;
+    &#125;)
+&#125;
+
+// 客户端与服务端建立连接
+wsServer.on(&#39;connection&#39;, onMsghandler);
+server.listen(port);
+console.log(`---listen on $&#123;port&#125;---`);
+</code></pre>
+<pre><code class="javascript">// Users.js
+
+&#39;use strict&#39;;
+
+class Users &#123;
+    #list;
+    #timeoutLimit; // 自动断开连接时间
+    #userLimit; // 最大人数
+
+    constructor() &#123;
+        this.#list = new Map;
+        this.#timeoutLimit = 3 * 60 * 1000; // 保证足够时间交换进行WebRTC需要的数据
+        this.#userLimit = 5;
+    &#125;
+
+    getUserFlags() &#123;
+        return Array.from(this.#list.keys())
+    &#125;
+
+    getUserByFlag(flag) &#123;
+        return this.#list.get(flag);
+    &#125;
+
+    addUser(socket) &#123;
+        // 如果用户超过限制，则删除第一个用户
+        if(this.#list.size &gt;= this.#userLimit) &#123;
+            this.deleteUser(
+                this.#list.keys().next().value
+            )
+        &#125;
+
+        // 创建用户id
+        let flag = new Date().getTime().toString().substring(8).split(&#39;&#39;);
+        flag.splice(2, 0, &#39;-&#39;);
+        flag = flag.join(&#39;&#39;);
+
+        // 定时删除用户
+        let timer = setTimeout(() =&gt; &#123;
+            this.deleteUser(flag);
+        &#125;, this.#timeoutLimit)
+
+        this.#list.set(flag, &#123;
+            timer,
+            socket
+        &#125;);
+        return flag;
+    &#125;
+
+    deleteUser(flag) &#123;
+        let user = this.#list.get(flag);
+        // 通知用户登录超时
+        user.socket.send(JSON.stringify(&#123;
+            type: &#39;login_timeout&#39;
+        &#125;));
+        // 断开当前用户socket连接
+        user.socket.close();
+        // 请除定时器
+        clearTimeout(user.timer);
+        // 删除用户
+        this.#list.delete(flag);
+    &#125;
+&#125;
+
+module.exports = Users;
+</code></pre>
+<h2 id="前端页面目录结构"><a href="#前端页面目录结构" class="headerlink" title="前端页面目录结构"></a>前端页面目录结构</h2><ul>
+<li>public<ul>
+<li>index.html</li>
+</ul>
+</li>
+<li>src<ul>
+<li>index.js 主文件</li>
+<li>FileTransfer.js 文件传输类（核心类）</li>
+<li>utils.js 工具</li>
+</ul>
+</li>
+</ul>
+<pre><code class="html">&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        &lt;title&gt;文件传输&lt;/title&gt;
+        &lt;style&gt;
+            * &#123;
+                box-sizing: border-box;
+            &#125;
+
+            body &#123;
+                margin: 0;
+                padding: 12px;
+            &#125;
+
+            #flag &#123;
+                cursor: pointer;
+            &#125;
+
+            #state &gt; span &#123;
+                display: none;
+            &#125;
+
+            #state &gt; .wsdisconnected &#123;
+                color: gray;
+            &#125;
+
+            #state &gt; .wsconnecting &#123;
+                color: blue;
+            &#125;
+
+            #state &gt; .wsconnected &#123;
+                color: green;
+            &#125;
+
+            #state &gt; .pcconnecting &#123;
+                color: blue;
+            &#125;
+
+            #state &gt; .pcconnected &#123;
+                color: green;
+            &#125;
+
+            #log &#123;
+                max-height: 10vh;
+                overflow-y: auto;
+            &#125;
+
+            #userArea &#123;
+                display: none;
+            &#125;
+
+            #fileArea &#123;
+                display: none;
+            &#125;
+
+            #fileAreaInner &#123;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            &#125;
+
+            #fileAreaInner &gt; button &#123;
+                width: 90px;
+            &#125;
+
+            #fileAreaInner &gt; div &#123;
+                width: calc((100% - 90px - 20px) / 2);
+                height: 400px;
+                padding: 0 8px;
+                overflow-x: hidden;
+                overflow-y: auto;
+            &#125;
+
+            #fileAreaInner &gt; .sendArea &#123;
+                border-right: 1px solid black;
+            &#125;
+
+            #fileAreaInner &gt; .receiveArea &#123;
+                border-left: 1px solid black;
+            &#125;
+
+            .fileList &#123;
+                width: 100%;
+                list-style-type: decimal;
+            &#125;
+
+            .fileList &gt; .percent &#123;
+                position: relative;
+                height: 22px;
+                border: 1px solid black;
+                margin: 8px 0;
+                font-size: 12px;
+            &#125;
+
+            .fileList &gt; .percent &gt; .bar &#123;
+                position: relative;
+                z-index: 0;
+                display: block;
+                width: 0%;
+                height: 100%;
+                padding: 0 8px;
+                background-color: gray;
+                font-size: inherit;
+            &#125;
+
+            .fileList &gt; .percent &gt; .text &#123;
+                position: absolute;
+                z-index: 1;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 0 8px;
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                pointer-events: none;
+                font-size: inherit;
+            &#125;
+        &lt;/style&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h3&gt;状态&lt;/h3&gt;
+        &lt;p id=&quot;state&quot;&gt;
+            &lt;span class=&quot;wsdisconnected&quot;&gt;WebSocket未连接&lt;/span&gt;
+            &lt;span class=&quot;wsconnecting&quot;&gt;WebSocket连接中...&lt;/span&gt;
+            &lt;span class=&quot;wsconnected&quot;&gt;WebSocket连接成功&lt;/span&gt;
+            &lt;span class=&quot;pcconnecting&quot;&gt;WebRTC连接中...&lt;/span&gt;
+            &lt;span class=&quot;pcconnected&quot;&gt;WebRTC连接成功&lt;/span&gt;
+        &lt;/p&gt;
+
+        &lt;hr /&gt;
+
+        &lt;!-- log --&gt;
+        &lt;h3&gt;日志&lt;/h3&gt;
+        &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;
+
+        &lt;hr /&gt;
+
+        &lt;div id=&quot;userArea&quot;&gt;
+            &lt;h3&gt;
+                &lt;p&gt;当前页面ID：&lt;/p&gt;
+                &lt;input id=&quot;flag&quot; readonly&gt;&lt;/input&gt;
+            &lt;/h3&gt;
+    
+            &lt;hr /&gt;
+    
+            &lt;h3&gt;
+                &lt;p&gt;输入对方页面ID：&lt;/p&gt;
+                &lt;input id=&quot;flagRemote&quot; type=&quot;text&quot; placeholder=&quot;xx-xxx&quot;/&gt;&lt;button id=&quot;flagRemoteBtn&quot;&gt;
+                    确认
+                &lt;/button&gt;
+            &lt;/h3&gt;
+    
+            &lt;hr /&gt;
+    
+            &lt;div id=&quot;fileArea&quot;&gt;
+
+                &lt;div id=&quot;fileAreaInner&quot;&gt;
+                    &lt;div class=&quot;sendArea&quot;&gt;
+                        &lt;p&gt;
+                            &lt;input id=&quot;uploadFile&quot; type=&quot;file&quot; /&gt;
+                        &lt;/p&gt;
+                        &lt;h4&gt;发送列表：&lt;/h4&gt;
+                        &lt;ul id=&quot;sendList&quot; class=&quot;fileList&quot;&gt;&lt;/ul&gt;
+                    &lt;/div&gt;
+    
+                    &lt;button id=&quot;abort&quot;&gt;终止传输&lt;/button&gt;
+    
+                    &lt;div class=&quot;receiveArea&quot;&gt;
+                        &lt;h4&gt;接收列表：&lt;/h4&gt;
+                        &lt;ul id=&quot;receiveList&quot; class=&quot;fileList&quot;&gt;&lt;/ul&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<pre><code class="javascript">// index.js
+
+&#39;use strict&#39;;
+import &quot;core-js&quot;;
+import &#123; haveWebSocket, haveWebRTC, $, gen, initDom, changeState, log &#125; from &#39;./utils&#39;;
+import FileTransfer from &quot;./FileTransfer&quot;;
+
+const $state = $(&#39;state&#39;);
+const $userArea = $(&#39;userArea&#39;);
+const $flag = $(&#39;flag&#39;);
+const $flagRemote = $(&#39;flagRemote&#39;);
+const $flagRemoteBtn = $(&#39;flagRemoteBtn&#39;);
+const $logDom = $(&#39;log&#39;);
+const $fileArea = $(&#39;fileArea&#39;);
+const $uploadFile = $(&#39;uploadFile&#39;);
+const $sendList = $(&#39;sendList&#39;);
+const $receiveList = $(&#39;receiveList&#39;);
+const $abort = $(&#39;abort&#39;);
+
+let wsServerUrl;
+if (process.env.NODE_ENV === &#39;development&#39;) &#123;
+    // 测试环境信令服务器地址
+    wsServerUrl =&#39;ws://localhost:9999&#39;;
+&#125; else if (process.env.NODE_ENV === &#39;production&#39;) &#123;
+    // 正式环境信令服务器地址
+    wsServerUrl =&#39;&#39;;
+&#125;
+
+let $sendLi, $receiveLi;
+
+initDom();
+
+(function() &#123;
+    if (!haveWebSocket()) &#123;
+        myAlert(&#39;当前浏览器不支持WebSocket&#39;);
+        return
+    &#125;
+    if (!haveWebRTC()) &#123;
+        myAlert(&#39;当前浏览器不支持WebRTC&#39;);
+        return
+    &#125;
+
+    const ft = new FileTransfer(wsServerUrl);
+    ft.setLogDom($logDom);
+    ft.addEventListener(&#39;statechange&#39;, ev =&gt; &#123;
+        let state = ev.target.getState();
+        changeState(state, $state);
+        log(state, $logDom);
+        switch (state) &#123;
+            case &#39;wsdisconnected&#39;:
+                let err = ft.getError();
+                if (err) &#123;
+                    log(err.message, $logDom);
+                &#125;
+            default:
+                $flag.value = &#39;&#39;;
+                $flagRemote.value = &#39;&#39;;
+                $userArea.hide();
+                $fileArea.hide();
+                break;
+            case &#39;wsconnected&#39;:
+                let flag = ft.getFlag();
+                $flag.value = flag;
+                $userArea.show();
+                break;
+            case &#39;pcconnecting&#39;:
+                $userArea.show();
+                break;
+            case &#39;pcconnected&#39;:
+                $userArea.show();
+                $fileArea.show();
+                onRTCConnected();
+                break;
+        &#125;
+    &#125;)
+    $abort.onclick = () =&gt; &#123;
+        if(window.confirm(&#39;确认终止传输，该操作不可逆&#39;)) &#123;
+            ft.abort.call(ft);
+        &#125;
+    &#125;;
+    $flagRemoteBtn.onclick = onFlagRemoteBtnClick;
+
+    function onFlagRemoteBtnClick() &#123;
+        let flagRemote = $flagRemote.value;
+        if(flagRemote === &#39;&#39;) &#123;
+            alert(&#39;对方id不能为空&#39;)
+        &#125; else if (flagRemote === ft.getFlag()) &#123;
+            alert(&#39;不能输入自己的id&#39;);;
+            $flagRemote.value = &#39;&#39;;
+        &#125; else if (!/^\d&#123;2&#125;\-\d&#123;3&#125;$/.test(flagRemote)) &#123;
+            alert(&#39;对方id格式不正确，请输入 xx-xxx 格式&#39;);
+            $flagRemote.value = &#39;&#39;;
+        &#125; else &#123;
+            ft.setFlagRemote(flagRemote);
+            ft.connect();
+        &#125;
+    &#125;
+
+    function onRTCConnected() &#123;
+        $uploadFile.onchange = ev =&gt; &#123;
+            let file = ev.target.files[0];
+            // 开始发送文件
+            ft.addEventListener(&#39;sendfileinfo&#39;, ev =&gt; &#123;
+                $uploadFile.disabled = true;
+                // 文件基本信息
+                let fileInfo = ev.target.getFileInfo();
+                log(&#39;开始发送文件&#39;, $logDom);
+                log(fileInfo, $logDom);
+                if (!Array.from($sendList.children).find($a =&gt; new RegExp(fileInfo.name).test($a.innerText))) &#123;
+                    $sendLi = gen(&#39;li&#39;);
+                    $sendLi.innerText = `$&#123;fileInfo.name&#125;(0%)`;
+                    $sendList.appendChild($sendLi);
+                &#125;
+            &#125;)
+            // 正在发送文件
+            ft.addEventListener(&#39;sending&#39;, ev =&gt; &#123;
+                let sendPercent = ev.target.getSendPercent();
+                $sendLi.innerText = $sendLi.innerText.replace(/\(\d&#123;1,3&#125;(\.\d&#123;1,2&#125;)?\%\)$/, `($&#123;sendPercent&#125;%)`);
+            &#125;)
+            // 发送文件完毕
+            ft.addEventListener(&#39;sended&#39;, () =&gt; &#123;
+                log(&#39;发送文件完毕&#39;);
+                $uploadFile.disabled = false;
+                $uploadFile.value = null;
+            &#125;)
+            ft.sendFile(file);
+        &#125;
+
+        // 开始接收文件
+        ft.addEventListener(&#39;receivefileinfo&#39;, ev =&gt; &#123;
+            $uploadFile.disabled = true;
+            // 文件基本信息
+            let fileInfo = ev.target.getFileInfo();
+            log(&#39;开始接收文件&#39;, $logDom);
+            log(fileInfo, $logDom);
+            if (!Array.from($receiveList.children).find($a =&gt; new RegExp(fileInfo.name).test($a.innerText))) &#123;
+                $receiveLi = gen(&#39;li&#39;);
+                let $a = gen(&#39;a&#39;);
+                $a.innerText = `$&#123;fileInfo.name&#125;(0%)`;
+                $receiveLi.appendChild($a);
+                $receiveList.appendChild($receiveLi);
+            &#125;
+        &#125;)
+        // 正在接收文件
+        ft.addEventListener(&#39;receiving&#39;, ev =&gt; &#123;
+            let receivePercent = ev.target.getReceivePercent();
+            let $a = $receiveLi.children[0];
+            $a.innerText = $a.innerText.replace(/\(\d&#123;1,3&#125;(\.\d&#123;1,2&#125;)?\%\)$/, `($&#123;receivePercent&#125;%)`);
+        &#125;)
+        // 接收文件完毕
+        ft.addEventListener(&#39;received&#39;, ev =&gt; &#123;
+            $uploadFile.disabled = false;
+            $uploadFile.value = null;
+            let file = ev.target.getFile();
+            log(&#39;接收文件完毕&#39;, $logDom);
+            let $a = $receiveLi.children[0];
+            $a.href = URL.createObjectURL(file);
+            $a.download = $a.innerText.replace(/\(\d&#123;1,3&#125;(\.\d&#123;1,2&#125;)?\%\)$/, &#39;&#39;);
+        &#125;)
+    &#125;
+
+&#125;)()
+</code></pre>
+<pre><code class="javascript">// FileTransfer.js
+
+
+import &#123; log &#125; from &quot;./utils&quot;;
+
+class FileTransfer extends EventTarget &#123;
+
+    // 连接
+    #wsServerUrl;
+    #ws;
+    #pc;
+    #dc;
+    #dcRemote;
+
+    // 中止标记
+    #abortFlag = false;
+
+    // 状态
+    #state;
+    #rtcSuccess = false;
+
+    // 日志
+    #logDom;
+    #err;
+
+    // 对象页面标记
+    #flag;
+    #flagRemote;
+
+    // 发送文件
+    #sendFileInterval = 0; // 发送chunk之间的间隔时间，这里单位是毫秒。貌似只要异步就能避免send queue full，但还是给了他一个间隔时间
+    #sendFileChunkSize = 4 * 1024 // 每次发送的chunk大小，单位为BYTE
+    #sendFileOffset;
+    #sendPercent = 0;
+
+    // 文件
+    #fileInfo;
+    #file;
+
+    // 接收文件
+    #receiveBuffer;
+    #receiveFileSize;
+    #receiveFileTotalSize;
+    #receivePercent = 0;
+
+
+    /**
+     * 这个类封装了建立WebRTC连接的详细过程
+     * @param &#123;String&#125; wsServerUrl WebSockets服务器地址
+     */
+    constructor(wsServerUrl) &#123;
+        super();
+        this.#wsServerUrl = wsServerUrl;
+        this.#setState(&#39;wsdisconnected&#39;);
+        this.#initFileInfo();
+        this.#initWebSocket();
+        this.#initWebRTC();
+    &#125;
+
+    #initWebSocket() &#123;
+        this.#ws = new WebSocket(this.#wsServerUrl);
+        this.#ws.onopen = () =&gt; &#123;
+            log(&#39;建立WebSocket连接成功&#39;, this.#logDom);
+            this.#setState(&#39;wsconnecting&#39;);
+            // 登录
+            this.#ws.send(JSON.stringify(&#123; type: &#39;login&#39; &#125;));
+            this.#ws.onmessage = msg =&gt; this.#wsMsgHandler.call(this, msg)
+        &#125;
+        this.#ws.onerror = err =&gt; &#123;
+            this.#setState(&#39;wsdisconnected&#39;);
+            log(&#39;建立WebSocket连接失败&#39; + JSON.stringify(err), this.#logDom, 2);
+            alert(&#39;建立WebSocket连接失败&#39; + JSON.stringify(err));
+        &#125;
+    &#125;
+
+    /**
+     * Socket msg事件处理
+     * @param &#123;Object&#125; msg 
+     */
+    #wsMsgHandler(msg) &#123;
+        let obj;
+        try &#123;
+            obj = JSON.parse(msg.data);
+        &#125; catch(err) &#123; &#125;
+        let &#123; type, data &#125; = obj;
+        log(&#39;type：&#39; + type, this.#logDom);
+        switch (type) &#123;
+            case &#39;login_success&#39;:
+                log(&#39;登录成功&#39;, this.#logDom);
+                this.#flag = data;
+                this.#setState(&#39;wsconnected&#39;);
+                break;
+            case &#39;login_timeout&#39;:
+                if (!this.#rtcSuccess) &#123;
+                    this.#flag = &#39;&#39;;
+                    this.#setState(&#39;wsdisconnected&#39;);
+                &#125;
+                break;
+            case &#39;remote_disconnected&#39;:
+                this.#flagRemote = &#39;&#39;;
+                this.#setState(&#39;wsdisconnected&#39;);
+                alert(&#39;对方已掉线，请对方刷新网页&#39;);
+                break;
+            case &#39;receive_offer&#39;:
+                log(&#39;接收Offer&#39;, this.#logDom);
+                this.#flagRemote = data.flag;
+                this.#createAnswer(data);
+                break;
+            case &#39;receive_answer&#39;:
+                log(&#39;接收Answer&#39;, this.#logDom);
+                this.#receiveAnswer(data);
+                break;
+            case &#39;receive_ice&#39;:
+                log(&#39;接收Ice&#39;, this.#logDom);
+                this.#receiveIce(data);
+                break;
+            default:
+                break;
+        &#125;
+    &#125;
+
+    /**
+     * 创建Offer并发送
+     */
+    async #createOffer() &#123;
+        this.#setState(&#39;pcconnecting&#39;);
+        let offer = await this.#pc.createOffer();
+        await this.#pc.setLocalDescription(offer);
+        this.#createIce();
+
+        log(&#39;发送Offer&#39;, this.#logDom);
+        this.#ws.send(JSON.stringify(&#123;
+            type: &#39;send_offer&#39;,
+            data: &#123;
+                flag: this.#flag,
+                flagRemote: this.#flagRemote,
+                sdp: offer,
+            &#125;
+        &#125;))
+    &#125;
+
+    /**
+     * 创建Answer并发送
+     * @param &#123;Object&#125; data 
+     */
+    async #createAnswer(data) &#123;
+        let offer = data.sdp;
+        await this.#pc.setRemoteDescription(offer);
+        let answer = await this.#pc.createAnswer();
+        await this.#pc.setLocalDescription(answer);
+        this.#createIce();
+
+        log(&#39;发送Answer&#39;, this.#logDom);
+        this.#ws.send(JSON.stringify(&#123;
+            type: &#39;send_answer&#39;,
+            data: &#123;
+                flag: this.#flag,
+                flagRemote: this.#flagRemote,
+                sdp: answer,
+            &#125;
+        &#125;))
+    &#125;
+
+    /**
+     * 完成Offer/Answer交换
+     * @param &#123;Object&#125; data 
+     */
+    async #receiveAnswer(data) &#123;
+        let answer = data.sdp;
+        await this.#pc.setRemoteDescription(answer);
+    &#125;
+
+    /**
+     * 创建icecandidate并发送
+     */
+    #createIce() &#123;
+        this.#pc.onicecandidate = ev =&gt; &#123;
+            if (ev.candidate) &#123;
+                log(&#39;发送Ice&#39;, this.#logDom);
+                this.#ws.send(JSON.stringify(&#123;
+                    type: &#39;send_ice&#39;,
+                    data: &#123;
+                        flag: this.#flag,
+                        flagRemote: this.#flagRemote,
+                        ice: ev.candidate
+                    &#125;
+                &#125;))
+            &#125;
+        &#125;
+    &#125;
+
+    /**
+     * 接收icecandidate并保存
+     * @param &#123;Object&#125; data 
+     */
+    #receiveIce(data) &#123;
+        let &#123; ice &#125; = data;
+        this.#pc.addIceCandidate(ice);
+    &#125;
+
+    #initWebRTC() &#123;
+        this.#pc = new RTCPeerConnection(&#123;
+            /*
+            虽然只在内网环境实现p2p连接，但是可能出现多重内网的情况，所以还是添加一些STUN服务，
+            由于这些STUN服务是第三方提供的，所以可能会出现不可用的情况，需要酌情更换
+            */
+            iceServers: [
+                &#123; url: &quot;stun:stun.l.google.com:19302&quot; &#125;,
+                &#123; url: &quot;stun:stun.services.mozilla.com&quot; &#125;,
+            ],
+            sdpSemantics: &#39;plan-b&#39;
+        &#125;);
+        this.#initDataChannel();
+    &#125;
+
+    #initDataChannel() &#123;
+        // 本地数据通道
+        this.#dc = this.#pc.createDataChannel(&#39;fileTransfer&#39;, &#123; ordered: true &#125;);
+        this.#dcConntHandler(this.#dc);
+
+        // 远端数据通道
+        this.#pc.ondatachannel = ev =&gt; &#123;
+            this.#dcRemote = ev.channel;
+            this.#dcConntHandler(this.#dcRemote);
+        &#125;;
+    &#125;
+
+    /**
+     * 数据通道连接事件处理
+     * @param &#123;RTCDataChannel&#125; dc 
+     */
+    #dcConntHandler(dc) &#123;
+        dc.onopen = () =&gt; &#123;
+            log(&#39;建立WebRTC连接成功&#39;, this.#logDom);
+            this.#rtcSuccess = true;
+            this.#setState(&#39;pcconnected&#39;);
+            dc.onmessage = msg =&gt; this.#dcMsgHandler.call(this, msg);
+        &#125;
+        dc.onerror = err =&gt; &#123;
+            this.#setState(&#39;pcdisconnected&#39;);
+            log(&#39;建立WebRTC连接失败&#39; + JSON.stringify(err), this.#logDom, 2);
+            alert(&#39;建立WebRTC连接失败&#39; + JSON.stringify(err));
+        &#125;
+    &#125;
+
+    /**
+     * 数据通道msg事件处理
+     * @param &#123;Object&#125; msg 
+     */
+    #dcMsgHandler(msg) &#123;
+        if (!this.#abortFlag) &#123;
+            let &#123; data &#125; = msg;
+            if (typeof data === &#39;string&#39;) &#123;
+                log(&#39;收到文件基本信息&#39; + data, this.#logDom);
+                let dataObj;
+                try &#123;
+                    dataObj = JSON.parse(data);
+                &#125; catch (err) &#123; &#125;
+                this.#fileInfo = dataObj;
+                this.#receiveFileTotalSize = dataObj.size;
+                this.dispatchEvent(new Event(&#39;receivefileinfo&#39;));
+            &#125; else &#123;
+                setTimeout(() =&gt; &#123;
+
+                    if (data instanceof ArrayBuffer) &#123;
+                        this.#receiveFileSize += data.byteLength;
+                    &#125; else if (data instanceof Blob) &#123;
+                        this.#receiveFileSize += data.size;
+                    &#125;
+
+                    this.#receivePercent = Math.ceil(this.#receiveFileSize / this.#receiveFileTotalSize * 1000) / 10;
+                    this.dispatchEvent(new Event(&#39;receiving&#39;));
+                    this.#receiveBuffer.push(data);
+                    if (this.#receiveFileSize &gt;= this.#receiveFileTotalSize) &#123;
+                        let file = new Blob(this.#receiveBuffer);
+                        this.#file = file;
+                        this.dispatchEvent(new Event(&#39;received&#39;));
+                        this.#initFileInfo();
+                    &#125;
+                &#125;, this.#sendFileInterval);
+            &#125;
+        &#125;
+    &#125;
+
+    /**
+     * 初始化文件信息
+     */
+    #initFileInfo() &#123;
+        this.#sendFileOffset = 0;
+        this.#sendPercent = 0;
+        this.#receiveBuffer = [];
+        this.#receiveFileSize = 0;
+        this.#receiveFileTotalSize = 0;
+        this.#receivePercent = 0;
+        this.#fileInfo = null;
+        this.#file = null;
+    &#125;
+
+    #setState(state) &#123;
+        this.#state = state;
+        this.dispatchEvent(new Event(&#39;statechange&#39;));
+    &#125;
+    getState() &#123;
+        return this.#state;
+    &#125;
+    getSendPercent() &#123;
+        return this.#sendPercent;
+    &#125;
+    getReceivePercent() &#123;
+        return this.#receivePercent;
+    &#125;
+    getFileInfo() &#123;
+        return this.#fileInfo;
+    &#125;
+    getFile() &#123;
+        return this.#file;
+    &#125;
+    getFlag() &#123;
+        return this.#flag;
+    &#125;
+    getError() &#123;
+        return this.#err;
+    &#125;
+
+
+    setLogDom(dom) &#123;
+        this.#logDom = dom;
+    &#125;
+
+    setFlagRemote(flag) &#123;
+        this.#flagRemote = flag;
+    &#125;
+
+    connect() &#123;
+        this.#createOffer();
+    &#125;
+
+    sendFile(file) &#123;
+        let fr = new FileReader();
+
+        // 先发送文件基本信息
+        this.#fileInfo = &#123;
+            name: file.name,
+            size: file.size,
+        &#125;;
+        this.#dc.send(JSON.stringify(this.#fileInfo));
+        this.dispatchEvent(new Event(&#39;sendfileinfo&#39;));
+
+        fr.onload = ev =&gt; &#123;
+            setTimeout(() =&gt; &#123;
+                this.#dc.send(ev.target.result);
+                this.#sendFileOffset += ev.target.result.byteLength;
+                this.#sendPercent = Math.ceil(this.#sendFileOffset / file.size * 1000) / 10;
+                this.dispatchEvent(new Event(&#39;sending&#39;));
+                if (this.#sendFileOffset &lt; file.size) &#123;
+                    if (!this.#abortFlag) &#123;
+                        readSlice(this.#sendFileOffset);
+                    &#125;
+                &#125; else &#123;
+                    this.dispatchEvent(new Event(&#39;sended&#39;));
+                    this.#initFileInfo();
+                &#125;
+            &#125;, this.#sendFileInterval)
+
+        &#125;
+
+        // 分段发送文件
+        const readSlice = offset =&gt; &#123;
+            let fileSlice = file.slice(offset, offset + this.#sendFileChunkSize);
+            fr.readAsArrayBuffer(fileSlice);
+        &#125;
+        readSlice(0);
+    &#125;
+
+    abort() &#123;
+        this.#abortFlag = true;
+    &#125;
+&#125;
+
+export default FileTransfer;
+</code></pre>
+<pre><code class="javascript">// utils.js
+
+export function haveWebSocket() &#123;
+    if(window.WebSocket) return true;
+    return false;
+&#125;
+
+export function haveWebRTC() &#123;
+    window.RTCPeerConnection = window.RTCPeerConnection
+        || window.webkitRTCPeerConnection
+        || window.mozRTCPeerConnection
+        || window.msRTCPeerConnection;
+    if(window.RTCPeerConnection) return true;
+    return false;
+&#125;
+
+/**
+ * 日志记录
+ * @param &#123;String&#125; msg 
+ * @param &#123;HTMLElement&#125; dom 
+ * @param &#123;Number&#125; errLevel 
+ */
+export function log(msg, dom, errLevel = 0) &#123;
+    let p = document.createElement(&#39;p&#39;);
+    p.innerText = JSON.stringify(msg);
+    switch(errLevel) &#123;
+        case 0:
+        default:
+            p.style.color = &#39;gray&#39;;
+            console.log(msg);
+            break;
+        case 1:
+            p.style.color = &#39;orange&#39;;
+            console.warn(msg);
+            break;
+        case 2:
+            p.style.color = &#39;red&#39;;
+            console.error(msg);
+            break;
+    &#125;
+    if(dom) dom.prepend(p);
+&#125;
+
+/**
+ * DOM ID选择器简化版
+ * @param &#123;String&#125; selector 
+ * @returns &#123;HTMLElement&#125;
+ */
+export function $(selector) &#123;
+    return document.getElementById(selector);
+&#125;
+
+/**
+ * 创建DOM 简化版
+ * @param &#123;String&#125; tag 
+ * @returns &#123;HTMLElement&#125;
+ */
+export function gen(tag) &#123;
+    return document.createElement(tag);
+&#125;
+
+/**
+* 初始化DOM并为其添加常用方法
+*/
+export function initDom() &#123;
+   if (!Element.prototype.show) &#123;
+       Element.prototype.show = function () &#123;
+           this.style.display = &#39;initial&#39;;
+       &#125;
+   &#125;
+   if (!Element.prototype.hide) &#123;
+       Element.prototype.hide = function () &#123;
+           this.style.display = &#39;none&#39;;
+       &#125;
+   &#125;
+   if (!Element.prototype.isShow) &#123;
+       Element.prototype.isShow = function () &#123;
+           return this.style.display !== &#39;none&#39;;
+       &#125;
+   &#125;
+   if (!Element.prototype.hasClass) &#123;
+       Element.prototype.hasClass = function (className) &#123;
+           return this.classList.contains(className);
+       &#125;
+   &#125;
+&#125;
+
+/**
+ * 修改连接状态
+ * @param &#123;String&#125; status 
+ * @param &#123;HTMLElement&#125; dom
+ */
+export function changeState(status, dom) &#123;
+    for (let $child of dom.children) &#123;
+        if ($child.hasClass(status)) &#123;
+            $child.show();
+        &#125; else &#123;
+            $child.hide();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 喵喵的狗窝
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;喵喵拖孩
+        </div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            <div id="showimg">
+                <img id="showimg-content">
+            </div>
+        </div>
+        <script src="/js/functions.js"></script>
+<script src="/js/particlex.js"></script>
+
+
+
+
+
+
+
+        <!-- html -->
+        <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+        <canvas id="background" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"></canvas>
+        <div id="cursor"></div>
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/cursor.min.css">
+        <script src="/js/cursor.min.js"></script>
+        <!-- JS -->
+        <!-- 先关掉自己的ip访问检测功能，感觉没啥用还降低性能-->
+        <!-- <script src="/js/ipcheck.js"></script> -->
+        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+        <script src="/js/fireworks.min.js"></script>
+        <script src="/js/background.min.js"></script>
+    </body>
+</html>
