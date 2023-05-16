@@ -240,7 +240,10 @@ sudo chown -R USER[:GROUP] FOLDER
 <pre><code class="bash"># 修改目录权限
 sudo chmod -R 777 FOLDER
 </code></pre>
-<h2 id="服务-x2F-守护进程"><a href="#服务-x2F-守护进程" class="headerlink" title="服务&#x2F;守护进程"></a>服务&#x2F;守护进程</h2><h3 id="前提是需要在-x2F-etc-x2F-systemd-x2F-system目录下新建-DAEMON-service-文件来配置服务"><a href="#前提是需要在-x2F-etc-x2F-systemd-x2F-system目录下新建-DAEMON-service-文件来配置服务" class="headerlink" title="前提是需要在&#x2F;etc&#x2F;systemd&#x2F;system目录下新建 DAEMON.service 文件来配置服务"></a>前提是需要在&#x2F;etc&#x2F;systemd&#x2F;system目录下新建 DAEMON.service 文件来配置服务</h3><p>内容基本如下</p>
+<h2 id="文件及目录增删改查"><a href="#文件及目录增删改查" class="headerlink" title="文件及目录增删改查"></a>文件及目录增删改查</h2><pre><code class="bash"># 删除非空文件夹
+rm -r FOLDER
+</code></pre>
+<h2 id="服务-x2F-守护进程"><a href="#服务-x2F-守护进程" class="headerlink" title="服务&#x2F;守护进程"></a>服务&#x2F;守护进程</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要在&#x2F;etc&#x2F;systemd&#x2F;system目录下新建 DAEMON.service 文件来配置服务<br>内容基本如下</p>
 <pre><code class="text">[Unit]
 Description=Minecraft Server
 
@@ -253,7 +256,7 @@ ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p PASSWORD st
 [Install]
 WantedBy=multi-user.target
 </code></pre>
-<p>这里重点说一下因为 <em>权限问题</em> 导致启动服务不成功的解决办法，<br>关键是 DAEMON.service 文件里面配置的 <em>User</em> 是否有足够的权限，<br>视情况可以改为 <em>root</em> 用户</p>
+<p>这里重点说一下因为 <em>权限问题</em> 导致启动服务不成功的解决办法，<br>关键是 DAEMON.service 文件里面配置的 <em>User</em>字段 是否有足够的权限，<br>视情况可以改为 <em>root</em> 用户</p>
 <pre><code class="bash"># 重载服务配置
 sudo systemctl daemon-reload
 </code></pre>
