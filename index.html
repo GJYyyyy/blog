@@ -152,6 +152,100 @@
             
 
 <div class="post">
+    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/">
+        <h2 class="post-title">css父元素选择器</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>今天发现一个css父选择器写法</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+        &lt;style&gt;
+            .wrapper &#123;
+                width: 100px;
+                height: 100px;
+                border: 2px solid green;
+            &#125;
+            .inner &#123;
+                width: 80px;
+                height: 80px;
+                border: 2px solid blue;
+            &#125;
+            .heart &#123;
+                width: 60px;
+                height: 60px;
+                border: 2px solid red;
+            &#125;
+
+            /* 父选择器，选择了.inner元素的父元素.wrapper */
+            .wrapper:has(.inner) &#123;
+                border-top-left-radius: 50%;
+            &#125;
+
+            /* 链式调用，实现祖先选择器 */
+            .wrapper:has(.inner):has(.heart) &#123;
+                border-bottom-right-radius: 50%;
+            &#125;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;wrapper&quot;&gt;
+            &lt;div class=&quot;inner&quot;&gt;
+                &lt;div class=&quot;heart&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Css/" style="color: #00bcd4">
+                Css
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/05/16/%E9%80%9A%E8%BF%87WebRTC%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD/">
         <h2 class="post-title">通过WebRTC实现局域网p2p文件传输功能</h2>
     </a>
@@ -208,14 +302,14 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #ffa2c4">
+            <a href="/tags/javascript/" style="color: #03a9f4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/WebRTC/" style="color: #03a9f4">
+            <a href="/tags/WebRTC/" style="color: #00a596">
                 WebRTC
             </a>
         </span>
@@ -342,7 +436,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #ff7d73">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
                 特效
             </a>
         </span>
@@ -453,7 +547,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #00bcd4">
+            <a href="/tags/Css/" style="color: #ffa2c4">
                 Css
             </a>
         </span>
@@ -502,14 +596,14 @@
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #03a9f4">
+            <a href="/tags/Ubuntu/" style="color: #00bcd4">
                 Ubuntu
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Node-js/" style="color: #ffa2c4">
+            <a href="/tags/Node-js/" style="color: #ff7d73">
                 Node.js
             </a>
         </span>
@@ -558,7 +652,7 @@
         
         <span class="tag">
             
-            <a href="/tags/WOL/" style="color: #00bcd4">
+            <a href="/tags/WOL/" style="color: #03a9f4">
                 WOL
             </a>
         </span>
@@ -607,7 +701,7 @@
         
         <span class="tag">
             
-            <a href="/tags/DDNS/" style="color: #00bcd4">
+            <a href="/tags/DDNS/" style="color: #ffa2c4">
                 DDNS
             </a>
         </span>
@@ -667,7 +761,7 @@
         
         <span class="tag">
             
-            <a href="/tags/webpack/" style="color: #ffa2c4">
+            <a href="/tags/webpack/" style="color: #03a9f4">
                 webpack
             </a>
         </span>
@@ -725,21 +819,21 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #ffa2c4">
+            <a href="/tags/javascript/" style="color: #00bcd4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00bcd4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
                 特效
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #ff7d73">
+            <a href="/tags/Css/" style="color: #ffa2c4">
                 Css
             </a>
         </span>
@@ -797,72 +891,13 @@
         
         <span class="tag">
             
-            <a href="/tags/PuTTY/" style="color: #ffa2c4">
+            <a href="/tags/PuTTY/" style="color: #00a596">
                 PuTTY
             </a>
         </span>
         
     </div>
     <a href="/2023/04/22/%E4%BD%BF%E7%94%A8PuTTY%E5%92%8Cssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95Ubuntu/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/04/22/Ubuntu%E5%AE%89%E8%A3%85%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-        <h2 class="post-title">Ubuntu安装我的世界服务器端</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="1-安装java"><a href="#1-安装java" class="headerlink" title="1. 安装java"></a>1. 安装java</h1><pre><code class="bash">sudo apt update
-sudo apt upgrade
-sudo apt install default-jdk
-</code></pre>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Ubuntu/" style="color: #ff7d73">
-                Ubuntu
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Minecraft/" style="color: #ffa2c4">
-                Minecraft
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/04/22/Ubuntu%E5%AE%89%E8%A3%85%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="go-post">阅读全文</a>
 </div>
 
 
