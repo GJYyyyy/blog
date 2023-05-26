@@ -236,7 +236,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #03a9f4">
+            <a href="/tags/Css/" style="color: #ff7d73">
                 Css
             </a>
         </span>
@@ -302,14 +302,14 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00bcd4">
+            <a href="/tags/javascript/" style="color: #03a9f4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/WebRTC/" style="color: #03a9f4">
+            <a href="/tags/WebRTC/" style="color: #ffa2c4">
                 WebRTC
             </a>
         </span>
@@ -423,6 +423,160 @@
 &lt;/html&gt;
 </code></pre>
 <p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lin494910940/p/14051631.html">https://www.cnblogs.com/lin494910940/p/14051631.html</a></p>
+<hr>
+<hr>
+<h1 id="用Javascript实现"><a href="#用Javascript实现" class="headerlink" title="用Javascript实现"></a>用Javascript实现</h1><p>后来发现css实现的效果不好，小球运动到盒子四边时会有明显的碰撞感，所以这里用js实现一下</p>
+<p>目录结构</p>
+<ul>
+<li>EllipsisGenerator.js</li>
+<li>index.html</li>
+</ul>
+<pre><code class="javascript">// EllipsisGenerator.js
+
+/**
+ * 椭圆轨道坐标生成器类
+ */
+class EllipsisGenerator &#123;
+    x;
+    y;
+    a;
+    b;
+    angle;
+    angleStep;
+
+    /**
+     * 构造一个椭圆轨道
+     * @param &#123;Number&#125; x 圆心x坐标
+     * @param &#123;Number&#125; y 圆心y坐标
+     * @param &#123;Number&#125; a x轴半径长度
+     * @param &#123;Number&#125; b y轴半径长度
+     * @param &#123;Number&#125; angle 起始角度 单位deg
+     * @param &#123;Number&#125; angleStep 角度自增值 单位deg
+     */
+    constructor(x, y, a, b, angle = 0, angleStep = 1) &#123;
+        this.x = x;
+        this.y = y;
+        this.a = a;
+        this.b = b;
+        this.angle = angle;
+        this.angleStep = angleStep;
+    &#125;
+
+    /**
+     * *generate方法返回一个迭代器，每次调用迭代器的next方法就会使角度(this.angle)自增(this.angleStep)，
+     * 然后返回角度射线与椭圆轨道的交点坐标(x,y)，即椭圆轨道坐标
+     */
+    *generate() &#123;
+        while (true) &#123;
+            let radians = this.angle * Math.PI / 180
+                , tx = this.a * Math.cos(radians)
+                , ty = this.b * Math.sin(radians);
+
+            yield &#123;
+                x: this.x + tx,
+                y: this.y + ty
+            &#125;
+
+            if (this.angle &gt;= 360) &#123;
+                this.angle = 1;
+            &#125; else &#123;
+                this.angle += this.angleStep;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;canvas id=&quot;container&quot; style=&quot;border: 1px solid&quot;&gt;&lt;/canvas&gt;
+        &lt;script src=&quot;./EllipsisGenerator.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            const bubbleCount = 100; // 球球数量
+            const bubbleRadius = 10; // 球球半径
+            const frameRate = 40; // 渲染帧数；每秒40帧
+            const bubbleColor = &#39;yellowgreen&#39;;
+            const bubbles = [];
+            class Bubble &#123;
+                x;
+                y;
+                r;
+                alpha;
+                constructor(x = 0, y = 0, r = 1, alpha = 1) &#123;
+                    this.x = x;
+                    this.y = y;
+                    this.r = r;
+                    this.alpha = alpha;
+                &#125;
+            &#125;
+
+            const $star = document.getElementById(&#39;container&#39;);
+            const width = 600;
+            const height = 400;
+            $star.width = width;
+            $star.height = height;
+
+            const elliptic = new EllipsisGenerator(
+                width / 2,
+                height / 2,
+                width / 2 - bubbleRadius,
+                height / 2 - bubbleRadius,
+                0,
+                -1
+            );
+            const generate = elliptic.generate();
+
+            const ctx = $star.getContext(&#39;2d&#39;);
+
+            const run = () =&gt; &#123;
+                ctx.clearRect(0, 0, width, height);
+                let &#123; x, y &#125; = generate.next().value;
+
+                if (bubbles.length &gt;= bubbleCount) &#123;
+                    bubbles.shift();
+                &#125;
+
+                let bubble = new Bubble(x, y, 2);
+                bubbles.push(bubble);
+
+                //渲染bubble数组
+                for (let i = 0; i &lt; bubbles.length; i++) &#123;
+                    let bubble = bubbles[i];
+                    bubble.alpha = (i + 1) * (1 / bubbleCount);
+                    bubble.r = bubble.r * (i + 1) * (1 / bubbleCount);
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.globalAlpha = bubble.alpha * 0.5;
+                    ctx.fillStyle = bubbleColor;
+                    ctx.arc(
+                        bubble.x,
+                        bubble.y,
+                        bubble.r * 4,
+                        0,
+                        2 * Math.PI,
+                        false
+                    );
+                    ctx.fill();
+                    ctx.restore();
+                &#125;
+
+                setTimeout(() =&gt; &#123;
+                    requestAnimationFrame(run);
+                &#125;, 1000 / frameRate);
+            &#125;;
+
+            run();
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
             
         </div>
@@ -436,14 +590,21 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #ffa2c4">
+            <a href="/tags/javascript/" style="color: #ffa2c4">
+                javascript
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00bcd4">
                 特效
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #ff7d73">
+            <a href="/tags/Css/" style="color: #00a596">
                 Css
             </a>
         </span>
@@ -547,7 +708,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #03a9f4">
+            <a href="/tags/Css/" style="color: #00a596">
                 Css
             </a>
         </span>
@@ -596,14 +757,14 @@
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #00bcd4">
+            <a href="/tags/Ubuntu/" style="color: #00a596">
                 Ubuntu
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Node-js/" style="color: #ffa2c4">
+            <a href="/tags/Node-js/" style="color: #00a596">
                 Node.js
             </a>
         </span>
@@ -652,7 +813,7 @@
         
         <span class="tag">
             
-            <a href="/tags/WOL/" style="color: #00a596">
+            <a href="/tags/WOL/" style="color: #03a9f4">
                 WOL
             </a>
         </span>
@@ -754,14 +915,14 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00bcd4">
+            <a href="/tags/javascript/" style="color: #ffa2c4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/webpack/" style="color: #03a9f4">
+            <a href="/tags/webpack/" style="color: #ffa2c4">
                 webpack
             </a>
         </span>
@@ -819,21 +980,21 @@
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00a596">
+            <a href="/tags/javascript/" style="color: #00bcd4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00bcd4">
                 特效
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #ff7d73">
+            <a href="/tags/Css/" style="color: #00a596">
                 Css
             </a>
         </span>
@@ -884,14 +1045,14 @@
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #00bcd4">
+            <a href="/tags/Ubuntu/" style="color: #03a9f4">
                 Ubuntu
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/PuTTY/" style="color: #03a9f4">
+            <a href="/tags/PuTTY/" style="color: #ff7d73">
                 PuTTY
             </a>
         </span>
