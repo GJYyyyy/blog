@@ -152,6 +152,73 @@
             
 
 <div class="post">
+    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/">
+        <h2 class="post-title">总结一下安卓手机抓包流程</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>因为想给移动端APP做自动签到的功能，所以给手机抓包是必经的课题。</p>
+<hr>
+<h1 id="简单说一下思路："><a href="#简单说一下思路：" class="headerlink" title="简单说一下思路："></a>简单说一下思路：</h1><p><strong>笔记本电脑开启热点，手机连接热点，然后在电脑上对热点网卡抓包，这样，就可以完全监控手机的网络流量</strong></p>
+<h1 id="主要是用到以下工具："><a href="#主要是用到以下工具：" class="headerlink" title="主要是用到以下工具："></a>主要是用到以下工具：</h1><ul>
+<li>笔记本电脑热点</li>
+<li>Wireshark</li>
+<li>安卓手机</li>
+</ul>
+<h1 id="笔记本电脑开启移动热点"><a href="#笔记本电脑开启移动热点" class="headerlink" title="笔记本电脑开启移动热点"></a>笔记本电脑开启移动热点</h1><p><img src="/images/QQ%E6%88%AA%E5%9B%BE20230527142117.png"></p>
+<h1 id="手机连接热点"><a href="#手机连接热点" class="headerlink" title="手机连接热点"></a>手机连接热点</h1><p>注意啊，为了抓包的准确性，手机最好关闭流量功能，关闭双WIFI加速功能<br><img src="/images/1685169004870.jpg"><br><img src="/images/1685169004846.jpg"><br><img src="/images/1685169004818.jpg"></p>
+<h1 id="Wireshark监听开启热点的网卡"><a href="#Wireshark监听开启热点的网卡" class="headerlink" title="Wireshark监听开启热点的网卡"></a>Wireshark监听开启热点的网卡</h1><p>手机连接笔记本电脑热点后可以看到自己的<strong>网关地址</strong>，根据这个<strong>网关地址</strong>可以在Wireshark确定要抓包的网卡<br><img src="/images/1685169004924.jpg"><br><img src="/images/1685169493008.jpg"><br>拿到网关地址后就可以去Wireshark筛选网卡了<br><img src="/images/QQ%E6%88%AA%E5%9B%BE20230527144113.png"><br>确定网卡后就可以愉快的抓包了！</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%8A%93%E5%8C%85/" style="color: #ff7d73">
+                抓包
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Wireshark/" style="color: #ff7d73">
+                Wireshark
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/">
         <h2 class="post-title">css父元素选择器</h2>
     </a>
@@ -309,7 +376,7 @@
         
         <span class="tag">
             
-            <a href="/tags/WebRTC/" style="color: #03a9f4">
+            <a href="/tags/WebRTC/" style="color: #ffa2c4">
                 WebRTC
             </a>
         </span>
@@ -592,21 +659,21 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #03a9f4">
+            <a href="/tags/javascript/" style="color: #ff7d73">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #03a9f4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #ff7d73">
                 特效
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #ff7d73">
+            <a href="/tags/Css/" style="color: #00bcd4">
                 Css
             </a>
         </span>
@@ -710,7 +777,7 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #ffa2c4">
+            <a href="/tags/Css/" style="color: #00a596">
                 Css
             </a>
         </span>
@@ -759,7 +826,7 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/Ubuntu/" style="color: #03a9f4">
+            <a href="/tags/Ubuntu/" style="color: #00a596">
                 Ubuntu
             </a>
         </span>
@@ -815,7 +882,7 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/WOL/" style="color: #00bcd4">
+            <a href="/tags/WOL/" style="color: #ffa2c4">
                 WOL
             </a>
         </span>
@@ -864,7 +931,7 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/DDNS/" style="color: #ff7d73">
+            <a href="/tags/DDNS/" style="color: #ffa2c4">
                 DDNS
             </a>
         </span>
@@ -924,7 +991,7 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/webpack/" style="color: #00bcd4">
+            <a href="/tags/webpack/" style="color: #00a596">
                 webpack
             </a>
         </span>
@@ -982,85 +1049,27 @@ class EllipsisGenerator &#123;
         
         <span class="tag">
             
-            <a href="/tags/javascript/" style="color: #00a596">
+            <a href="/tags/javascript/" style="color: #03a9f4">
                 javascript
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00bcd4">
+            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #ff7d73">
                 特效
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Css/" style="color: #03a9f4">
+            <a href="/tags/Css/" style="color: #ff7d73">
                 Css
             </a>
         </span>
         
     </div>
     <a href="/2023/04/23/DOM%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%BA%95%E6%A3%80%E6%B5%8B/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/04/22/%E4%BD%BF%E7%94%A8PuTTY%E5%92%8Cssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95Ubuntu/">
-        <h2 class="post-title">使用PuTTY和ssh密钥登录Ubuntu</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="1-服务端配置"><a href="#1-服务端配置" class="headerlink" title="1. 服务端配置"></a>1. 服务端配置</h1><h2 id="1-1-允许密钥登录"><a href="#1-1-允许密钥登录" class="headerlink" title="1.1 允许密钥登录"></a>1.1 允许密钥登录</h2><p>配置 &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
-<pre><code class="bash">sudo vim /etc/ssh/sshd_config
-</code></pre>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Ubuntu/" style="color: #00a596">
-                Ubuntu
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/PuTTY/" style="color: #03a9f4">
-                PuTTY
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/04/22/%E4%BD%BF%E7%94%A8PuTTY%E5%92%8Cssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95Ubuntu/" class="go-post">阅读全文</a>
 </div>
 
 
