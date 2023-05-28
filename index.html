@@ -1,184 +1,406 @@
-
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <title>喵喵的狗窝</title>
-        <meta name="author" content="喵喵拖孩">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
+    
+    <meta name="author" content="木头的喵喵拖孩">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.xx-xx.top/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
         <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
-        <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <link rel="icon" href="/images/44609683.png">
-        <script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.min.js"></script>
-        <script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css">
-        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.2.1/css/all.min.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="喵喵的狗窝">
+<meta property="og:url" content="https://blog.xx-xx.top/index.html">
+<meta property="og:site_name" content="喵喵的狗窝">
+<meta property="og:description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
+<meta property="og:locale">
+<meta property="article:author" content="喵喵拖孩">
+<meta property="article:tag" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/44609683.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/44609683.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/44609683.png">
+    <!--- Page Info-->
+    
+    <title>
         
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        木头的狗窝
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"blog.xx-xx.top","root":"/","language":"zh","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"木头的狗窝","subtitle":{"text":["前端","技术","杂感","HTML","JavaScript","CSS","PHP","C#","NodeJs"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/gjyyyyy","instagram":null,"zhihu":null,"twitter":null,"email":"770248440@qq.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"About":{"icon":"fa-regular fa-user","submenus":{"About":"/about","Github":"https://github.com/gjyyyyy","Blog":"https://blog.xx-xx.top","阮一峰":"http://www.ruanyifeng.com/home.html"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY/MM/DD","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
         
-        
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="loading" style="height: 100vh; width: 100vw; left: 0; top: 0; position: fixed; display: flex; z-index: 2147483647; justify-content: space-between; background: #fff; transition: opacity 0.3s ease-out, visibility 0.3s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none">
-    <div style="position: fixed; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center">
-        <div id="loadcontent" style="width: 50vmin; height: 50vmin; padding: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: solid 10px #a3ddfb; text-align: center">
-            <div>
-                <h2>LOADING...</h2>
-                <p style="word-break: keep-all">加载过慢请开启缓存（浏览器默认开启）</p>
-                <img alt="loading" src="/images/loading.gif" style="height: 50px">
-            </div>
+    <style>
+        .home-banner-container {
+            background: transparent !important;
+        }
+        .home-article-item,
+        .sidebar-links,
+        .sidebar-content,
+        a.page-number,
+        a.extend,
+        .sidebar-links .links:hover,
+        .right-bottom-tools,
+        footer.footer {
+            background-color: var(--background-color-transparent-80) !important;
+        }
+        .right-bottom-tools:hover,
+        a.page-number:hover,
+        a.extend:hover {
+            background-color: var(--primary-color) !important;
+        }
+        .site-info,
+        .home-article-sticky-label {
+            background-color: var(--background-color-transparent-15) !important;
+        }
+        .home-article-sticky-label {
+            backdrop-filter: none !important;
+        }
+    </style>
+
+    <div class="home-banner-background">
+    </div>
+
+
+<div class="home-banner-container flex-center">
+    <div class="content flex-center">
+        <div class="description fade-in-down-animation" >
+          木头的狗窝 
+          
+            <p><i id="subtitle"></i></p>
+          
         </div>
+        
     </div>
 </div>
 
-        <div id="layout">
-            <transition name="into">
-            <div id="main" v-show="showpage" style="display: -not-none">
-                <nav id="menu">
-    <div class="desktop-menu">
-        <a class="title" href="/">
-            <span>喵喵的狗窝</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-    </div>
-    <div :class="&quot;phone-menu &quot; + menushow" id="phone-menu">
-        <div class="curtain" @click="menushow = !menushow" v-show="menushow"></div>
-        <div class="title" @click="menushow = !menushow">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;喵喵的狗窝</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menushow">
-            
-            <a href="/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                </div>
-            </a>
-            
-            <a href="/about">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                </div>
-            </a>
-            
-            <a href="/archives">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-box-archive fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                </div>
-            </a>
-            
-            <a href="/categories">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-bookmark fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                </div>
-            </a>
-            
-            <a href="/tags">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
 
-                <div id="home-head">
-    <div id="home-background" style="background-image: url(/images/6392f1b4b80d04cfe02c2cfb1d5fc833.png)"></div>
+
     
-    <div id="home-info" @click="homeclick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>喵喵的狗窝</h1>
-                <h3>大多数时间都在做梦~</h3>
-                <h5>一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~</h5>
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content has-home-banner">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/44609683.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                <h1>
+                木头的狗窝
+                </h1>
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="active" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        ARCHIVES&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/archives">ARCHIVES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/categories">CATEGORIES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/tags">TAGS
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ABOUT
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/gjyyyyy">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="https://blog.xx-xx.top">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">阮一峰
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
             </div>
-        </span>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-</div>
-<div id="home-posts-wrap" class="">
-    <div id="home-posts">
-        <div id="posts">
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="active" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                ARCHIVES&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/archives">ARCHIVES</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/categories">CATEGORIES</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/tags">TAGS</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/about">ABOUT</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://github.com/gjyyyyy">GITHUB</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="https://blog.xx-xx.top">BLOG</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+                            </li>
+                        
+                    
             
 
-<div class="post">
-    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/">
-        <h2 class="post-title">总结一下安卓手机抓包流程</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/27
-        </span>
-        
-        
+        </ul>
     </div>
-    <div class="description">
-        <div class="content" v-pre>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
             
-            <p>因为想给移动端APP做自动签到的功能，所以给手机抓包是必经的课题。</p>
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/">
+                        总结一下安卓手机抓包流程
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>因为想给移动端APP做自动签到的功能，所以给手机抓包是必经的课题。</p>
 <hr>
 <h1 id="简单说一下思路："><a href="#简单说一下思路：" class="headerlink" title="简单说一下思路："></a>简单说一下思路：</h1><p><strong>笔记本电脑开启热点，手机连接热点，然后在电脑上对热点网卡抓包，这样，就可以完全监控手机的网络流量</strong></p>
 <h1 id="主要是用到以下工具："><a href="#主要是用到以下工具：" class="headerlink" title="主要是用到以下工具："></a>主要是用到以下工具：</h1><ul>
@@ -186,156 +408,132 @@
 <li>Wireshark</li>
 <li>安卓手机</li>
 </ul>
-            
-        </div>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sat May 27 2023 12:34:38 GMT+0800">
+                
+                    2023/05/27
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E6%8A%93%E5%8C%85/">抓包</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Wireshark/">Wireshark</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
     </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%8A%93%E5%8C%85/" style="color: #ff7d73">
-                抓包
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Wireshark/" style="color: #00a596">
-                Wireshark
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/" class="go-post">阅读全文</a>
+
+    <a href="/2023/05/27/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E6%B5%81%E7%A8%8B/">Read more<span class="seo-reader-text">总结一下安卓手机抓包流程</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/">
-        <h2 class="post-title">css父元素选择器</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/">
+                        css父元素选择器
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        今天发现一个css父选择器写法
+12345678910111213141516171819202122232425262728293031323334353637383940414243&lt;!DOCTYPE html&gt;&lt;html la...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu May 18 2023 16:00:19 GMT+0800">
+                
+                    2023/05/18
+                
             </span>
-            2023/5/18
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Css/">Css</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>今天发现一个css父选择器写法</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-        &lt;title&gt;Document&lt;/title&gt;
-        &lt;style&gt;
-            .wrapper &#123;
-                width: 100px;
-                height: 100px;
-                border: 2px solid green;
-            &#125;
-            .inner &#123;
-                width: 80px;
-                height: 80px;
-                border: 2px solid blue;
-            &#125;
-            .heart &#123;
-                width: 60px;
-                height: 60px;
-                border: 2px solid red;
-            &#125;
 
-            /* 父选择器，选择了.inner元素的父元素.wrapper */
-            .wrapper:has(.inner) &#123;
-                border-top-left-radius: 50%;
-            &#125;
-
-            /* 链式调用，实现祖先选择器 */
-            .wrapper:has(.inner):has(.heart) &#123;
-                border-bottom-right-radius: 50%;
-            &#125;
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div class=&quot;wrapper&quot;&gt;
-            &lt;div class=&quot;inner&quot;&gt;
-                &lt;div class=&quot;heart&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Css/" style="color: #ff7d73">
-                Css
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/" class="go-post">阅读全文</a>
+    <a href="/2023/05/18/css%E7%88%B6%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8/">Read more<span class="seo-reader-text">css父元素选择器</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/16/%E9%80%9A%E8%BF%87WebRTC%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD/">
-        <h2 class="post-title">通过WebRTC实现局域网p2p文件传输功能</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/16
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起初我是想实现一个不论在内网还是公网环境下都能建立p2p连接传输文件的功能，后来经过学习发现，内网环境实现起来很简单，但是公网就很麻烦了，要用到STUN和TURN，并且不符合我“只能通过p2p传输文件，不能经过中转服务器”的理念，所以这个项目只实现了<strong>局域网</strong>这部分的功能</p>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/16/%E9%80%9A%E8%BF%87WebRTC%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD/">
+                        通过WebRTC实现局域网p2p文件传输功能
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起初我是想实现一个不论在内网还是公网环境下都能建立p2p连接传输文件的功能，后来经过学习发现，内网环境实现起来很简单，但是公网就很麻烦了，要用到STUN和TURN，并且不符合我“只能通过p2p传输文件，不能经过中转服务器”的理念，所以这个项目只实现了<strong>局域网</strong>这部分的功能</p>
 <h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><ul>
 <li>因为信令服务器没有部署ssl证书，所以当前端页面部署到https协议的服务器里时，无法访问信令服务器</li>
 </ul>
@@ -345,677 +543,461 @@
 <li>STUN：帮助p2p双方获取到对方的IP地址和端口号，<em>（仅公网和多重内网环境需要）</em>。</li>
 <li>TURN：数据中转服务，当p2p连接失败时，会使用TURN服务中转数据，<em>（仅公网和多重内网环境需要）</em>。</li>
 </ul>
-            
-        </div>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue May 16 2023 11:01:07 GMT+0800">
+                
+                    2023/05/16
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/javascript/">javascript</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/WebRTC/">WebRTC</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
     </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/javascript/" style="color: #03a9f4">
-                javascript
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/WebRTC/" style="color: #ffa2c4">
-                WebRTC
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/16/%E9%80%9A%E8%BF%87WebRTC%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD/" class="go-post">阅读全文</a>
+
+    <a href="/2023/05/16/%E9%80%9A%E8%BF%87WebRTC%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD/">Read more<span class="seo-reader-text">通过WebRTC实现局域网p2p文件传输功能</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/">
-        <h2 class="post-title">用CSS做一个椭圆轨道小球运动动画</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/">
+                        用CSS做一个椭圆轨道小球运动动画
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        个人CSS技能查漏补缺系列  
+关键在于使用关键帧(keyframs)时让两个动画重叠，并让其中一个动画延迟  
+直接上代码  
+123456789101112131415161718192021222324252627282930313233343...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri May 12 2023 12:03:50 GMT+0800">
+                
+                    2023/05/12
+                
             </span>
-            2023/5/12
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/javascript/">javascript</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E7%89%B9%E6%95%88/">特效</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Css/">Css</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>个人CSS技能查漏补缺系列  </p>
-<p>关键在于使用关键帧(keyframs)时让两个动画重叠，并让其中一个动画延迟  </p>
-<p>直接上代码  </p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        #wrapper &#123;
-            --ballCount: 2; /* 小球数量 */
-            --ballAnimTime: 1s; /* 动画单轮总时间 */
-            --ballAnimDeley: calc(var(--ballAnimTime) / 4); /* 为了实现椭圆轨迹而计算的延迟时间，为单轮总时间除以4 */
-            --ballUnitAnimTime: calc(var(--ballAnimTime) / var(--ballCount)); /* 小球延迟，为单轮总时间除以小球数量 */
 
-            position: relative;
-            width: 60vw;
-            height: 30vw;
-            border: 1px solid black;
-            overflow: hidden;
-            resize: auto;
-        &#125;
-
-        #wrapper &gt; .ball &#123;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            width: 2vw;
-            height: 2vw;
-            border-radius: 50%;
-            background-color: blue;
-        &#125;
-
-        /* Y轴移动动画 */
-        @keyframes moveY &#123;
-            from &#123;
-                top: 0;
-            &#125;
-            to &#123;
-                top: 100%;
-            &#125;
-        &#125;
-        /* X轴移动动画 */
-        @keyframes moveX &#123;
-            from &#123;
-                left: 0;
-            &#125;
-            to &#123;
-                left: 100%;
-            &#125;
-        &#125;
-
-        #wrapper &gt; .ball1 &#123;
-            /* moveY需要比moveX延迟一段时间，才能显示出椭圆轨迹，这个时间为--ballAnimDeley*/
-            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-            animation: 
-            moveY calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * (var(--ballAnimDeley) + 0 * var(--ballUnitAnimTime))) infinite alternate,
-            moveX calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * 0 * var(--ballUnitAnimTime)) infinite alternate;
-        &#125;
-
-        #wrapper &gt; .ball2 &#123;
-            animation: 
-            moveY calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * (var(--ballAnimDeley) + 1 * var(--ballUnitAnimTime))) infinite alternate,
-            moveX calc(var(--ballAnimTime) / 2) cubic-bezier(0.6, 0.3, 0.3, 0.6) calc(-1 * 1 * var(--ballUnitAnimTime)) infinite alternate;
-        &#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;p&gt;线框右下角可以拖拽改变大小&lt;/p&gt;
-    &lt;div id=&quot;wrapper&quot;&gt;
-        &lt;div class=&quot;ball ball1&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;ball ball2&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-&lt;!-- more --&gt;
-</code></pre>
-<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lin494910940/p/14051631.html">https://www.cnblogs.com/lin494910940/p/14051631.html</a></p>
-<hr>
-<hr>
-<h1 id="用Javascript实现"><a href="#用Javascript实现" class="headerlink" title="用Javascript实现"></a>用Javascript实现</h1><p>后来发现css实现的效果不好，小球运动到盒子四边时会有明显的碰撞感，所以这里用js实现一下</p>
-<p>目录结构</p>
-<ul>
-<li>EllipsisGenerator.js</li>
-<li>index.html</li>
-</ul>
-<pre><code class="javascript">// EllipsisGenerator.js
-
-/**
- * 椭圆轨道坐标生成器类
- */
-class EllipsisGenerator &#123;
-    x;
-    y;
-    a;
-    b;
-    angle;
-    angleStep;
-
-    /**
-     * 构造一个椭圆轨道
-     * @param &#123;Number&#125; x 圆心x坐标
-     * @param &#123;Number&#125; y 圆心y坐标
-     * @param &#123;Number&#125; a x轴半径长度
-     * @param &#123;Number&#125; b y轴半径长度
-     * @param &#123;Number&#125; angle 起始角度 单位deg
-     * @param &#123;Number&#125; angleStep 角度自增值 单位deg
-     */
-    constructor(x, y, a, b, angle = 0, angleStep = 1) &#123;
-        this.x = x;
-        this.y = y;
-        this.a = a;
-        this.b = b;
-        this.angle = angle;
-        this.angleStep = angleStep;
-    &#125;
-
-    /**
-     * *generate方法返回一个迭代器，每次调用迭代器的next方法就会使角度(this.angle)自增(this.angleStep)，
-     * 然后返回角度射线与椭圆轨道的交点坐标(x,y)，即椭圆轨道坐标
-     */
-    *generate() &#123;
-        while (true) &#123;
-            let radians = this.angle * Math.PI / 180
-                , tx = this.a * Math.cos(radians)
-                , ty = this.b * Math.sin(radians);
-
-            yield &#123;
-                x: this.x + tx,
-                y: this.y + ty
-            &#125;
-
-            if (this.angle &gt;= 360) &#123;
-                this.angle = 1;
-            &#125; else &#123;
-                this.angle += this.angleStep;
-            &#125;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-        &lt;title&gt;Document&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;canvas id=&quot;container&quot; style=&quot;border: 1px solid&quot;&gt;&lt;/canvas&gt;
-        &lt;script src=&quot;./EllipsisGenerator.js&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;
-            const bubbleCount = 100; // 球球数量
-            const bubbleRadius = 10; // 球球半径
-            const frameRate = 40; // 渲染帧数；每秒40帧
-            const bubbleColor = &#39;yellowgreen&#39;;
-            const bubbles = [];
-            class Bubble &#123;
-                x;
-                y;
-                r;
-                alpha;
-                constructor(x = 0, y = 0, r = 1, alpha = 1) &#123;
-                    this.x = x;
-                    this.y = y;
-                    this.r = r;
-                    this.alpha = alpha;
-                &#125;
-            &#125;
-
-            const $star = document.getElementById(&#39;container&#39;);
-            const width = 600;
-            const height = 400;
-            $star.width = width;
-            $star.height = height;
-
-            const elliptic = new EllipsisGenerator(
-                width / 2,
-                height / 2,
-                width / 2 - bubbleRadius,
-                height / 2 - bubbleRadius,
-                0,
-                -1
-            );
-            const generate = elliptic.generate();
-
-            const ctx = $star.getContext(&#39;2d&#39;);
-
-            const run = () =&gt; &#123;
-                ctx.clearRect(0, 0, width, height);
-                let &#123; x, y &#125; = generate.next().value;
-
-                if (bubbles.length &gt;= bubbleCount) &#123;
-                    bubbles.shift();
-                &#125;
-
-                let bubble = new Bubble(x, y, 2);
-                bubbles.push(bubble);
-
-                //渲染bubble数组
-                for (let i = 0; i &lt; bubbles.length; i++) &#123;
-                    let bubble = bubbles[i];
-                    bubble.alpha = (i + 1) * (1 / bubbleCount);
-                    bubble.r = bubble.r * (i + 1) * (1 / bubbleCount);
-
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.globalAlpha = bubble.alpha * 0.5;
-                    ctx.fillStyle = bubbleColor;
-                    ctx.arc(
-                        bubble.x,
-                        bubble.y,
-                        bubble.r * 4,
-                        0,
-                        2 * Math.PI,
-                        false
-                    );
-                    ctx.fill();
-                    ctx.restore();
-                &#125;
-
-                setTimeout(() =&gt; &#123;
-                    requestAnimationFrame(run);
-                &#125;, 1000 / frameRate);
-            &#125;;
-
-            run();
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/javascript/" style="color: #03a9f4">
-                javascript
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00bcd4">
-                特效
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Css/" style="color: #00bcd4">
-                Css
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/" class="go-post">阅读全文</a>
+    <a href="/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/">Read more<span class="seo-reader-text">用CSS做一个椭圆轨道小球运动动画</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/">
-        <h2 class="post-title">用CSS画一个正方形</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/">
+                        用CSS画一个正方形
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        个人 CSS 技能查漏补缺系列
+关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。
+直接上代码
+123456789101112131415161718192021222324...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri May 12 2023 12:01:50 GMT+0800">
+                
+                    2023/05/12
+                
             </span>
-            2023/5/12
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Css/">Css</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>个人 CSS 技能查漏补缺系列</p>
-<p>关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。</p>
-<p>直接上代码</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-        &lt;title&gt;Document&lt;/title&gt;
-        &lt;style&gt;
-            @keyframes show &#123;
-                0% &#123;
-                    width: 100px;
-                    height: 240px;
-                &#125;
-                25% &#123;
-                    width: 200px;
-                    height: 200px;
-                &#125;
-                50% &#123;
-                    width: 200px;
-                    height: 240px;
-                &#125;
-                75% &#123;
-                    width: 100px;
-                    height: 200px;
-                &#125;
-                100% &#123;
-                    width: 100px;
-                    height: 240px;
-                &#125;
-            &#125;
 
-            #wrapper &#123;
-                border: 1px solid black;
-                animation: show 5s linear 0s infinite;
-            &#125;
-
-            #wrapper &gt; #cube &#123;
-                --side: 80%;
-                width: var(--side);
-                padding: calc(var(--side) / 2) 0;
-                background-color: blue;
-            &#125;
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;不管线框容器宽高怎么变，蓝色区块的宽高始终相等&lt;/p&gt;
-        &lt;div id=&quot;wrapper&quot;&gt;
-            &lt;div id=&quot;cube&quot;&gt;&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Css/" style="color: #ffa2c4">
-                Css
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/" class="go-post">阅读全文</a>
+    <a href="/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/">Read more<span class="seo-reader-text">用CSS画一个正方形</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/09/%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%E5%BC%80%E5%90%AF%E6%9C%AC%E5%9C%B0https%E6%9C%8D%E5%8A%A1/">
-        <h2 class="post-title">使用自签证书开启本地https服务</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/09/%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%E5%BC%80%E5%90%AF%E6%9C%AC%E5%9C%B0https%E6%9C%8D%E5%8A%A1/">
+                        使用自签证书开启本地https服务
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>记录一下如何在本地搭建https服务</p>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue May 09 2023 17:08:13 GMT+0800">
+                
+                    2023/05/09
+                
             </span>
-            2023/5/9
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Ubuntu/">Ubuntu</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Node-js/">Node.js</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>记录一下如何在本地搭建https服务</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Ubuntu/" style="color: #ffa2c4">
-                Ubuntu
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Node-js/" style="color: #00bcd4">
-                Node.js
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/09/%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%E5%BC%80%E5%90%AF%E6%9C%AC%E5%9C%B0https%E6%9C%8D%E5%8A%A1/" class="go-post">阅读全文</a>
+
+    <a href="/2023/05/09/%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%E5%BC%80%E5%90%AF%E6%9C%AC%E5%9C%B0https%E6%9C%8D%E5%8A%A1/">Read more<span class="seo-reader-text">使用自签证书开启本地https服务</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/09/WOL%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92/">
-        <h2 class="post-title">WOL网络唤醒</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/09/WOL%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92/">
+                        WOL网络唤醒
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>WOL(Wake On Lan)指的是通过网络唤醒电脑，配置流程如下：</p>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue May 09 2023 16:57:56 GMT+0800">
+                
+                    2023/05/09
+                
             </span>
-            2023/5/9
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/WOL/">WOL</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>WOL(Wake On Lan)指的是通过网络唤醒电脑，配置流程如下：</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/WOL/" style="color: #00bcd4">
-                WOL
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/09/WOL%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92/" class="go-post">阅读全文</a>
+
+    <a href="/2023/05/09/WOL%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92/">Read more<span class="seo-reader-text">WOL网络唤醒</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/05/09/%E5%9C%A8%E7%A7%9F%E6%88%BF%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%90%AD%E5%BB%BADDNS%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-        <h2 class="post-title">在租房环境下搭建DDNS服务器</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/09/%E5%9C%A8%E7%A7%9F%E6%88%BF%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%90%AD%E5%BB%BADDNS%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        在租房环境下搭建DDNS服务器
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>事情是这样的，自从我毕业以后，就一直想要搭建个自己的服务器，但是自己很穷且云服务器太贵，而且不能体验到自己动手搭建的乐趣，所以才有了这篇文章</p>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue May 09 2023 16:37:42 GMT+0800">
+                
+                    2023/05/09
+                
             </span>
-            2023/5/9
         </span>
         
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/DDNS/">DDNS</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>事情是这样的，自从我毕业以后，就一直想要搭建个自己的服务器，但是自己很穷且云服务器太贵，而且不能体验到自己动手搭建的乐趣，所以才有了这篇文章</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/DDNS/" style="color: #00a596">
-                DDNS
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/09/%E5%9C%A8%E7%A7%9F%E6%88%BF%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%90%AD%E5%BB%BADDNS%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="go-post">阅读全文</a>
+
+    <a href="/2023/05/09/%E5%9C%A8%E7%A7%9F%E6%88%BF%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%90%AD%E5%BB%BADDNS%E6%9C%8D%E5%8A%A1%E5%99%A8/">Read more<span class="seo-reader-text">在租房环境下搭建DDNS服务器</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">
-        <h2 class="post-title">webpack基础使用</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/27
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>这里记录下 webpack 的基本使用，因为每次我新建项目的时候都要去搜索一下 webpack，感觉很麻烦，所以还是自己记录下使用的方法，增强下记忆。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="webpack-安装"><a href="#webpack-安装" class="headerlink" title="webpack 安装"></a>webpack 安装</h2><p>写文章的时候，webpack 最新版本是 5.81.0，可以参考<a target="_blank" rel="noopener" href="https://www.webpackjs.com/guides/getting-started/#basic-setup">官网</a></p>
-<pre><code class="bash">npm install webpack webpack-cli -D
-</code></pre>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">
+                        webpack基础使用
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>这里记录下 webpack 的基本使用，因为每次我新建项目的时候都要去搜索一下 webpack，感觉很麻烦，所以还是自己记录下使用的方法，增强下记忆。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="webpack-安装"><a href="#webpack-安装" class="headerlink" title="webpack 安装"></a>webpack 安装</h2><p>写文章的时候，webpack 最新版本是 5.81.0，可以参考<a class="link"   target="_blank" rel="noopener" href="https://www.webpackjs.com/guides/getting-started/#basic-setup" >官网 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack webpack-cli -D</span><br></pre></td></tr></table></figure>
+
 <p>一般都是使用命令行来操作 webpack，所以顺便把 webpack-cli 给安装了</p>
-            
-        </div>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Apr 27 2023 13:10:39 GMT+0800">
+                
+                    2023/04/27
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/javascript/">javascript</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/webpack/">webpack</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
     </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/javascript/" style="color: #00bcd4">
-                javascript
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/webpack/" style="color: #03a9f4">
-                webpack
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="go-post">阅读全文</a>
+
+    <a href="/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">Read more<span class="seo-reader-text">webpack基础使用</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="post">
-    <a href="/2023/04/23/DOM%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%BA%95%E6%A3%80%E6%B5%8B/">
-        <h2 class="post-title">DOM滚动触底检测</h2>
-    </a>
-    <div class="category-and-date">
+            </li>
         
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>这里用到了几个基本的css变量：</p>
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/04/23/DOM%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%BA%95%E6%A3%80%E6%B5%8B/">
+                        DOM滚动触底检测
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        <p>这里用到了几个基本的css变量：</p>
 <ul>
 <li>clientHeight：可视区域的高度</li>
 <li>scrollTop：可视区域距离父容器顶部的距离</li>
@@ -1025,150 +1007,399 @@ class EllipsisGenerator &#123;
 <li>scrollWidth：父容器内部总宽度，包括被卷(scroll)的宽度</li>
 </ul>
 <p>上代码~</p>
-            
-        </div>
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Apr 23 2023 10:23:36 GMT+0800">
+                
+                    2023/04/23
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/javascript/">javascript</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E7%89%B9%E6%95%88/">特效</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Css/">Css</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
     </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/javascript/" style="color: #00bcd4">
-                javascript
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%89%B9%E6%95%88/" style="color: #00a596">
-                特效
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Css/" style="color: #00bcd4">
-                Css
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/04/23/DOM%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%BA%95%E6%A3%80%E6%B5%8B/" class="go-post">阅读全文</a>
+
+    <a href="/2023/04/23/DOM%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%BA%95%E6%A3%80%E6%B5%8B/">Read more<span class="seo-reader-text">DOM滚动触底检测</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+            </li>
+        
+    </ul>
 
-            <div class="page-current">
-    <div class="prev">
-        
-    </div>
-    <div class="page-index">
-        
-        <span class="current">1</span>
-        
-        <span>
-            <a class="page-num" href="/page/2/">2</a>
-            
-            
-        </span>
-        
-    </div>
-    <div class="next">
-        
-        <a class="page-num" href="/page/2/">
-            <i class="fa-solid fa-caret-right fa-fw"></i>
-        </a>
-        
+    <div class="home-paginator">
+        <div class="paginator">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa-regular fa-angle-right"></i></a>
+</div>
+
     </div>
 </div>
 
-        </div>
-    </div>
-    
-    <div id="home-card">
-        <div id="card-div">
-    <div class="card-style" style="width: 300px">
-        <div class="avatar">
-            <img src="/images/44609683.png" alt="avatar">
-        </div>
-        <div class="name">喵喵拖孩</div>
-        <div class="description">
-            <p>别急，快要长脑子了。</p>
+                
 
-        </div>
-        
-        <div class="icon-links">
-            
-            <span class="icon-link">
-                <a href="mailto:770248440@qq.com">
-                    <i class="fa-solid fa-envelope fa-fw"></i>
-                </a>
-            </span>
-            
-            <span class="icon-link">
-                <a target="_blank" rel="noopener" href="https://github.com/gjyyyyy">
-                    <i class="fa-brands fa-github fa-fw"></i>
-                </a>
-            </span>
-            
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">ruanyifeng</a>
             </div>
             
-        </div>
+            
+                <div class="home-sidebar-container fade-in-down-animation">
+    <div class="sticky-container">
         
+            
+                <div class="sidebar-links">
+                    <div class="site-info">
+                        <div class="site-name">木头的狗窝</div>
+                        
+                    </div>
+                    
+                        
+                            
+                                <a class="links" href="/archives" target="_blank">
+                                    
+                                        <i class="fa-regular fa-archive icon-space"></i>
+                                    
+                                    <span class="link-name">Archives</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/tags" target="_blank">
+                                    
+                                        <i class="fa-regular fa-tags icon-space"></i>
+                                    
+                                    <span class="link-name">Tags</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/categories" target="_blank">
+                                    
+                                        <i class="fa-regular fa-folder icon-space"></i>
+                                    
+                                    <span class="link-name">Categories</span>
+                                </a>
+                            
+                        
+                    
+                </div>
+            
+            <div class="sidebar-content"  marginTop >
+                <div class="avatar">
+                    <img src="/images/44609683.png">
+                </div>
+                <div class="author">
+                    <div class="name">木头的喵喵拖孩</div>
+                    
+                </div>
+                <div class="statistics">
+                    <a class="item" href="/tags">
+                        <div class="number">17</div>
+                        <div class="label">Tags</div>
+                    </a>
+                    <a class="item" href="/categories">
+                        <div class="number">1</div>
+                        <div class="label">Categories</div>
+                    </a>
+                    <a class="item" href="/archives">
+                        <div class="number">18</div>
+                        <div class="label">Posts</div>
+                    </a>
+                </div>
+            </div>
+        
+
     </div>
 </div>
 
-    </div>
-    
-</div>
+            
 
-                <footer id="footer">
-    <div class="footer-wrap">
-        <div>
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
             &copy;
-            2022 - 2023 喵喵的狗窝
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;喵喵拖孩
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">木头的喵喵拖孩</a>
         </div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
         
-    </div>
-</footer>
-
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
             </div>
-            </transition>
-            <div id="showimg">
-                <img id="showimg-content">
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.4</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2023/1/15 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
             </div>
         </div>
-        <script src="/js/functions.js"></script>
-<script src="/js/particlex.js"></script>
+    </div>
+</div>
+
+    
 
 
-        <!-- html -->
-        <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
-        <canvas id="background" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"></canvas>
-        <div id="cursor"></div>
-        <!-- CSS -->
-        <link rel="stylesheet" href="/css/cursor.min.css">
-        <script src="/js/cursor.min.js"></script>
-        <!-- JS -->
-        <!-- 先关掉自己的ip访问检测功能，感觉没啥用还降低性能-->
-        <!-- <script src="/js/ipcheck.js"></script> -->
-        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
-        <script src="/js/fireworks.min.js"></script>
-        <script src="/js/background.min.js"></script>
-    </body>
+</main>
+
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
 </html>

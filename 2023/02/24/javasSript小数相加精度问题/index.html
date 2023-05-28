@@ -1,281 +1,808 @@
-
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <title>javasSript小数相加精度问题 | 喵喵的狗窝</title>
-        <meta name="author" content="喵喵拖孩">
-        <meta name="description" content="一个靠自学的前端小菜鸟，凭着兴趣学习并记录着一些新鲜事，不只是前端技术哦~~">
-        <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <link rel="icon" href="/images/44609683.png">
-        <script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.min.js"></script>
-        <script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css">
-        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.2.1/css/all.min.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="前端，技术，杂感，Html，JavaScript，Css，PHP，C#，NodeJS">
+    
+    <meta name="author" content="木头的喵喵拖孩">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.xx-xx.top/2023/02/24/javassript小数相加精度问题/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="如果在javasSript中0.1 + 0.3会出现精度问题，那么其他小数相加会不会也有问题呢？测试用代码和结果如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javasSript小数相加精度问题">
+<meta property="og:url" content="https://blog.xx-xx.top/2023/02/24/javasSript%E5%B0%8F%E6%95%B0%E7%9B%B8%E5%8A%A0%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="喵喵的狗窝">
+<meta property="og:description" content="如果在javasSript中0.1 + 0.3会出现精度问题，那么其他小数相加会不会也有问题呢？测试用代码和结果如下">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-24T06:22:10.000Z">
+<meta property="article:modified_time" content="2023-02-24T06:43:24.000Z">
+<meta property="article:author" content="喵喵拖孩">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/44609683.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/44609683.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/44609683.png">
+    <!--- Page Info-->
+    
+    <title>
         
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+            javasSript小数相加精度问题 -
         
-        
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="loading" style="height: 100vh; width: 100vw; left: 0; top: 0; position: fixed; display: flex; z-index: 2147483647; justify-content: space-between; background: #fff; transition: opacity 0.3s ease-out, visibility 0.3s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none">
-    <div style="position: fixed; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center">
-        <div id="loadcontent" style="width: 50vmin; height: 50vmin; padding: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: solid 10px #a3ddfb; text-align: center">
-            <div>
-                <h2>LOADING...</h2>
-                <p style="word-break: keep-all">加载过慢请开启缓存（浏览器默认开启）</p>
-                <img alt="loading" src="/images/loading.gif" style="height: 50px">
+        木头的狗窝
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"blog.xx-xx.top","root":"/","language":"zh","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"木头的狗窝","subtitle":{"text":["前端","技术","杂感","HTML","JavaScript","CSS","PHP","C#","NodeJs"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/gjyyyyy","instagram":null,"zhihu":null,"twitter":null,"email":"770248440@qq.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"About":{"icon":"fa-regular fa-user","submenus":{"About":"/about","Github":"https://github.com/gjyyyyy","Blog":"https://blog.xx-xx.top","阮一峰":"http://www.ruanyifeng.com/home.html"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY/MM/DD","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/44609683.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                木头的狗窝
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        ARCHIVES&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/archives">ARCHIVES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/categories">CATEGORIES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/tags">TAGS
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ABOUT
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/gjyyyyy">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="https://blog.xx-xx.top">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">阮一峰
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                ARCHIVES&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/archives">ARCHIVES</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/categories">CATEGORIES</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/tags">TAGS</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/about">ABOUT</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://github.com/gjyyyyy">GITHUB</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="https://blog.xx-xx.top">BLOG</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">javasSript小数相加精度问题</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/44609683.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">木头的喵喵拖孩</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-02-24 14:22:10</span>
+        <span class="mobile">2023-02-24 14:22</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-02-24 14:43:24</span>
+            <span class="mobile">2023-02-24 14:43</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/javascript/">javascript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
 </div>
 
-        <div id="layout">
-            <transition name="into">
-            <div id="main" v-show="showpage" style="display: -not-none">
-                <nav id="menu">
-    <div class="desktop-menu">
-        <a class="title" href="/">
-            <span>喵喵的狗窝</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-    </div>
-    <div :class="&quot;phone-menu &quot; + menushow" id="phone-menu">
-        <div class="curtain" @click="menushow = !menushow" v-show="menushow"></div>
-        <div class="title" @click="menushow = !menushow">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;喵喵的狗窝</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menushow">
-            
-            <a href="/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
                     </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
                 </div>
-            </a>
             
-            <a href="/about">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                </div>
-            </a>
-            
-            <a href="/archives">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-box-archive fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                </div>
-            </a>
-            
-            <a href="/categories">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-bookmark fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                </div>
-            </a>
-            
-            <a href="/tags">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
 
-                <div class="article">
-    <div>
-        <h1>javasSript小数相加精度问题 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/2/24
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E5%AD%A6%E4%B9%A0/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/javascript/" style="color: #03a9f4">javascript</a>
-            </span>
-            
-        </span>
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <p>如果在javasSript中0.1 + 0.3会出现精度问题，那么其他小数相加会不会也有问题呢？<br>测试用代码和结果如下</p>
+            <div class="article-content markdown-body">
+                <p>如果在javasSript中0.1 + 0.3会出现精度问题，那么其他小数相加会不会也有问题呢？<br>测试用代码和结果如下</p>
 <span id="more"></span>
 
-<pre><code class="javascript">let arr = [.1, .2, .3, .4, .5, .6, .7, .8, .9]
-for(let i = 0;i &lt; arr.length;i++) &#123;
-    let val1 = arr[i];
-    for(let j = i;j &lt; arr.length;j++) &#123;
-        let val2 = arr[j];
-        console.log(`$&#123;val1&#125; + $&#123;val2&#125; = $&#123;val1 + val2&#125;`)
-    &#125;
-&#125;
+<div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">.1</span>, <span class="number">.2</span>, <span class="number">.3</span>, <span class="number">.4</span>, <span class="number">.5</span>, <span class="number">.6</span>, <span class="number">.7</span>, <span class="number">.8</span>, <span class="number">.9</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; arr.<span class="property">length</span>;i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> val1 = arr[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = i;j &lt; arr.<span class="property">length</span>;j++) &#123;</span><br><span class="line">        <span class="keyword">let</span> val2 = arr[j];</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;val1&#125;</span> + <span class="subst">$&#123;val2&#125;</span> = <span class="subst">$&#123;val1 + val2&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.1 + 0.1 = 0.2</span></span><br><span class="line"><span class="comment">// 0.1 + 0.2 = 0.30000000000000004</span></span><br><span class="line"><span class="comment">// 0.1 + 0.3 = 0.4</span></span><br><span class="line"><span class="comment">// 0.1 + 0.4 = 0.5</span></span><br><span class="line"><span class="comment">// 0.1 + 0.5 = 0.6</span></span><br><span class="line"><span class="comment">// 0.1 + 0.6 = 0.7</span></span><br><span class="line"><span class="comment">// 0.1 + 0.7 = 0.7999999999999999</span></span><br><span class="line"><span class="comment">// 0.1 + 0.8 = 0.9</span></span><br><span class="line"><span class="comment">// 0.1 + 0.9 = 1</span></span><br><span class="line"><span class="comment">// 0.2 + 0.2 = 0.4</span></span><br><span class="line"><span class="comment">// 0.2 + 0.3 = 0.5</span></span><br><span class="line"><span class="comment">// 0.2 + 0.4 = 0.6000000000000001</span></span><br><span class="line"><span class="comment">// 0.2 + 0.5 = 0.7</span></span><br><span class="line"><span class="comment">// 0.2 + 0.6 = 0.8</span></span><br><span class="line"><span class="comment">// 0.2 + 0.7 = 0.8999999999999999</span></span><br><span class="line"><span class="comment">// 0.2 + 0.8 = 1</span></span><br><span class="line"><span class="comment">// 0.2 + 0.9 = 1.1</span></span><br><span class="line"><span class="comment">// 0.3 + 0.3 = 0.6</span></span><br><span class="line"><span class="comment">// 0.3 + 0.4 = 0.7</span></span><br><span class="line"><span class="comment">// 0.3 + 0.5 = 0.8</span></span><br><span class="line"><span class="comment">// 0.3 + 0.6 = 0.8999999999999999</span></span><br><span class="line"><span class="comment">// 0.3 + 0.7 = 1</span></span><br><span class="line"><span class="comment">// 0.3 + 0.8 = 1.1</span></span><br><span class="line"><span class="comment">// 0.3 + 0.9 = 1.2</span></span><br><span class="line"><span class="comment">// 0.4 + 0.4 = 0.8</span></span><br><span class="line"><span class="comment">// 0.4 + 0.5 = 0.9</span></span><br><span class="line"><span class="comment">// 0.4 + 0.6 = 1</span></span><br><span class="line"><span class="comment">// 0.4 + 0.7 = 1.1</span></span><br><span class="line"><span class="comment">// 0.4 + 0.8 = 1.2000000000000002</span></span><br><span class="line"><span class="comment">// 0.4 + 0.9 = 1.3</span></span><br><span class="line"><span class="comment">// 0.5 + 0.5 = 1</span></span><br><span class="line"><span class="comment">// 0.5 + 0.6 = 1.1</span></span><br><span class="line"><span class="comment">// 0.5 + 0.7 = 1.2</span></span><br><span class="line"><span class="comment">// 0.5 + 0.8 = 1.3</span></span><br><span class="line"><span class="comment">// 0.5 + 0.9 = 1.4</span></span><br><span class="line"><span class="comment">// 0.6 + 0.6 = 1.2</span></span><br><span class="line"><span class="comment">// 0.6 + 0.7 = 1.2999999999999998</span></span><br><span class="line"><span class="comment">// 0.6 + 0.8 = 1.4</span></span><br><span class="line"><span class="comment">// 0.6 + 0.9 = 1.5</span></span><br><span class="line"><span class="comment">// 0.7 + 0.7 = 1.4</span></span><br><span class="line"><span class="comment">// 0.7 + 0.8 = 1.5</span></span><br><span class="line"><span class="comment">// 0.7 + 0.9 = 1.6</span></span><br><span class="line"><span class="comment">// 0.8 + 0.8 = 1.6</span></span><br><span class="line"><span class="comment">// 0.8 + 0.9 = 1.7000000000000002</span></span><br><span class="line"><span class="comment">// 0.9 + 0.9 = 1.8</span></span><br></pre></td></tr></table></figure></div>
+            </div>
 
-// 0.1 + 0.1 = 0.2
-// 0.1 + 0.2 = 0.30000000000000004
-// 0.1 + 0.3 = 0.4
-// 0.1 + 0.4 = 0.5
-// 0.1 + 0.5 = 0.6
-// 0.1 + 0.6 = 0.7
-// 0.1 + 0.7 = 0.7999999999999999
-// 0.1 + 0.8 = 0.9
-// 0.1 + 0.9 = 1
-// 0.2 + 0.2 = 0.4
-// 0.2 + 0.3 = 0.5
-// 0.2 + 0.4 = 0.6000000000000001
-// 0.2 + 0.5 = 0.7
-// 0.2 + 0.6 = 0.8
-// 0.2 + 0.7 = 0.8999999999999999
-// 0.2 + 0.8 = 1
-// 0.2 + 0.9 = 1.1
-// 0.3 + 0.3 = 0.6
-// 0.3 + 0.4 = 0.7
-// 0.3 + 0.5 = 0.8
-// 0.3 + 0.6 = 0.8999999999999999
-// 0.3 + 0.7 = 1
-// 0.3 + 0.8 = 1.1
-// 0.3 + 0.9 = 1.2
-// 0.4 + 0.4 = 0.8
-// 0.4 + 0.5 = 0.9
-// 0.4 + 0.6 = 1
-// 0.4 + 0.7 = 1.1
-// 0.4 + 0.8 = 1.2000000000000002
-// 0.4 + 0.9 = 1.3
-// 0.5 + 0.5 = 1
-// 0.5 + 0.6 = 1.1
-// 0.5 + 0.7 = 1.2
-// 0.5 + 0.8 = 1.3
-// 0.5 + 0.9 = 1.4
-// 0.6 + 0.6 = 1.2
-// 0.6 + 0.7 = 1.2999999999999998
-// 0.6 + 0.8 = 1.4
-// 0.6 + 0.9 = 1.5
-// 0.7 + 0.7 = 1.4
-// 0.7 + 0.8 = 1.5
-// 0.7 + 0.9 = 1.6
-// 0.8 + 0.8 = 1.6
-// 0.8 + 0.9 = 1.7000000000000002
-// 0.9 + 0.9 = 1.8
-</code></pre>
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> javasSript小数相加精度问题</li>
+        <li><strong>Author:</strong> 木头的喵喵拖孩</li>
+        <li><strong>Created at:</strong> 2023-02-24 14:22:10</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2023-02-24 14:43:24
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://blog.xx-xx.top/2023/02/24/javasSript小数相加精度问题/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/javascript/">#javascript</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/03/07/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84WebSocket%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%8A%9F%E8%83%BD/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">实现一个基本的WebSocket前后端数据交互功能</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/05/%E7%94%A8css3%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%98%9F%E7%90%83%E8%8A%82%E7%82%B9%E6%97%8B%E8%BD%AC%E6%95%88%E6%9E%9C%E5%9B%BE/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">用css3实现一个星球节点旋转效果图</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">javasSript小数相加精度问题</div>
+        
 
     </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">木头的喵喵拖孩</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.4</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2023/1/15 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
     
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
     
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
     
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
     
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
     
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
     
 </div>
 
-                <footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2023 喵喵的狗窝
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;喵喵拖孩
-        </div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
 
-            </div>
-            </transition>
-            <div id="showimg">
-                <img id="showimg-content">
-            </div>
-        </div>
-        <script src="/js/functions.js"></script>
-<script src="/js/particlex.js"></script>
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
 
 
 
 
-
-
-
-        <!-- html -->
-        <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
-        <canvas id="background" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"></canvas>
-        <div id="cursor"></div>
-        <!-- CSS -->
-        <link rel="stylesheet" href="/css/cursor.min.css">
-        <script src="/js/cursor.min.js"></script>
-        <!-- JS -->
-        <!-- 先关掉自己的ip访问检测功能，感觉没啥用还降低性能-->
-        <!-- <script src="/js/ipcheck.js"></script> -->
-        <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
-        <script src="/js/fireworks.min.js"></script>
-        <script src="/js/background.min.js"></script>
-    </body>
+</body>
 </html>
