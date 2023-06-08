@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --color-1: #01fd9c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            height: 100vh;
+            background-color: black;
+            perspective: 500px;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes wrapperBreathe {
+            0% {
+                scale: 1;
+            }
+
+            50% {
+                scale: 1.04;
+            }
+
+            100% {
+                scale: 1;
+            }
+        }
+
+        #wrapper {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            width: 300px;
+            height: 300px;
+            border: 8px solid var(--color-1);
+            border-radius: 50%;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            animation: wrapperBreathe 2s ease-out 0s infinite;
+            box-shadow: 0 0 18px 0 var(--color-1) inset;
+        }
+
+        @keyframes innerRotate {
+            0% {
+                rotate: 0deg;
+            }
+
+            100% {
+                rotate: 360deg;
+            }
+        }
+
+        #inner {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            width: 27%;
+            height: 27%;
+            border-radius: 50%;
+            transform: translateZ(50px);
+            animation: innerRotate 8s linear 0s infinite;
+        }
+
+        #inner>.aperture {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--color-1);
+            border-radius: 50%;
+            box-shadow: 0 0 18px 2px var(--color-1);
+        }
+
+        #inner>span {
+            position: absolute;
+            transform-origin: center bottom;
+            color: var(--color-1);
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="inner">
+            <div class="aperture"></div>
+        </div>
+    </div>
+
+    <script>
+        const $body = document.body;
+        const $wrapper = document.getElementById('wrapper');
+        const $inner = document.getElementById('inner');
+
+        const { clientWidth, clientHeight } = $body;
+        const centerPoint = {
+            x: clientWidth / 2,
+            y: clientHeight / 2
+        }
+        const maxDeg = 45; // unit deg
+        const maxScale = .5;
+
+        // 眼球跟随鼠标事件
+        $body.onmousemove = ev => {
+            const { clientX, clientY } = ev;
+            const percent = {
+                x: (clientX - centerPoint.x) / centerPoint.x,
+                y: (clientY - centerPoint.y) / centerPoint.y
+            }
+
+            $wrapper.style.transform = `rotateX(${-maxDeg * percent.y}deg) rotateY(${maxDeg * percent.x}deg)`;
+            $inner.style.scale = (2 - Math.abs(percent.y) - Math.abs(percent.x)) * maxScale + 1;
+        }
+
+        // 卢恩文字与其动画
+        const _letters = 'ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚳᚴᚵᚶᚸᚹᚺᚻᚼᚽᚾᚿᛀᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛍᛎᛏᛐᛑᛒᛓᛔᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫ᛮᛯᛰ';
+        const letters = _letters.substr(0, 30);
+        const letterUnitDeg = 360 / letters.length;
+        const $fragment = document.createDocumentFragment();
+
+        for (let i in letters) {
+            let letter = letters[i];
+            let $span = document.createElement('span');
+            $span.innerText = letter;
+            $span.style.rotate = `${i * letterUnitDeg}deg`;
+            $span.style.height = `${$inner.clientHeight / 2}px`;
+            $span.style.translate = `calc(${$inner.clientWidth / 2}px - 50%)`;
+            $fragment.append($span);
+        }
+        $inner.append($fragment);
+
+        const $letterArr = Array.from($inner.querySelectorAll('span'));
+        const flicker = () => {
+            let index = Math.floor(Math.random() * letters.length);
+            let $span = $letterArr[index];
+            $span.innerText = _letters[Math.floor(Math.random() * _letters.length)];
+            setTimeout(() => {
+                requestAnimationFrame(flicker);
+            }, 50)
+        }
+        flicker();
+    </script>
+</body>
+
+</html>
