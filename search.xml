@@ -398,6 +398,53 @@
       </tags>
   </entry>
   <entry>
+    <title>webpack基础使用</title>
+    <url>/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>这里记录下 webpack 的基本使用，因为每次我新建项目的时候都要去搜索一下 webpack，感觉很麻烦，所以还是自己记录下使用的方法，增强下记忆。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="webpack-安装"><a href="#webpack-安装" class="headerlink" title="webpack 安装"></a>webpack 安装</h2><p>写文章的时候，webpack 最新版本是 5.81.0，可以参考<a class="link"   href="https://www.webpackjs.com/guides/getting-started/#basic-setup" >官网 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack webpack-cli -D</span><br></pre></td></tr></table></figure></div>
+
+<p>一般都是使用命令行来操作 webpack，所以顺便把 webpack-cli 给安装了</p>
+<span id="more"></span>
+
+<h2 id="其他常用插件安装"><a href="#其他常用插件安装" class="headerlink" title="其他常用插件安装"></a>其他常用插件安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack-dev-server html-webpack-plugin copy-webpack-plugin clean-webpack-plugin babel-loader @babel/preset-env -D</span><br></pre></td></tr></table></figure></div>
+
+<p>这里分别装了：</p>
+<ul>
+<li>webpack-dev-server<br> 用来开启本地服务器（开发时使用）</li>
+<li>html-webpack-plugin<br> 用来设置不用打包的静态文件，比如 html 文件</li>
+<li>copy-webpack-plugin<br> 用来将不需要webpack处理的静态文件复制到指定的打包目录</li>
+<li>clean-webpack-plugin<br> 该插件负责每次打包之前都清空打包目录，保证目录干净</li>
+<li>babel-loader<br> babel的webpack版本，负责将js高版本语法编译为低版本语法，解决兼容性问题</li>
+<li>@babel&#x2F;preset-env<br> babel的预设库，用来预先设置一些常用的配置选项，比如编译目标预设为ES5</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在项目根目录下新建配置文件：</p>
+<ol>
+<li>webpack.config.js（基本配置）</li>
+<li>webpack.dev.config.js（开发环境配置）</li>
+<li>webpack.pro.config.js（生产环境配置）</li>
+</ol>
+<p>webpack 配置<a class="link"   href="https://www.webpackjs.com/guides/getting-started/#using-a-configuration" >官网参考 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CleanWebpackPlugin</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">CopyWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;copy-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// target: &#x27;node&#x27;, // 如果需要打包后运行在nodejs环境下，需要设置此值</span></span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>, <span class="comment">// 不编译node_modules里的代码</span></span><br><span class="line">                <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                <span class="attr">options</span>: &#123;</span><br><span class="line">                    <span class="attr">presets</span>: [[<span class="string">&#x27;@babel/preset-env&#x27;</span>, &#123; <span class="attr">targets</span>: <span class="string">&#x27;defaults&#x27;</span> &#125;]] <span class="comment">// 使用babel预设</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CleanWebpackPlugin</span>(), <span class="comment">// 先删除打包目标目录再打包,</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./public/index.html&#x27;</span> <span class="comment">// 配置模板index.html文件</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CopyWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">patterns</span>: [</span><br><span class="line">                &#123; <span class="attr">from</span>: <span class="string">&#x27;./public/CNAME&#x27;</span> &#125; <span class="comment">// 把文件（CNAME等）移动到打包目录</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="webpack-dev-config-js"><a href="#webpack-dev-config-js" class="headerlink" title="webpack.dev.config.js"></a>webpack.dev.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.dev.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(baseConfig, &#123;</span><br><span class="line">    <span class="comment">// 开发模式配置</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;/&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">static</span>: &#123;</span><br><span class="line">            <span class="attr">directory</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>) <span class="comment">// 开发服务器根目录</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">compress</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">port</span>: <span class="number">8888</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="webpack-pro-config-js"><a href="#webpack-pro-config-js" class="headerlink" title="webpack.pro.config.js"></a>webpack.pro.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.pro.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(baseConfig, &#123;</span><br><span class="line">    <span class="comment">// 生产模式配置</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;scripts/bundle.js&#x27;</span>,</span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>最后为了方便，我们把启动 webpack 的命令行脚本添加到 npm 项目的 package.json 中</p>
+<div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack-dev-server --config ./webpack.dev.config.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config ./webpack.pro.config.js&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>最后就可以快乐地使用项目了。<br><em>文章实时更新中…</em></p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用PuTTY和ssh密钥登录Ubuntu</title>
     <url>/2023/04/22/%E4%BD%BF%E7%94%A8PuTTY%E5%92%8Cssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95Ubuntu/</url>
     <content><![CDATA[<h1 id="1-服务端配置"><a href="#1-服务端配置" class="headerlink" title="1. 服务端配置"></a>1. 服务端配置</h1><h2 id="1-1-允许密钥登录"><a href="#1-1-允许密钥登录" class="headerlink" title="1.1 允许密钥登录"></a>1.1 允许密钥登录</h2><p>配置 &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
@@ -457,53 +504,6 @@
       <tags>
         <tag>Ubuntu</tag>
         <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>webpack基础使用</title>
-    <url>/2023/04/27/webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>这里记录下 webpack 的基本使用，因为每次我新建项目的时候都要去搜索一下 webpack，感觉很麻烦，所以还是自己记录下使用的方法，增强下记忆。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="webpack-安装"><a href="#webpack-安装" class="headerlink" title="webpack 安装"></a>webpack 安装</h2><p>写文章的时候，webpack 最新版本是 5.81.0，可以参考<a class="link"   href="https://www.webpackjs.com/guides/getting-started/#basic-setup" >官网 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack webpack-cli -D</span><br></pre></td></tr></table></figure></div>
-
-<p>一般都是使用命令行来操作 webpack，所以顺便把 webpack-cli 给安装了</p>
-<span id="more"></span>
-
-<h2 id="其他常用插件安装"><a href="#其他常用插件安装" class="headerlink" title="其他常用插件安装"></a>其他常用插件安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack-dev-server html-webpack-plugin copy-webpack-plugin clean-webpack-plugin babel-loader @babel/preset-env -D</span><br></pre></td></tr></table></figure></div>
-
-<p>这里分别装了：</p>
-<ul>
-<li>webpack-dev-server<br> 用来开启本地服务器（开发时使用）</li>
-<li>html-webpack-plugin<br> 用来设置不用打包的静态文件，比如 html 文件</li>
-<li>copy-webpack-plugin<br> 用来将不需要webpack处理的静态文件复制到指定的打包目录</li>
-<li>clean-webpack-plugin<br> 该插件负责每次打包之前都清空打包目录，保证目录干净</li>
-<li>babel-loader<br> babel的webpack版本，负责将js高版本语法编译为低版本语法，解决兼容性问题</li>
-<li>@babel&#x2F;preset-env<br> babel的预设库，用来预先设置一些常用的配置选项，比如编译目标预设为ES5</li>
-</ul>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在项目根目录下新建配置文件：</p>
-<ol>
-<li>webpack.config.js（基本配置）</li>
-<li>webpack.dev.config.js（开发环境配置）</li>
-<li>webpack.pro.config.js（生产环境配置）</li>
-</ol>
-<p>webpack 配置<a class="link"   href="https://www.webpackjs.com/guides/getting-started/#using-a-configuration" >官网参考 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CleanWebpackPlugin</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">CopyWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;copy-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// target: &#x27;node&#x27;, // 如果需要打包后运行在nodejs环境下，需要设置此值</span></span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>, <span class="comment">// 不编译node_modules里的代码</span></span><br><span class="line">                <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                <span class="attr">options</span>: &#123;</span><br><span class="line">                    <span class="attr">presets</span>: [[<span class="string">&#x27;@babel/preset-env&#x27;</span>, &#123; <span class="attr">targets</span>: <span class="string">&#x27;defaults&#x27;</span> &#125;]] <span class="comment">// 使用babel预设</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CleanWebpackPlugin</span>(), <span class="comment">// 先删除打包目标目录再打包,</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./public/index.html&#x27;</span> <span class="comment">// 配置模板index.html文件</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">CopyWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">patterns</span>: [</span><br><span class="line">                &#123; <span class="attr">from</span>: <span class="string">&#x27;./public/CNAME&#x27;</span> &#125; <span class="comment">// 把文件（CNAME等）移动到打包目录</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="webpack-dev-config-js"><a href="#webpack-dev-config-js" class="headerlink" title="webpack.dev.config.js"></a>webpack.dev.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.dev.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(baseConfig, &#123;</span><br><span class="line">    <span class="comment">// 开发模式配置</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;/&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">static</span>: &#123;</span><br><span class="line">            <span class="attr">directory</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>) <span class="comment">// 开发服务器根目录</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">compress</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">port</span>: <span class="number">8888</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="webpack-pro-config-js"><a href="#webpack-pro-config-js" class="headerlink" title="webpack.pro.config.js"></a>webpack.pro.config.js</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// webpack.pro.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(baseConfig, &#123;</span><br><span class="line">    <span class="comment">// 生产模式配置</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;scripts/bundle.js&#x27;</span>,</span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>最后为了方便，我们把启动 webpack 的命令行脚本添加到 npm 项目的 package.json 中</p>
-<div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack-dev-server --config ./webpack.dev.config.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config ./webpack.pro.config.js&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>最后就可以快乐地使用项目了。<br><em>文章实时更新中…</em></p>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -618,6 +618,54 @@
       </tags>
   </entry>
   <entry>
+    <title>用CSS画一个正方形</title>
+    <url>/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
+    <content><![CDATA[<p>个人 CSS 技能查漏补缺系列</p>
+<p>关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。</p>
+<p>直接上代码</p>
+<div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="keyword">@keyframes</span> show &#123;</span></span><br><span class="line"><span class="language-css">                <span class="number">0%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">25%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">50%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">75%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">100%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-id">#wrapper</span> &#123;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">animation</span>: show <span class="number">5s</span> linear <span class="number">0s</span> infinite;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-id">#wrapper</span> &gt; <span class="selector-id">#cube</span> &#123;</span></span><br><span class="line"><span class="language-css">                <span class="attr">--side</span>: <span class="number">80%</span>;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">width</span>: <span class="built_in">var</span>(--side);</span></span><br><span class="line"><span class="language-css">                <span class="attribute">padding</span>: <span class="built_in">calc</span>(<span class="built_in">var</span>(--side) / <span class="number">2</span>) <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">background-color</span>: blue;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>不管线框容器宽高怎么变，蓝色区块的宽高始终相等<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;cube&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单记录一下Java的基础开发过程</title>
+    <url>/2023/06/08/%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BJava%E7%9A%84%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="开发环境安装"><a href="#开发环境安装" class="headerlink" title="开发环境安装"></a>开发环境安装</h1><p>Java版本 1.8.0_181<br>vscode 需要安装 <a class="link"   href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack" >Extension Pack for Java <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 插件</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>这个helloworld项目解决了Java环境搭建问题、包（package）命名问题、UI界面问题、jar打包问题</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
+<li>testJava  <ul>
+<li>demo  <ul>
+<li>Index.java</li>
+<li>Demo.java</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Index-java"><a href="#Index-java" class="headerlink" title="Index.java"></a>Index.java</h3><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Index</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Demo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Demo-java"><a href="#Demo-java" class="headerlink" title="Demo.java"></a>Demo.java</h3><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> <span class="keyword">extends</span> <span class="title class_">JFrame</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">lookAndFeel</span> <span class="operator">=</span> UIManager.getCrossPlatformLookAndFeelClassName();</span><br><span class="line">            UIManager.setLookAndFeel(lookAndFeel);</span><br><span class="line">        &#125; <span class="keyword">catch</span>(Exception exc) &#123;&#125; </span><br><span class="line">        setPreferredSize(<span class="keyword">new</span> <span class="title class_">Dimension</span>(<span class="number">600</span>, <span class="number">400</span>));</span><br><span class="line">        pack();</span><br><span class="line">        setDefaultCloseOperation(EXIT_ON_CLOSE);</span><br><span class="line">        setVisible(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="jar打包"><a href="#jar打包" class="headerlink" title="jar打包"></a>jar打包</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230608145032.png"
+                     
+                ></p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>用CSS做一个椭圆轨道小球运动动画</title>
     <url>/2023/05/12/%E7%94%A8CSS%E5%81%9A%E4%B8%80%E4%B8%AA%E6%A4%AD%E5%9C%86%E8%BD%A8%E9%81%93%E5%B0%8F%E7%90%83%E8%BF%90%E5%8A%A8%E5%8A%A8%E7%94%BB/</url>
     <content><![CDATA[<p>个人CSS技能查漏补缺系列  </p>
@@ -666,59 +714,6 @@
       </tags>
   </entry>
   <entry>
-    <title>用CSS画一个正方形</title>
-    <url>/2023/05/12/%E7%94%A8CSS%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
-    <content><![CDATA[<p>个人 CSS 技能查漏补缺系列</p>
-<p>关键在于 padding-top 和 padding-bottom 使用百分比(%)单位时是基于元素的 width 来计算的。</p>
-<p>直接上代码</p>
-<div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="keyword">@keyframes</span> show &#123;</span></span><br><span class="line"><span class="language-css">                <span class="number">0%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">25%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">50%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">75%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">                <span class="number">100%</span> &#123;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">                    <span class="attribute">height</span>: <span class="number">240px</span>;</span></span><br><span class="line"><span class="language-css">                &#125;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-id">#wrapper</span> &#123;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">animation</span>: show <span class="number">5s</span> linear <span class="number">0s</span> infinite;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-id">#wrapper</span> &gt; <span class="selector-id">#cube</span> &#123;</span></span><br><span class="line"><span class="language-css">                <span class="attr">--side</span>: <span class="number">80%</span>;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">width</span>: <span class="built_in">var</span>(--side);</span></span><br><span class="line"><span class="language-css">                <span class="attribute">padding</span>: <span class="built_in">calc</span>(<span class="built_in">var</span>(--side) / <span class="number">2</span>) <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">                <span class="attribute">background-color</span>: blue;</span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>不管线框容器宽高怎么变，蓝色区块的宽高始终相等<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;cube&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>Css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一篇文章哦</title>
-    <url>/2023/03/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%93%A6/</url>
-    <content><![CDATA[<h2 id="别催"><a href="#别催" class="headerlink" title="别催!!"></a>别催!!</h2><h3 id="作者正在长脑子"><a href="#作者正在长脑子" class="headerlink" title="作者正在长脑子~"></a>作者正在长脑子~</h3><h4 id="别急。快了！快有内容了！"><a href="#别急。快了！快有内容了！" class="headerlink" title="别急。快了！快有内容了！"></a>别急。快了！快有内容了！</h4><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;打点代码证明脑子快就长好了！&#x27;</span>);</span><br></pre></td></tr></table></figure></div>]]></content>
-  </entry>
-  <entry>
-    <title>简单记录一下Java的基础开发过程</title>
-    <url>/2023/06/08/%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BJava%E7%9A%84%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="开发环境安装"><a href="#开发环境安装" class="headerlink" title="开发环境安装"></a>开发环境安装</h1><p>Java版本 1.8.0_181<br>vscode 需要安装 <a class="link"   href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack" >Extension Pack for Java <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 插件</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>这个helloworld项目解决了Java环境搭建问题、包（package）命名问题、UI界面问题、jar打包问题</p>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
-<li>testJava  <ul>
-<li>demo  <ul>
-<li>Index.java</li>
-<li>Demo.java</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Index-java"><a href="#Index-java" class="headerlink" title="Index.java"></a>Index.java</h3><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Index</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Demo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="Demo-java"><a href="#Demo-java" class="headerlink" title="Demo.java"></a>Demo.java</h3><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> <span class="keyword">extends</span> <span class="title class_">JFrame</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">lookAndFeel</span> <span class="operator">=</span> UIManager.getCrossPlatformLookAndFeelClassName();</span><br><span class="line">            UIManager.setLookAndFeel(lookAndFeel);</span><br><span class="line">        &#125; <span class="keyword">catch</span>(Exception exc) &#123;&#125; </span><br><span class="line">        setPreferredSize(<span class="keyword">new</span> <span class="title class_">Dimension</span>(<span class="number">600</span>, <span class="number">400</span>));</span><br><span class="line">        pack();</span><br><span class="line">        setDefaultCloseOperation(EXIT_ON_CLOSE);</span><br><span class="line">        setVisible(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="jar打包"><a href="#jar打包" class="headerlink" title="jar打包"></a>jar打包</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230608145032.png"
-                     
-                ></p>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记录一个Three.js项目</title>
     <url>/2023/06/06/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%AAThree-js%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p>记录一下公司的Three.js项目，感觉很经典</p>
@@ -763,6 +758,11 @@
         <tag>javascript</tag>
         <tag>Three.js</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>第一篇文章哦</title>
+    <url>/2023/03/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%93%A6/</url>
+    <content><![CDATA[<h2 id="别催"><a href="#别催" class="headerlink" title="别催!!"></a>别催!!</h2><h3 id="作者正在长脑子"><a href="#作者正在长脑子" class="headerlink" title="作者正在长脑子~"></a>作者正在长脑子~</h3><h4 id="别急。快了！快有内容了！"><a href="#别急。快了！快有内容了！" class="headerlink" title="别急。快了！快有内容了！"></a>别急。快了！快有内容了！</h4><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;打点代码证明脑子快就长好了！&#x27;</span>);</span><br></pre></td></tr></table></figure></div>]]></content>
   </entry>
   <entry>
     <title>跟随鼠标的眼球css特效</title>
@@ -841,6 +841,21 @@
       <tags>
         <tag>javascript</tag>
         <tag>WebRTC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>隐藏各大浏览器滚动条的兼容处理方案</title>
+    <url>/2023/06/10/%E9%9A%90%E8%97%8F%E5%90%84%E5%A4%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%BB%9A%E5%8A%A8%E6%9D%A1%E7%9A%84%E5%85%BC%E5%AE%B9%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<p>不同浏览器的滚动条样式都不一样，不统一就不美观，所以要统一隐藏掉</p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.hide-scrollber</span>::-weblit-scrollber &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>; // 兼容chrome浏览器</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hide-scrollbar</span> &#123;</span><br><span class="line">	<span class="attribute">scrollbar-width</span>: none; // 兼容火狐浏览器</span><br><span class="line">	-ms-<span class="attribute">overflow</span>-style: none; // 兼容IE10+</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><a class="link"   href="https://blog.csdn.net/qq_37804387/article/details/130338874" >参考 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>当然，还有通过外层容器设置overflow: hidden;来隐藏滚动条的办法，这里就不说了，上面的代码已经能满足大部分现代浏览器了</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
       </tags>
   </entry>
 </search>
