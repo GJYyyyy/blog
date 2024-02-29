@@ -1,0 +1,1 @@
+"serviceWorker"in navigator&&navigator.serviceWorker.register("/cacheWorker.js",{scope:"/"}).then(e=>{console.log("ServiceWorker registration successful")}).catch(e=>{console.warn("ServiceWorker registration failed: ",e)});
